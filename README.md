@@ -4,7 +4,7 @@ HTML Site 'Filmoteka' ................. Made by design  <a href="https://www.fig
 
 PROJECT WAS CREATED BY: 
 <a href="https://github.com/0trava">Lytvyn Svetlana</a>, 
-<a href="https://github.com/Tetiana1409">Tetiana Okhrymenko</a>, 
+<a href="https://github.com/Tetiana1409">Tetiana Okhrymenko</a>...
 
 
 
