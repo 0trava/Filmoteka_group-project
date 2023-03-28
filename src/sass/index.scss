@@ -1,2 +1,33 @@
-@import './common';
-@import './example';
+
+/* Utils */
+@import './utils/vars';
+@import './utils/normalize';
+@import './utils/visually-hidden';
+@import './utils/mixins';
+
+/* Base styles*/
+@import './base/container';
+
+
+/* Components */
+@import './components/library-btn';
+@import './components/dot-spinner';
+@import './components/switch-light-btn';
+
+
+
+/* Layouts*/
+
+@import './layouts/home-header';
+@import './layouts/home-body';
+@import './layouts/page-scroll';
+@import './layouts/footer';
+
+@import './layouts/library_header';
+@import './layouts/library-body';
+
+@import './layouts/students-modal';
+@import './layouts/modal-window';
+
+
+
