@@ -1,0 +1,90 @@
+.home-header_background {
+    background-image: url(../images/Home/header-mob-2x.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 230px;
+    flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+
+
+    @include mq(tablet) {
+        height: 216px;
+        background-image: url(../images/Home/header-tablet-2x.jpg);
+    }
+
+    @include mq(desktop) {
+        background-image: url(../images/Home/header-desktop-2x.jpg);
+    }
+
+}
+
+.home-header_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.home-header_box{
+    padding-top: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-header_box-link{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.home-header_logo {
+    width: 24px;
+    height: 24px;
+
+}
+
+
+.home-header_link{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: calc(14/12);
+    text-transform: uppercase;
+
+    color: var(--secondaryColor) ;
+ 
+
+}
+
+.open{
+    border-bottom: 5px solid var(--secondaryAccentColor);
+
+}
+
+.home-header_title{
+    display: flex;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    @include mq(tablet) {
+        display: flex;
+    }
+}
+
+.inputbox {
+    justify-content: center;
+}
+.inputbox-inform {
+
+
+
+}

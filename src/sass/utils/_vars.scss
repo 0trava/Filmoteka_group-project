@@ -1,9 +1,20 @@
 :root {
-
+    --mobile: 320px;
+    --tablet: 768px;
+    --desktop: 1280px;
 
     --primary-text-color: #000000;
     --headerHoverColor: #a1a1a2;
     --secondaryColor: #ffffff;
     --mainAccentColor: #ff6b08;
     --secondaryAccentColor: #ff001b;
+    
+
+    
   };
+
+  $headerGradient: linear-gradient(
+                  to right,
+                  rgba(0, 0, 0, 0.56),
+                  rgba(0, 0, 0, 0.56)
+                  );
