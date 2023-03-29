@@ -1,0 +1,92 @@
+.library-header_background {
+    background-image: url(../images/Library/header-lib-mob-2x.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 230px;
+    flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+
+
+    @include mq(tablet) {
+        height: 216px;
+        background-image: url(../images/Library/header-lib-tablet-2x.jpg);
+    }
+
+    @include mq(desktop) {
+        background-image: url(../images/Library/header-lib-desktop-2x.jpg);
+    }
+
+}
+
+.library-header_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.library-header_box{
+    padding-top: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.library-header_box-link{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.library-header_logo {
+    width: 24px;
+    height: 24px;
+
+}
+
+
+.library-header_link{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: calc(14/12);
+    text-transform: uppercase;
+
+    color: var(--secondaryColor) ;
+ 
+
+}
+
+.open{
+    border-bottom: 5px solid var(--secondaryAccentColor);
+
+}
+
+.library-header_logo-link{
+    display: flex;
+    align-items: center;
+}
+
+.library-header_title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: calc(35/30);
+    color: #FFFFFF;
+    display: none;
+
+    @include mq(tablet) {
+        margin-left: 8px;
+        display: flex;
+    }
+}
+
+.library-btnbox{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+
+

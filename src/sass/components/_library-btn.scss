@@ -1,0 +1,23 @@
+.library-btn_watched, .library-btn_queue{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: calc(16/12);
+
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+background-color: transparent;
+width: 147px;
+height: 42px;
+
+border: 1px solid var(--secondaryColor);
+border-radius: 5px;
+
+color: var(--secondaryColor);
+}
+
+.library-btn_queue{
+    margin-left: 16px;
+}

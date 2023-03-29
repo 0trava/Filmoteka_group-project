@@ -62,20 +62,22 @@
 
 }
 
-.home-header_title{
+.home-header_logo-link{
     display: flex;
+    align-items: center;
+}
+
+.home-header_title{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 30px;
-    line-height: 35px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-
+    line-height: calc(35/30);
     color: #FFFFFF;
+    display: none;
 
     @include mq(tablet) {
+        margin-left: 8px;
         display: flex;
     }
 }
@@ -84,7 +86,5 @@
     justify-content: center;
 }
 .inputbox-inform {
-
-
 
 }
