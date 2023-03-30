@@ -1,90 +1,221 @@
-.home-header_background {
-    background-image: url(../images/Home/header-mob-2x.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 230px;
-    flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+.home-header__background {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 230px;
+  flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+  // background-image: url(../images/Home/header-mob-2x.jpg);
 
+  //   бекграунд для телефону
+  background-image: $headerGradient, url(../images/Home/header-mob-1x.jpg);
+  @include mq(retina) {
+    background-image: $headerGradient, url(../images/Home/header-mob-2x.jpg);
+  }
 
-    @include mq(tablet) {
-        height: 216px;
-        background-image: url(../images/Home/header-tablet-2x.jpg);
+  //   бекграунд для планшета
+
+  @include mq(tablet) {
+    height: 216px;
+    background-image: $headerGradient, url(../images/Home/header-tablet-1x.jpg);
+
+    @include mq(retina) {
+      background-image: $headerGradient,
+        url(../images/Home/header-tablet-2x.jpg);
     }
+  }
 
-    @include mq(desktop) {
-        background-image: url(../images/Home/header-desktop-2x.jpg);
+  //   бекграунд для десктопа
+
+  @include mq(desktop) {
+    background-image: $headerGradient, url(../images/Home/header-desktop-1x.jpg);
+
+    @include mq(retina) {
+      background-image: $headerGradient,
+        url(../images/Home/header-desktop-2x.jpg);
     }
-
+  }
 }
 
-.home-header_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
+.home-header__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.home-header_box{
-    padding-top: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.home-header__box {
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 54px;
+
+  @include mq(tablet) {
+    margin-bottom: 40px;
+  }
 }
 
-.home-header_box-link{
+.navigation {
+  display: flex;
+}
+
+.navigation__list {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-.home-header_logo {
-    width: 24px;
-    height: 24px;
+.navigation__link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(14 / 12);
+  text-transform: uppercase;
 
+  color: var(--secondaryColor);
+
+  &:hover,
+  &:focus {
+    color: var(--headerHoverColor);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
-
-.home-header_link{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: calc(14/12);
-    text-transform: uppercase;
-
-    color: var(--secondaryColor) ;
- 
-
+.nav__link--current {
+  border-bottom: 3px solid var(--secondaryAccentColor);
 }
 
-.open{
-    border-bottom: 5px solid var(--secondaryAccentColor);
-
+.home-header__logo-link {
+  display: flex;
+  align-items: center;
+  fill: #ffffff;
+  color: var(--secondaryColor);
 }
 
-.home-header_logo-link{
+.logo__icon {
+  fill: var(--secondaryColor);
+  transform: scale(1);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.2);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.home-header__title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: calc(35 / 30);
+  color: #ffffff;
+  display: none;
+  //   transform: scale(1);
+
+  @include mq(tablet) {
+    margin-left: 8px;
     display: flex;
-    align-items: center;
+  }
+
+  @include mq(desktop) {
+    margin-left: 10px;
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--headerHoverColor);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
-.home-header_title{
+// пошукова форма для фільмів
+
+.search-form {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  //   text-align: center;
+  margin: 0 auto;
+  margin-bottom: 16px;
+
+  width: 280px;
+
+  @include mq(tablet) {
+    margin-bottom: 20px;
+    width: 336px;
+  }
+
+  @include mq(desktop) {
+    width: 394px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 20px;
+    padding-bottom: 4px;
+    border: none;
+    border-bottom: 0.5px solid var(--secondaryColor);
+    background-color: transparent;
+    outline: none;
+
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: calc(35/30);
-    color: #FFFFFF;
-    display: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(16 / 14);
+    color: var(--secondaryColor);
+  }
 
-    @include mq(tablet) {
-        margin-left: 8px;
-        display: flex;
-    }
+  &:hover,
+  &:focus {
+    border-bottom: 0.5px solid var(--headerHoverColor);
+    transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
-.inputbox {
-    justify-content: center;
+.search-form__input::placeholder {
+  color: var(--secondaryColor);
 }
-.inputbox-inform {
 
+.search-form__btn {
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  //   z-index: 30;
+  width: 20px;
+  height: 20px;
+
+  border: none;
+  background-color: transparent;
+}
+
+.search-form__icon {
+  fill: var(--secondaryColor);
+  transform: scale(1);
+
+  &:hover,
+  &:focus {
+    stroke: var(--headerHoverColor);
+    // fill: var(--headerHoverColor);
+    transform: scale(1.3);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+// текст при помилці вводу
+.error-notification {
+  display: flex;
+  justify-content: center;
+  text-align: start;
+
+  &__text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(16 / 14);
+    color: var(--secondaryAccentColor);
+  }
 }
