@@ -1,0 +1,98 @@
+.gallery-wrap {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  
+    @include mq(tablet) {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+  }
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include mq(tablet) {
+    gap: 16px;
+      }
+
+}
+
+.movie-card {    
+    margin-bottom: 20px;
+    width: 280px;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      1px 4px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    @include mq(tablet) {
+        width: calc((100% - 16px) / 2);
+
+        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    @include mq(desktop) {
+        width: calc((100% - 32px) / 3);
+    }
+}
+
+.movie-card__image {
+    border-radius: 5px;
+    width: 100%;
+    height: 398px;
+
+    @include mq(tablet) {
+        height: 455px;
+    }
+
+    @include mq(desktop) {
+        height: 574px;
+    }
+}
+
+.movie-card__name {
+    padding-left: 5px;
+    margin-top: 10px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 500;
+    font-size: 12px;
+
+    @include mq(tablet) {
+        margin-top: 8px;
+        line-height: 1.3;
+    }
+
+    @include mq(desktop) {
+        margin-top: 12px;
+        line-height: 1.2;
+        font-size: 20px;
+    }
+}
+
+.movie-card__text {
+    padding-left: 5px;
+    display: flex;
+    padding-bottom: 2px;
+
+    font-weight: 500;
+    line-height: 1.3;
+    color: #ff6b08;
+    align-items: baseline;
+
+    @include mq(desktop) {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+}

@@ -1,4 +1,3 @@
-
 <!-- Кнопка зміни теми День-Ніч -->
 
 <!-- <div class="toggle-switch">
@@ -8,36 +7,48 @@
     </label>
   </div>   -->
 
-
-
-
 <!-- починай писати код тут -->
 
-
-<div class="home-header_background">
-  <div class="container home-header_container">
-
-    <div class="home-header_box">
-      <a class="home-header_logo-link" href="./index.html">
-        <img src="./images/logo.svg" alt="logo" class="home-header_logo">
-        <h1 class="home-header_title">Filmoteka</h1>   
+<!-- хедер домашньої сторінки -->
+<header class="home-header__background">
+  <div class="container home-header__container">
+    <div class="home-header__box">
+      <!-- логотип -->
+      <a class="home-header__logo-link" href="./index.html">
+        <svg class="logo__icon" width="24" height="24">
+          <use href="/src/images/symbol-defs.svg#logo-icon"></use>
+        </svg>
+        <span class="home-header__title">Filmoteka</span>
       </a>
-      <div class="home-header_box-link">
-        <a  class="home-header_link open" href="./index.html">Home</a>
-        <a  class="home-header_link" href="./library.html">MY Library</a>
-      </div>
 
-    </div>
-
-    <div class="inputbox">
-          
-      <input type="text" required="required" id="search-box" /> 
-      <span>Movie search</span>
-      <i class="inputbox-inform"></i>
-    </div>
-
-
-
-
+      <!-- навігація -->
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item">
+            <a class="navigation__link nav__link--current" href="./index.html">Home</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link" href="./library.html">My library</a>
+          </li>
+        </ul>
+      </nav>
   </div>
-</div>
+
+  <!-- пошукова форма для фільмів -->
+  <form action="" id="search-box" class="search-form">
+    <input class="search-form__input" type="text" autocomplete="off" placeholder="Movie search" >
+    <button class="search-form__btn" type="submit">
+      <svg class="search-form__icon" width="12" height="12">
+        <use href="/src/images/symbol-defs.svg#search-icon"></use>
+      </svg>
+    </button>
+  </form>
+
+  <!-- текст при помилці вводу -->
+ <div class="error-notification">
+  <p class="error-notification__text">
+    <!-- Search result not successful. Enter the correct movie name and try again. -->
+  </p>
+ </div>
+
+</header>
