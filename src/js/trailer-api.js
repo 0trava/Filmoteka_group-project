@@ -1,22 +1,22 @@
 import axios from 'axios';
 
-const API_KEY = '3fae8df0f78070a007ffb073b1444710';
-const BASE_URL =
-    `https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=${API_KEY}&language=en-US`;
+// import axios from "axios";
+
+// const API_KEY = '3fae8df0f78070a007ffb073b1444710';
+// const BASE_URL = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&language=en-US`;
     
-export async function getTrailer() {
-    const options = new URLSearchParams({
-      headers: {
-        'Content-Type': 'application/json',
-        'key': API_KEY,
-      },
-    });
-  const resp = await axios(`${BASE_URL}`, options);
+// export async function getTrailer() {
+//     const options = new URLSearchParams({
+//       headers: {
+//         'Content-Type': 'application/json',
+//         // 'key': API_KEY,
+//       },
+//     });
+//   const res = await axios(BASE_URL, options);
 
-    return resp.data;
-}
+//     return res.data;
+// }
 
-getTrailer();
 
 
 // async function getMovies(id) {
@@ -28,3 +28,29 @@ getTrailer();
 // }
 
 // getMovies(2232);
+
+
+const API = 'https://api.themoviedb.org/3/';
+const KEY = '3fae8df0f78070a007ffb073b1444710';
+const MEDIA_TYPE = 'movie';
+
+export const getMovieTrailer = async movieId => {
+  try {
+    const options = new URLSearchParams({
+      api_key: KEY,
+    });
+
+    const response = await axios(
+      `${API}${MEDIA_TYPE}/${movieId}/videos?${options}`
+    );
+    
+    if (response.status !== 200) {
+      throw new Error(response.status);
+    }
+    return response.data;
+  } catch (error) {
+    console.log('error :>> ', error);
+  }
+};
+
+getMovieTrailer();
