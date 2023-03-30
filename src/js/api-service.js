@@ -5,9 +5,7 @@ const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
 
-const refs = {
-    gallery: document.querySelector('.gallery'),
-}
+const moviesAll = document.querySelector(".gallery");
 
 getMovies(1);
 initPagination(1000, getMovies); 
@@ -30,7 +28,8 @@ async function getMovies(page) {
             </li>
         `;
     }).join('');
-    refs.gallery.innerHTML = data;
+    moviesAll.insertAdjacentHTML('beforeend', data); // вставлення розмітки на сторінку
+    // refs.gallery.innerHTML = data;
 }
 
 
