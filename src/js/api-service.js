@@ -21,7 +21,7 @@ async function getMovies(page) {
 
     const data = respData["results"].map(item => {
         return `
-            <li class="movie-card"  ID=${item.id}> >
+            <li class="movie-card"  ID=${item.id}>
                 <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
                 onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
                 alt="${item.original_title}" 
