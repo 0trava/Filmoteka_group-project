@@ -1,22 +1,22 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const API_KEY = '3fae8df0f78070a007ffb073b1444710';
-const BASE_URL =
-    `https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=${API_KEY}&language=en-US`;
+// const API_KEY = '3fae8df0f78070a007ffb073b1444710';
+// const BASE_URL =
+//     `https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=${API_KEY}&language=en-US`;
     
-export async function getTrailer() {
-    const options = new URLSearchParams({
-      headers: {
-        'Content-Type': 'application/json',
-        'key': API_KEY,
-      },
-    });
-  const resp = await axios(`${BASE_URL}`, options);
+// export async function getTrailer() {
+//     const options = new URLSearchParams({
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'key': API_KEY,
+//       },
+//     });
+//   const resp = await axios(`${BASE_URL}`, options);
 
-    return resp.data;
-}
+//     return resp.data;
+// }
 
-getTrailer();
+// getTrailer();
 
 
 // async function getMovies(id) {
