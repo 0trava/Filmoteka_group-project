@@ -19,7 +19,15 @@
         padding: 29px 0;
     }
 }
-span
+.home-footer-icon
+{
+    margin: 0 10px;
+}
+.home-footer-reference
+{
+    text-decoration: underline;
+}
+span, .home-footer-reference
 {
     color: #545454;
     @media screen and (max-width: 320px)
