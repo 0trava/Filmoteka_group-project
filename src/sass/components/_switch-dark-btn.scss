@@ -1,0 +1,33 @@
+.toggle-switch {
+  --dark-invers: #d8dbe0;
+  --light-invers: #28292c;
+}
+
+.switch-label {
+  background-color: var(--light-invers);
+  border: 3px solid var(--light-invers);
+}
+
+.checkbox:checked ~ .slider {
+  background-color: var(--dark-invers);
+}
+
+.slider::before {
+  -webkit-box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
+  box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
+  background-color: var(--light-invers);
+}
+
+.checkbox:checked ~ .slider::before {
+  background-color: var(--light-invers);
+}
+.movie-card__name {
+  color: var(--dark-invers);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    background: var(--light-invers);
+    color: var(--dark-invers);
+  }
+}

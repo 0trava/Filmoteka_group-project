@@ -1,4 +1,3 @@
-
 /* Utils */
 @import './utils/vars';
 @import './utils/normalize';
@@ -9,14 +8,13 @@
 @import './base/container';
 @import './base/reset-styles';
 
-
 /* Components */
 @import './components/library-btn';
 @import './components/dot-spinner';
+@import './components/switch-btn';
 @import './components/switch-light-btn';
+@import './components/switch-dark-btn';
 @import './components/inputbox-serch';
-
-
 
 /* Layouts*/
 
@@ -30,6 +28,3 @@
 
 @import './layouts/students-modal';
 @import './layouts/modal-window';
-
-
-
