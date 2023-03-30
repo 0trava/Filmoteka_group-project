@@ -4,8 +4,9 @@ import axios from 'axios';
 const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
-refs = {
-    gallery: document.querySelector(".gallery"),
+
+const refs = {
+    gallery: document.querySelector('.gallery'),
 }
 
 getMovies(1);
