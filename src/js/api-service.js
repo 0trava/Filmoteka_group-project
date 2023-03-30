@@ -3,7 +3,7 @@ import initPagination from './pagination';
 const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
-refs = {
+const refs = {
     gallery: document.querySelector('.gallery'),
 }
 
