@@ -1,18 +1,35 @@
-// import axios from 'axios';
+import initPagination from './pagination';
 
-const API_KEY = 'a183424c-2c54-4420-b62b-801b3a7db5c4';
-const API_URL_POPULAR = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1";
+const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
+const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
-getMovies(API_URL_POPULAR);
+refs = {
+    gallery: document.querySelector('.gallery'),
+}
 
-async function getMovies (url) {
-    const resp = await fetch(url, {
-        headers: {
-            "Content-Type": "application/json",
-            "X-API-KEY": API_KEY,
-        },
-    })
+getMovies(1);
+initPagination(1000, getMovies); 
+
+async function getMovies(page) {
+    const resp = await fetch( `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&page=${page}`);
 
     const respData = await resp.json();
-    console.log(respData)
+  //  console.log(respData);
+
+    const data = respData["results"].map(item => {
+        return `
+            <li class="movie-card">
+                <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
+                onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
+                alt="${item.original_title}" 
+                width="300">
+                <h2 class="movie-card__name">${item.original_title}</h2>
+                <p class="movie-card__text">${item.genre_ids} | ${item.release_date}</p>
+            </li>
+        `;
+    }).join('');
+    refs.gallery.innerHTML = data;
 }
+
+
+
