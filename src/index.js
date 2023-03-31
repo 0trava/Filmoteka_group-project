@@ -6,5 +6,6 @@ import './js/trailer-api';
 import './js/watched-queue-run';
 import './js/card-click';
 import './js/modal';
+import './js/search-by-key-word';
 
 
