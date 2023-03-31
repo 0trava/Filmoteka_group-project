@@ -92,8 +92,7 @@ async function showCard(e) {
     </div>
   `;
 
-  console.log(movie); 
-};
+
 
 
   //Кнопки
@@ -130,4 +129,4 @@ async function showCard(e) {
     queueBtn.textContent = 'remove from queue';
   }
   console.log(movie);
-}
+};
