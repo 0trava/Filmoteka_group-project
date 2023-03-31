@@ -1,0 +1,2 @@
+.toggle-switch{--light:#d8dbe0;--dark:#28292c;--link:#1b8170;--link-hover:#185e52}.switch-label{background-color:var(--dark);border:3px solid var(--dark)}.checkbox:checked~.slider{background-color:var(--light)}.slider:before{-webkit-box-shadow:inset 12px -4px 0px 0px var(--light);box-shadow:inset 12px -4px 0px 0px var(--light);background-color:var(--dark)}.checkbox:checked~.slider:before{background-color:var(--dark)}.movie-card__name{color:#000}
+/*# sourceMappingURL=index.d7e08bdf.css.map */
