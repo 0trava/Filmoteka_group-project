@@ -48,11 +48,11 @@ async function showCard(e) {
 
 
 
+  // Отримуємо дані фільму
+  const movie = await apiService.getMovieInfoById(movieId); 
 
-
-
-
-  const movie = await apiService.getMovieInfoById(movieId); // Отримали дані фільму
+  // Отримуємо youtube трейлер 
+  const youtubeTrailer = await apiService.getYoutubeTrailerByMovieId(movieId);
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -90,6 +90,8 @@ async function showCard(e) {
             </div>
             <div class="modal__button-trailer-wrap">
                 <button type="button" class="modal__button modal__button-trailer">Trailer</button>
+
+                <iframe width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
