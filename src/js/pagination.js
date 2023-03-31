@@ -1,7 +1,7 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-export default function initPagination(totalItems, funcOutputData) {
+export function initPagination(totalItems, funcOutputData, args) {
     const options = {
         totalItems, // Загальна кількість елементів
         itemsPerPage: 20, // Кількість елементів на одній сторінці
@@ -33,7 +33,7 @@ export default function initPagination(totalItems, funcOutputData) {
         pagination.on('beforeMove', evt => {
             const { page } = evt;
             window.scrollTo(0, 0); 
-            funcOutputData(page);
+            funcOutputData(page, args);
         });
 }
 

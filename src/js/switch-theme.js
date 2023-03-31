@@ -70,6 +70,7 @@ const changeTheme = () => {
     saveTheme('currTheme', theme);
     document.body.style.backgroundColor = lightBackground;
     setElementsColor('#000000');
+
   }
 
   link.setAttribute('href', currTheme);
