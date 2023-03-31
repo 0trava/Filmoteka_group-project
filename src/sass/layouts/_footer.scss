@@ -1,9 +1,6 @@
 .home-footer
 {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 0.8;
-    line-height: 100%;
     text-align: center;
     background-color: #F7F7F7;
 }
@@ -36,6 +33,9 @@
 }
 .home-footer-text
 {
+    font-size: 16px;
+    line-height: 0.8;
+    line-height: 100%;
     @include mq(mobile)
     {
         font-size: 14px;
