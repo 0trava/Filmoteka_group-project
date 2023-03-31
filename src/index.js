@@ -1,4 +1,6 @@
 // Приклади
 import './js/team-modal';
 import './js/api-service';
-import './js/modal';
+import './js/trailer-api';
+
+

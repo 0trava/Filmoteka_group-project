@@ -1,92 +1,69 @@
-.library-header_background {
-    background-image: url(../images/Library/header-lib-mob-2x.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 230px;
-    flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+.library-header__background {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 230px;
+  flex-grow: 1; /* !!! Заполняет собой всю оставшеєсе место*/
+  //   бекграунд для телефону
+  background-image: $headerGradient,
+    url(../images/Library/header-lib-mob-1x.jpg);
+  @include mq(retina) {
+    background-image: $headerGradient,
+      url(../images/Library/header-lib-mob-2x.jpg);
+  }
 
-
-    @include mq(tablet) {
-        height: 216px;
-        background-image: url(../images/Library/header-lib-tablet-2x.jpg);
+  //   бекграунд для планшета
+  @include mq(tablet) {
+    height: 219px;
+    //   бекграунд для планшета
+    background-image: $headerGradient,
+      url(../images/Library/header-lib-tablet-1x.jpg);
+    @include mq(retina) {
+      background-image: $headerGradient,
+        url(../images/Library/header-lib-tablet-2x.jpg);
     }
+  }
 
-    @include mq(desktop) {
-        background-image: url(../images/Library/header-lib-desktop-2x.jpg);
+  //   бекграунд для десктопа
+  @include mq(desktop) {
+    height: 216px;
+    background-image: url(../images/Library/header-lib-desktop-1x.jpg);
+    @include mq(retina) {
+      background-image: $headerGradient,
+        url(../images/Library/header-lib-desktop-2x.jpg);
     }
-
+  }
 }
 
-.library-header_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-}
-
-.library-header_box{
-    padding-top: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.library-header_box-link{
+.library-header__container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.library-header_logo {
-    width: 24px;
-    height: 24px;
+.library-header__box {
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
 
+  @include mq(tablet) {
+    margin-bottom: 40px;
+  }
 }
 
+// кнопки
+.btn-container__list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 
-.library-header_link{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: calc(14/12);
-    text-transform: uppercase;
+  @include mq(tablet) {
+    gap: 32px;
+  }
 
-    color: var(--secondaryColor) ;
- 
-
+  @include mq(desktop) {
+    gap: 16px;
+  }
 }
-
-.open{
-    border-bottom: 5px solid var(--secondaryAccentColor);
-
-}
-
-.library-header_logo-link{
-    display: flex;
-    align-items: center;
-}
-
-.library-header_title{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: calc(35/30);
-    color: #FFFFFF;
-    display: none;
-
-    @include mq(tablet) {
-        margin-left: 8px;
-        display: flex;
-    }
-}
-
-.library-btnbox{
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-
-
