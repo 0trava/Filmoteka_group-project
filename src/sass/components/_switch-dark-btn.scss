@@ -21,13 +21,10 @@
 .checkbox:checked ~ .slider::before {
   background-color: var(--light-invers);
 }
-.movie-card__name {
-  color: var(--dark-invers);
-}
 
 @media screen and (prefers-color-scheme: dark) {
   body {
-    background: var(--light-invers);
-    color: var(--dark-invers);
+    background: #28292c;
+    color: #ffffff;
   }
 }
