@@ -25,7 +25,6 @@
   }
 
   //   бекграунд для десктопа
-
   @include mq(desktop) {
     background-image: $headerGradient, url(../images/Home/header-desktop-1x.jpg);
 
@@ -71,13 +70,16 @@
   font-size: 12px;
   line-height: calc(14 / 12);
   text-transform: uppercase;
+  transform: scale(1);
 
   color: var(--secondaryColor);
 
   &:hover,
   &:focus {
-    color: var(--headerHoverColor);
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.25);
+    box-shadow: inset 5px -15px 30px -10px #a7151a;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms ease;
   }
 }
 
@@ -94,13 +96,19 @@
 
 // логотип
 .logo__icon {
-  fill: var(--secondaryColor);
-  transform: scale(1);
+  animation: logoPulse 2500ms linear 500ms infinite;
+}
 
-  &:hover,
-  &:focus {
-    transform: scale(1.2);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// анімація логотипу за допомогою keyframes
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -112,7 +120,6 @@
   line-height: calc(35 / 30);
   color: #ffffff;
   display: none;
-  //   transform: scale(1);
 
   @include mq(tablet) {
     margin-left: 8px;
@@ -125,13 +132,13 @@
 
   &:hover,
   &:focus {
-    color: var(--headerHoverColor);
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.1);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
 // пошукова форма для фільмів
-
 .search-form {
   position: relative;
 
@@ -171,8 +178,10 @@
 
   &:hover,
   &:focus {
-    border-bottom: 0.5px solid var(--headerHoverColor);
-    transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 2px solid #7d0313;
+    box-shadow: inset 3px -11px 25px -13px #a7151a;
+    transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
