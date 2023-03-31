@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 20;
+  z-index: 10;
 
   width: 100%;
   height: 100%;
@@ -28,8 +28,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-
-  max-height: 95%;
+  margin-top: 20px;
+  // max-height: 98%;
   overflow: auto;
 
   z-index: 100;
@@ -59,22 +59,26 @@
 
 .modal__button-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
 
   width: 30px;
   height: 30px;
 
   background-color: transparent;
+  fill: #b70404;
+  // transform: scale(1);
+
+  // transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal__button-close:hover,
 .modal__button-close:focus {
-  fill: #ff6b01;
+  transform: scale(1.15);
 }
 
 .modal__icon-close {
-  fill: #000000;
+  fill: #b70404;
 }
 
 .modal__poster {
@@ -83,9 +87,17 @@
   border-radius: 5px;
 
   @include mq(tablet) {
+    margin-bottom: 0;
+    margin-right: 68px;
+
+    width: 264px;
+    height: 374px;
   }
 
   @include mq(desktop) {
+    width: 375px;
+    height: auto;
+    margin-right: 16px;
   }
 }
 
@@ -99,11 +111,17 @@
   }
 }
 
-.modal__movie-title {
+.modal__title {
   margin-bottom: 20px;
 
-  font-size: 20px;
+  font-family: 'Roboto';
+  font-style: normal;
   font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+
   text-transform: uppercase;
 
   @include mq(desktop) {
@@ -178,7 +196,7 @@
   line-height: 1.7;
 }
 
-.modal__btn-container {
+.modal__button-container {
   display: flex;
   align-items: center;
 
@@ -187,7 +205,7 @@
   }
 }
 
-.modal__btn {
+.modal__button {
   width: 110px;
   height: 44px;
 
@@ -202,6 +220,20 @@
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
+  font-family: 'Roboto';
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  /* or 133% */
+
+  // display: flex;
+  // align-items: center;
+  // text-align: center;
+  // text-transform: uppercase;
+
+  // color: #ffffff;
+
   @include mq(tablet) {
     width: 125px;
   }
@@ -211,8 +243,8 @@
   }
 }
 
-.modal__btn:hover,
-.modal__btn:focus {
+.modal__button:hover,
+.modal__button:focus {
   color: #ffffff;
   background-color: #ff6b08;
   border: 1px solid #ff6b08;
@@ -221,7 +253,7 @@
   box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
 }
 
-.modal__btn-watched {
+.modal__button-watched {
   margin-right: 20px;
 
   @include mq(tablet) {
