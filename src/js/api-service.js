@@ -10,7 +10,7 @@ const moviesAll = document.querySelector(".gallery");
 getMovies(1);
 
 // ТОП фільмів - активувати пагінацію
-// pagination.initPagination(1000, getMovies); 
+pagination.initPagination(1000, getMovies); 
 
 
 // Функція виводу ТОП фільмів
@@ -38,7 +38,7 @@ async function getMovies(page) {
                 alt="${item.original_title}" 
                 width="300"
                 ID=${item.id}>
-                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
+                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title || item.name}</h2>
                 <p class="movie-card__text"   ID=${item.id}>${item.genre_ids} | ${item.release_date}</p>
             </li>
         `;
