@@ -1,7 +1,14 @@
 import * as apiService from './api-service';
-export const backdropModal = document.querySelector('.backdrop'); 
+import {
+  watched,
+  queue,
+  getQueue,
+  getWatched,
+  setQueue,
+  setWatched,
+} from './local-storage';
 
-
+export const backdropModal = document.querySelector('.backdrop');
 
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
@@ -12,17 +19,21 @@ window.addEventListener('keydown', closeModalHandler);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
-
-
 function closeModalHandler(evt) {
-    if (evt.code === 'Escape') {
-        backdropModal.classList.add('is-hidden')
-    }
-};
+  if (evt.code === 'Escape') {
+    backdropModal.classList.add('is-hidden');
+  }
+  //зняття слухачів
+  watchedBtn.removeEventListener('click', onWatchedClick);
+  queueBtn.removeEventListener('click', onQueueClick);
+}
 
- function onCloseButton() {
-            backdropModal.classList.add('is-hidden');
- }
+function onCloseButton() {
+  backdropModal.classList.add('is-hidden');
+  //зняття слухачів
+  watchedBtn.removeEventListener('click', onWatchedClick);
+  queueBtn.removeEventListener('click', onQueueClick);
+}
 
 async function showCard(e) {
   e.preventDefault();
@@ -80,6 +91,43 @@ async function showCard(e) {
         </div>
     </div>
   `;
+
   console.log(movie); 
 };
 
+
+  //Кнопки
+  const watchedBtn = document.querySelector('#watched');
+  const queueBtn = document.querySelector('#queue');
+  //слухачі подій на кнопки
+  watchedBtn.addEventListener('click', onWatchedClick);
+  queueBtn.addEventListener('click', onQueueClick);
+
+  function onWatchedClick() {
+    //якщо фільм вже в списку
+    if (watched.includes(movieId)) {
+      watched.splice(watched.indexOf(movieId), 1); //видаляємо з масиву айді
+      setWatched(watched); //перезаписуємо сховище
+      watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
+      return;
+    }
+
+    watched.push(movieId); //додати в масив айді фільма
+    setWatched(watched); //записати в сховище
+    watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
+  }
+
+  function onQueueClick() {
+    if (queue.includes(movieId)) {
+      queue.splice(queue.indexOf(movieId), 1);
+      setWatched(queue);
+      queueBtn.textContent = 'add to queue';
+      return;
+    }
+
+    queue.push(movieId);
+    setQueue(queue);
+    queueBtn.textContent = 'remove from queue';
+  }
+  console.log(movie);
+}
