@@ -39,17 +39,15 @@ async function getMovies(page) {
         let year = release_date?.substring(0, 4);
         //   if (genre && year) genre += ' | ';
           if (!title) title = 'no information';
-          console.log('year :>> ', year);
 
         return `
             <li class="movie-card"  ID=${id}>
                 <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
                 onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
-
                 alt="${title}" 
-                width="300"ID=${item.id}>
-                <h2 class="movie-card__name">${title}</h2>
-                <p class="movie-card__text">${genre} | ${year}</p>
+                width="300" ID=${id}>
+                <h2 class="movie-card__name" ID=${id}>${title}</h2>
+                <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
 
             </li>
         `;
