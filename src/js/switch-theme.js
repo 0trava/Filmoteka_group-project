@@ -1,69 +1,110 @@
 const switcher = document.getElementById('switcher');
 const link = document.getElementById('theme-link');
-const switchTheme = document.querySelector('.checkbox');
+
 const savedTheme = localStorage.getItem('currTheme');
 
-const load = currTheme => {
+document.addEventListener('DOMContentLoaded', () => {
+  const currentTheme = loadTheme('currTheme');
+  setTheme(currentTheme);
+});
+
+switcher.addEventListener('click', () => {
+  changeTheme();
+});
+
+const loadTheme = currTheme => {
   try {
-    let theme = window.localStorage.getItem(currTheme);
+    let theme = localStorage.getItem(currTheme);
+
     if (theme === null) {
       theme = 'light';
-      window.localStorage.setItem(currTheme, theme);
+      saveTheme(currTheme, theme);
     }
     return theme;
   } catch (error) {
     console.error('Get state error: ', error.message);
   }
 };
-//  стан чекбокса та тема при завантаженні сторінки
-document.addEventListener('DOMContentLoaded', () => {
-  const currTheme = load('currTheme');
-  if (currTheme === 'dark') {
-    switcher.checked = true;
-    link.setAttribute('href', '/src/sass/components/_switch-dark-btn.scss');
-    document.body.style.backgroundColor = '#28292c';
-  } else if (currTheme === 'light') {
-    switcher.checked = false;
-    link.setAttribute('href', '/src/sass/components/_switch-light-btn.scss');
-    document.body.style.backgroundColor = '#d8dbe0';
-  }
-});
 
-switcher.addEventListener('click', () => {
-  ChangeTheme();
-});
-
-function ChangeTheme() {
-  const lightTheme = '/src/sass/components/_switch-light-btn.scss';
-  const darkTheme = '/src/sass/components/_switch-dark-btn.scss';
-  let theme = 'light';
-  let currTheme = link.getAttribute('href');
-
-  if (currTheme == lightTheme) {
-    currTheme = darkTheme;
-    theme = 'dark';
-    window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = 'var(--darkThemebackgroundColor)';
-  } else {
-    currTheme = lightTheme;
-    theme = 'light';
-    window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = 'var(--lightThemebackgroundColor)';
-  }
-
-  link.setAttribute('href', currTheme);
-}
-
-const save = (currTheme, theme) => {
+const saveTheme = (currTheme, theme) => {
   try {
-    const serializedState = JSON.stringify(theme);
-    localStorage.setItem(currTheme, serializedState);
+    localStorage.setItem(currTheme, theme);
   } catch (error) {
     console.error('Set state error: ', error.message);
   }
 };
 
+const setTheme = currentTheme => {
+  const { lightTheme, darkTheme, lightBackground, darkBackground } =
+    getThemeStyles();
+
+  if (currentTheme === 'dark') {
+    switcher.checked = true;
+    link.setAttribute('href', darkTheme);
+    document.body.style.backgroundColor = darkBackground;
+    setElementsColor('#000');
+  } else {
+    switcher.checked = false;
+    link.setAttribute('href', lightTheme);
+    document.body.style.backgroundColor = lightBackground;
+    setElementsColor('#fff');
+  }
+};
+
+const changeTheme = () => {
+  const { lightTheme, darkTheme, lightBackground, darkBackground } =
+    getThemeStyles();
+  let theme = 'light';
+  setElementsColor('#ffffff');
+  let currTheme = link.getAttribute('href');
+
+  if (currTheme === lightTheme) {
+    currTheme = darkTheme;
+    theme = 'dark';
+    saveTheme('currTheme', theme);
+    document.body.style.backgroundColor = darkBackground;
+    setElementsColor('#ffffff');
+  } else {
+    currTheme = lightTheme;
+    theme = 'light';
+    saveTheme('currTheme', theme);
+    document.body.style.backgroundColor = lightBackground;
+    setElementsColor('#000000');
+
+  }
+
+  link.setAttribute('href', currTheme);
+};
+
+const getThemeStyles = () => {
+  const lightTheme = '/src/sass/components/_switch-light-btn.scss';
+  const darkTheme = '/src/sass/components/_switch-dark-btn.scss';
+  const lightBackground = '#d8dbe0';
+  const darkBackground = '#28292c';
+  const lightFont = '#000000';
+  const darkFont = '#ffffff';
+  return {
+    lightTheme,
+    darkTheme,
+    lightBackground,
+    darkBackground,
+    lightFont,
+    darkFont,
+  };
+};
+
+const setElementsColor = color => {
+  const elements = document.querySelectorAll(
+    '.movie-card__name',
+    '.tui-page-btn',
+    '.home-footer-page'
+  );
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.color = color;
+  }
+};
+
 export default {
-  save,
-  load,
+  saveTheme,
+  loadTheme,
 };
