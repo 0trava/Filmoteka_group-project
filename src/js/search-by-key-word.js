@@ -1,4 +1,7 @@
 import axios from "axios";
+import * as apiService from './api-service';
+import * as pagination from './pagination';
+
 const moviesAll = document.querySelector(".gallery");
 
 //ПОШУК ПО КЛЮЧОВОМУ СЛОВУ
@@ -17,11 +20,12 @@ function onSearchByKeyWords(e) {
     page = 1;
     moviesAll.innerHTML = ''; //видаляє розмітку, яка вже є 
 
-    const value = input.value.trim(); //значення, яке ввели в інпут
-    console.log(value);
+    const search_word = input.value.trim(); //значення, яке ввели в інпут
+    console.log(search_word);
     
-    if (value !== '') {
-    getMoviesByValue(value, page) //виклик ф-ції, для зв'язку з бек-ендом
+    if (search_word !== '') {
+        apiService.getSearchMovies(search_word, 1);
+        pagination.initPagination(1000, apiService.getSearchMovies, search_word); 
     } else {
         console.log(error)
     }
