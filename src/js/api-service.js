@@ -67,3 +67,14 @@ export async function getMovieInfoById(movieID) {
 
     return respData;
 }
+
+// Отримання посилання на youtube-трейлер по id фільма
+export async function getYoutubeTrailerByMovieId(movieId) {
+  const response = await fetch(
+    `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`
+  );
+
+  const responseData = await response.json();
+
+  return responseData["results"][0]["key"];
+}
