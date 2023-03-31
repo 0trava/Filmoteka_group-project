@@ -27,6 +27,8 @@ async function getMovies(page) {
     // Виключити loader
     spinner.classList.add('is-hidden');
 
+    console.log(respData);
+
     // Сформувати карточки фільмів
     const data = respData["results"].map(item => {
         return `
