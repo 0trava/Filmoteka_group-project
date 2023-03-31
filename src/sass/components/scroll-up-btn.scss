@@ -1,0 +1,71 @@
+.scroll-up-btn {
+    display: none;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    right: 30px;
+    bottom: 92px;
+    border-radius: 50%;
+    z-index: 1;
+
+    background-color: var(--btnAccentColor);
+    color: var(--secondaryColor);
+    box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+    -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+    -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+    
+    transition: color 1500ms ease-in-out;
+
+
+    &:hover {
+        background-color: var(--secondaryColor); 
+        .scroll-up-btn__text {
+                color: var(--mainAccentColor);
+            }
+            box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+            -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+            -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+    }
+
+    &:active {
+        .scroll-up-btn__text {
+            color: var(--mainAccentColor);
+            }
+        transform: translateY(-1px);
+        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+            -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+            -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+    }
+
+    @include mq(tablet) {
+        width: 50px;
+        height: 50px;
+        right: 45px;
+        bottom: 139px;
+    }
+
+    @include mq(desktop) {
+        width: 60px;
+        height: 60px;
+        right: 45px;
+        bottom: 137px;
+    }
+}
+
+
+.scroll-up-btn__text {
+    font-weight: 500;
+    font-size: 16px;
+
+    @include mq(tablet) {
+        font-size: 18px;
+    }
+
+    @include mq(desktop) {
+        font-size: 22px;
+    }
+}
+
+.go-up-show {
+    display: block;
+}

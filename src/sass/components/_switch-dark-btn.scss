@@ -1,11 +1,11 @@
 .toggle-switch {
-  --dark-invers: #d8dbe0;
-  --light-invers: #28292c;
+  --dark-invers: #e5e5e5;
+  --light-invers: #121213f7;
 }
 
 .switch-label {
   background-color: var(--light-invers);
-  border: 3px solid var(--light-invers);
+  border: 1px solid #920e0e;
 }
 
 .checkbox:checked ~ .slider {
@@ -21,13 +21,10 @@
 .checkbox:checked ~ .slider::before {
   background-color: var(--light-invers);
 }
-.movie-card__name {
-  color: var(--dark-invers);
-}
 
 @media screen and (prefers-color-scheme: dark) {
   body {
-    background: var(--light-invers);
-    color: var(--dark-invers);
+    background: #28292c;
+    color: #ffffff;
   }
 }
