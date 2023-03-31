@@ -24,8 +24,8 @@ function closeModalHandler(evt) {
     backdropModal.classList.add('is-hidden');
   }
   //зняття слухачів
-  watchedBtn.removeEventListener('click', onWatchedClick);
-  queueBtn.removeEventListener('click', onQueueClick);
+  // watchedBtn.removeEventListener('click', onWatchedClick);
+  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
 function onCloseButton() {
