@@ -88,6 +88,9 @@ async function showCard(e) {
                 <button id="watched" type="button" class="modal__button modal__button-watched">add to watched</button>
                 <button id="queue" type="button" class="modal__button modal__button-queue">add to queue</button>
             </div>
+            <div class="modal__button-trailer-wrap">
+                <button type="button" class="modal__button modal__button-trailer">Trailer</button>
+            </div>
         </div>
     </div>
   `;
