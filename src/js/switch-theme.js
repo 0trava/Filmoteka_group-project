@@ -1,20 +1,38 @@
 const switcher = document.getElementById('switcher');
 const link = document.getElementById('theme-link');
 const switchTheme = document.querySelector('.checkbox');
+const savedTheme = localStorage.getItem('currTheme');
 
 const load = currTheme => {
   try {
-    const serializedState = localStorage.getItem(currTheme);
-    return serializedState === null ? undefined : JSON.parse(serializedState);
+    let theme = window.localStorage.getItem(currTheme);
+    if (theme === null) {
+      theme = 'light';
+      window.localStorage.setItem(currTheme, theme);
+    }
+    return theme;
   } catch (error) {
     console.error('Get state error: ', error.message);
   }
 };
+//  стан чекбокса та тема при завантаженні сторінки
+document.addEventListener('DOMContentLoaded', () => {
+  const currTheme = load('currTheme');
+  if (currTheme === 'dark') {
+    switcher.checked = true;
+    link.setAttribute('href', '/src/sass/components/_switch-dark-btn.scss');
+    document.body.style.backgroundColor = '#28292c';
+  } else if (currTheme === 'light') {
+    switcher.checked = false;
+    link.setAttribute('href', '/src/sass/components/_switch-light-btn.scss');
+    document.body.style.backgroundColor = '#d8dbe0';
+  }
+});
 
 switcher.addEventListener('click', () => {
   ChangeTheme();
 });
-load();
+
 function ChangeTheme() {
   const lightTheme = '/src/sass/components/_switch-light-btn.scss';
   const darkTheme = '/src/sass/components/_switch-dark-btn.scss';
