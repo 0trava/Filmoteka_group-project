@@ -1,26 +1,15 @@
-import axios from 'axios';
 
 const API = 'https://api.themoviedb.org/3/';
-const KEY = '3fae8df0f78070a007ffb073b1444710';
-const MEDIA_TYPE = 'movie';
+const API_KEY = '3fae8df0f78070a007ffb073b1444710';
 
-export async function getTrailer(movieId) {
-  try {
-    const options = new URLSearchParams({
-      api_key: KEY,
-    });
+getVideos(603692);
 
-    const response = await axios(
-      `${API}${MEDIA_TYPE}/${movieId}/videos?${options}`
-    );
+async function getVideos(movieID) {
+  const resp = await fetch(
+    `${API}movie/${movieID}/videos?api_key=${API_KEY}&language=en-US`
+  );
 
-    if (response.status !== 200) {
-      throw new Error(response.status);
-    }
-    return response.data;
-  } catch (error) {
-    console.log('error :>> ', error);
-  }
-};
+  const respData = await resp.json();
 
-getMovieTrailer();
+  console.log(respData);
+}
