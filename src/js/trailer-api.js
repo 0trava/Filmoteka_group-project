@@ -11,5 +11,7 @@ async function getVideos(movieID) {
 
   const responseData = await response.json();
 
+  const respData = await resp.json();
+
   console.log(responseData);
 }

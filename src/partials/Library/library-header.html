@@ -1,4 +1,3 @@
-
 <!-- Кнопка зміни теми День-Ніч -->
 
 <!-- <div class="toggle-switch">
@@ -10,28 +9,46 @@
 
 <!-- починай писати код тут -->
 
-<div class="library-header_background">
-  <div class="container library-header_container">
-
-    <div class="library-header_box">
-      <a class="library-header_logo-link" href="./index.html">
-        <img src="./images/logo.svg" alt="logo" class="home-header_logo">
-        <h1 class="library-header_title">Filmoteka</h1>   
+<header class="library-header__background">
+  <div class="container library-header__container">
+    <div class="library-header__box">
+      <!-- логотип -->
+      <a class="home-header__logo-link" href="./index.html">
+        <svg class="logo__icon" width="24" height="24">
+          <use href="/src/images/symbol-defs.svg#logo-icon"></use>
+        </svg>
+        <span class="home-header__title">Filmoteka</span>
       </a>
-      <div class="library-header_box-link">
-        <a  class="library-header_link" href="./index.html">Home</a>
-        <a  class="library-header_link open" href="./library.html">MY Library</a>  
-      </div>
 
+      <!-- навігація -->
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item">
+            <a class="navigation__link" href="./index.html">Home</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link nav__link--current" href="./library.html"
+              >My library</a
+            >
+          </li>
+        </ul>
+      </nav>
     </div>
 
-    <div class="library-btnbox">
-          <button class="library-btn_watched">Watched</button>
-          <button class="library-btn_queue">queue</button>    
+    <!-- кнопки -->
+    <div class="btn-container">
+      <ul class="btn-container__list">
+        <li class="btn-container__item">
+          <button class="library-btn library-btn__watched" type="button">
+            Watched
+          </button>
+        </li>
+        <li class="btn-container__item">
+          <button class="library-btn library-btn__queue" type="button">
+            queue
+          </button>
+        </li>
+      </ul>
     </div>
-
-
-
-
   </div>
-</div>
+</header>
