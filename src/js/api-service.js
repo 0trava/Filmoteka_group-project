@@ -12,6 +12,9 @@ getMovies(1);
 // Активувати пагінацію
 initPagination(1000, getMovies); 
 
+
+
+
 // Функція виводу ТОП фільмів
 async function getMovies(page) {
     // Включити loader
