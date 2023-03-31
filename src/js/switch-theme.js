@@ -43,12 +43,12 @@ function ChangeTheme() {
     currTheme = darkTheme;
     theme = 'dark';
     window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = '#28292c';
+    document.body.style.backgroundColor = 'var(--darkThemebackgroundColor)';
   } else {
     currTheme = lightTheme;
     theme = 'light';
     window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = '#d8dbe0';
+    document.body.style.backgroundColor = 'var(--lightThemebackgroundColor)';
   }
 
   link.setAttribute('href', currTheme);
