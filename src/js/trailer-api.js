@@ -9,6 +9,9 @@ async function getVideos(movieID) {
     `${API}movie/${movieID}/videos?api_key=${API_KEY}&language=en-US`
   );
 
+import axios from 'axios';
+
+
   const respData = await resp.json();
 
   console.log(respData);
