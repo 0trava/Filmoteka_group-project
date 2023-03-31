@@ -20,6 +20,6 @@ export const movieGenresIds = {
   37: 'Western',
 };
 
-export function getGenre(genreId) {
-  return genreId.map(id => movieGenresIds[id]).join(',');
+export function getGenre(genre_ids) {
+  return genre_ids.map(id => movieGenresIds[id]).join(',');
 }
