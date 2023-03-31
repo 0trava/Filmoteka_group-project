@@ -1,26 +1,73 @@
 import { watched, queue } from './local-storage';
-import { getMovieInfoById } from './api-service';
+
+// import { getMovieInfoById } from './api-service';
+
+const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
+const API_URL = `https://api.themoviedb.org/3/`;
+const API_URL_IMG = `https://image.tmdb.org/t/p/original`;
 
 const libWatchedBtn = document.querySelector('.library-btn__watched');
 const libQueueBtn = document.querySelector('.library-btn__queue');
+const libContainer = document.querySelector('.library-container');
+const spinner = document.querySelector('.dot-spinner');
 
 libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
 libQueueBtn.addEventListener('click', onlibQueueBtnClick);
+window.addEventListener('load', onlibWatchedBtnClick);
 
-getWatchedMovies(watched);
-getQueueMovies(queue);
+async function onlibWatchedBtnClick() {
+  if (watched.length === 0) return;
 
-function onlibWatchedBtnClick() {
-  console.log('click watched');
-}
-function onlibQueueBtnClick() {
-  console.log('click queue');
+  spinner.classList.remove('is-hidden');
+
+  const moviesList = await getMoviesList(watched);
+  const watchedList = createList(moviesList);
+
+  spinner.classList.add('is-hidden');
+
+  renderList(watchedList);
 }
 
-// ФУНКЦІЯ - завантаження карток фільму з локальної бібліотеки Watched
-async function getWatchedMovies(array) {
-  // Пиши код тут
+async function onlibQueueBtnClick() {
+  if (queue.length === 0) return;
+
+  spinner.classList.remove('is-hidden');
+
+  const moviesList = await getMoviesList(queue);
+  const watchedList = createList(moviesList);
+
+  spinner.classList.add('is-hidden');
+
+  renderList(watchedList);
 }
+
+async function getMovieInfoById(movieID) {
+  const resp = await fetch(
+    `${API_URL}movie/${movieID}?api_key=${API_KEY}&language=en-US`
+  );
+
+  const respData = await resp.json();
+  console.log(respData);
+  return respData;
+}
+
+async function getMoviesList(array) {
+  const moviePromises = array.map(item => getMovieInfoById(item));
+  const moviesList = await Promise.all(moviePromises);
+  return moviesList;
+}
+
+function renderList(data) {
+  libContainer.innerHTML = '';
+  libContainer.insertAdjacentHTML('beforeend', data);
+}
+
+function createList(array) {
+  return array.reduce((acc, item) => {
+    return acc + createMarkup(item);
+  }, '');
+}
+
 function createMarkup(item) {
   return `
             <li class="movie-card"  ID=${item.id}>
@@ -33,15 +80,4 @@ function createMarkup(item) {
                 <p class="movie-card__text"   ID=${item.id}>${item.genre_ids} | ${item.release_date}</p>
             </li>
         `;
-}
-
-function createList(array) {
-  array.reduce((acc, item) => {
-    return acc + createMarkup(item);
-  }, '');
-}
-
-// ФУНКЦІЯ - завантаження карток фільму з локальної бібліотеки Queue
-async function getQueueMovies(array) {
-  // Пиши код тут
 }
