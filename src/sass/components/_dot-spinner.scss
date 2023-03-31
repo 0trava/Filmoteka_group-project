@@ -1,8 +1,12 @@
 .dot-spinner {
-    --uib-size: 2.8rem;
+    --uib-size: 8.8rem;
     --uib-speed: .9s;
-    --uib-color: #183153;
-    position: relative;
+    --uib-color: red; /*#183153;*/
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     align-items: center;
     justify-content: flex-start;

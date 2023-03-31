@@ -32,6 +32,7 @@ export default function initPagination(totalItems, funcOutputData) {
     
         pagination.on('beforeMove', evt => {
             const { page } = evt;
+            window.scrollTo(0, 0); 
             funcOutputData(page);
         });
 }
