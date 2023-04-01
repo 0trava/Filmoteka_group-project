@@ -7,24 +7,38 @@
     bottom: 75px;
     border-radius: 50%;
     z-index: 1;
+    transition: var(--timing-function);
+
+    animation-name: up;
+        animation-duration: 900ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    
+        @keyframes up {
+            0% {
+                    transform: translateY(0);
+            }
+        
+            50% {
+                transform: translateY(-10px);
+            }
+        
+            100% {
+                transform: translateY(0);
+            }
+        }
 
     background-color: var(--btnAccentColor);
     color: var(--secondaryColor);
-    box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
-    -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
-    -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
-    
-    transition: color 1500ms ease-in-out;
-
+    box-shadow: var(--box-shadow-scroll-up-btn);
 
     &:hover {
         background-color: var(--secondaryColor); 
         .scroll-up-btn__text {
                 color: var(--mainAccentColor);
             }
-            box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
-            -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
-            -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+            box-shadow: var(--box-shadow-scroll-up-btn);
+
     }
 
     &:active {
