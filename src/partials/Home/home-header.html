@@ -1,6 +1,6 @@
 <!-- починай писати код тут -->
-<link rel="stylesheet" type="text/scss" href="/src/sass/components/_switch-light-btn.scss" id="theme-link">
-
+<link rel="stylesheet" type="text/scss" href="/src/sass/components/_switch-btn.scss">
+<link rel="stylesheet" type="text/scss" href="/src/sass/components/_switch-theme.scss">
 <!-- хедер домашньої сторінки -->
 <header class="home-header__background">
   <div class="container home-header__container">
@@ -35,20 +35,19 @@
         </svg>
       </button>
     </form>
+<!-- текст при помилці вводу -->
+<div class="error-notification">
+  <p class="error-notification__text">
+    <!-- Search result not successful. Enter the correct movie name and try again. -->
+  </p>
+</div>
+
     <!-- Кнопка зміни теми День-Ніч -->
     <div class="toggle-switch">
       <label class="switch-label">
         <input type="checkbox" class="checkbox" id="switcher" />
         <span class="slider"></span>
       </label>
-    </div>
-
-
-    <!-- текст при помилці вводу -->
-    <div class="error-notification">
-      <p class="error-notification__text">
-        <!-- Search result not successful. Enter the correct movie name and try again. -->
-      </p>
     </div>
 
 </header>

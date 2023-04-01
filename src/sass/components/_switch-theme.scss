@@ -1,0 +1,80 @@
+.light-theme {
+  background-color: #d8dbe0;
+  color: var(--light-invers);
+  .modal {
+    background-color: #ffffff;
+  }
+}
+
+.dark-theme {
+  background-color: #28292c;
+  color: #ffffff;
+  .library-text,
+  .movie-card__name {
+    color: #ffffff;
+  }
+}
+
+.grey-background-theme {
+  background-color: #28292c;
+  box-shadow: 0 0 15px #444444;
+
+  .home-footer__text,
+  .home-footer-reference {
+    color: var(--secondaryColor);
+  }
+
+  .home-footer__icon {
+    color: var(--mainAccentColor);
+  }
+
+  .body {
+    background-color: #28292c;
+  }
+  .modal__title {
+    color: var(--mainAccentColor);
+  }
+  .modal__info-entry,
+  .modal__info-value {
+    color: var(--secondaryColor);
+  }
+  button {
+    background-color: var(--lightThemebackgroundColor);
+    box-shadow: 0 0 15px var(--headerHoverColor);
+    border: var(--lightThemebackgroundColor);
+  }
+  .movie-card__name {
+    color: var(--secondaryColor);
+  }
+}
+
+.toggle-switch {
+  --dark-invers: #e5e5e5;
+  --light-invers: #121213f7;
+}
+
+.switch-label {
+  background-color: var(--light-invers);
+  border: 1px solid #920e0e;
+}
+
+.checkbox:checked ~ .slider {
+  background-color: var(--secondaryColor);
+}
+
+.slider::before {
+  -webkit-box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
+  box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
+  background-color: var(--light-invers);
+}
+
+.checkbox:checked ~ .slider::before {
+  background-color: var(--light-invers);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    background: #28292c;
+    color: var(--secondaryColor);
+  }
+}
