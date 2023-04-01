@@ -10,7 +10,7 @@ const modal = document.querySelector('.modal');
 // const card = document.querySelector('.movie-card__name');
 
 const setElementsColor = color => {
-  const elements = document.querySelectorAll('.movie-card__name');
+  const elements = document.querySelectorAll('.movie-card__name', '.modal_all');
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.color = color;
   }
