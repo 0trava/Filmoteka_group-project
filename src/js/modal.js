@@ -38,7 +38,9 @@ const modal = document.querySelector('.modal');
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
+
     backdropModal.classList.add('is-hidden');
+
   }
   //зняття слухачів
 
@@ -57,8 +59,7 @@ function onCloseButton() {
 
 async function showCard(e) {
   e.preventDefault();
-  console.log(e.target.nodeName);
-  
+
   if (e.target.nodeName === 'UL') {
     return;
   }
@@ -119,7 +120,10 @@ async function showCard(e) {
             <div class="modal__button-trailer-wrap">
                 <button id="trailer" type="button" class="modal__button modal__button-trailer">Trailer</button>
 
-                <iframe class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="video" class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
+                title="Mia and me - Mia and me Day 2014" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -201,7 +205,9 @@ async function showCard(e) {
     
   function onWindowClick(e) {
     if (!modal.contains(event.target)) {
-   
+      console.log('Трейлер на паузі');
+      document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+
       backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
@@ -218,7 +224,7 @@ async function showCard(e) {
 
   function onTrailerClick() {
     modalIframe.classList.remove('is-hidden');
-    console.log('кнопка работает');
+
   }
 
 

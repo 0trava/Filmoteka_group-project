@@ -229,6 +229,8 @@ async function showCard(e) {
     
   function onWindowClick(e) {
     if (!modal.contains(event.target)) {
+      console.log('Трейлер на паузі');
+      document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
    
       backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
