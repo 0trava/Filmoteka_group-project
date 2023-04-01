@@ -70,7 +70,7 @@ function createList(array) {
 }
 
 function createMarkup(item) {
-  console.log(item);
+  // console.log(item);
 
         let test = getGenrelibrary(item.genres);
 
