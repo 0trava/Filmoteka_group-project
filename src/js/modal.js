@@ -133,7 +133,7 @@ async function showCard(e) {
       const watchedBtn = document.querySelector(`#watched`);
       //якщо фільм вже в списку
       if (watched.includes(movieId)) {
-        watchedBtn.textContent = 'remove from queue'; //змінити текст кнопки
+        watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
         return;
       }
         watchedBtn.textContent = 'add to queue'; //змінити текст кнопки
