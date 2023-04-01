@@ -41,8 +41,9 @@ function closeModalHandler(evt) {
     backdropModal.classList.add('is-hidden');
   }
   //зняття слухачів
-  watchedBtn.removeEventListener('click', onWatchedClick);
-  queueBtn.removeEventListener('click', onQueueClick);
+
+  // watchedBtn.removeEventListener('click', onWatchedClick);
+  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
 function onCloseButton() {
@@ -114,7 +115,7 @@ async function showCard(e) {
             </div>
 
             <div class="modal__button-trailer-wrap">
-                <button type="button" class="modal__button modal__button-trailer">Trailer</button>
+                <button id="trailer" type="button" class="modal__button modal__button-trailer">Trailer</button>
 
                 <iframe class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
@@ -147,24 +148,21 @@ async function showCard(e) {
       }
 
       queueBtn.textContent = 'add to queue';
-    }
-
-    chackClick ()
+    };
 
   };
 
 
-//   function chackClick () {
 
-//     const watchedBtn = document.querySelector(`#watched`);
-//     const queueBtn = document.querySelector('#queue');
-//     const queueBtn = document.querySelector('.modal__button-trailer');
+    const watchedBtn = document.querySelector(`#watched`);
+    const queueBtn = document.querySelector(`#queue`);
+    // const trailerBtn = document.querySelector(`#trailer`);
 
 
-//     watchedBtn.addEventListener('click', onWatchedClick);
-//     queueBtn.addEventListener('click', onQueueClick);
-//     window.addEventListener('click', onWindowClick);
-//  }
+    watchedBtn.addEventListener('click', onWatchedClick);
+    queueBtn.addEventListener('click', onQueueClick);
+    window.addEventListener('click', onWindowClick);
+ 
 
 
 
@@ -207,10 +205,12 @@ async function showCard(e) {
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
     }
+
   }
   const modalIframe = document.querySelector('iframe');
 
-  const trailerBtn = document.querySelector('.modal__button-trailer');
+  const trailerBtn = document.querySelector(`#trailer`);
+  console.log(trailerBtn);
   
   trailerBtn.addEventListener('click', onTrailerClick);
 
