@@ -1,2 +1,0 @@
-.toggle-switch{--light:#e5e5e5;--dark:#121213f7;--link:#1b8170;--link-hover:#185e52}.switch-label{background-color:var(--dark);border:3px solid var(--dark)}.checkbox:checked~.slider{background-color:var(--light)}.slider:before{-webkit-box-shadow:inset 12px -4px 0px 0px var(--light);box-shadow:inset 12px -4px 0px 0px var(--light);background-color:var(--dark)}.checkbox:checked~.slider:before{background-color:var(--dark)}
-/*# sourceMappingURL=index.a1a6b58e.css.map */
