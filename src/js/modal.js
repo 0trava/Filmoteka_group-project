@@ -16,6 +16,10 @@ const refs = {
 
 };
 
+ 
+
+
+
 window.addEventListener('keydown', closeModalHandler);
 // window.addEventListener('click', onCloseButton);
 refs.closeButton.addEventListener('click', onCloseButton);
@@ -37,15 +41,17 @@ function closeModalHandler(evt) {
     backdropModal.classList.add('is-hidden');
   }
   //зняття слухачів
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
+  watchedBtn.removeEventListener('click', onWatchedClick);
+  queueBtn.removeEventListener('click', onQueueClick);
 }
 
 function onCloseButton() {
   backdropModal.classList.add('is-hidden');
   //зняття слухачів
-  watchedBtn.removeEventListener('click', onWatchedClick);
-  queueBtn.removeEventListener('click', onQueueClick);
+
+
+  // watchedBtn.removeEventListener('click', onWatchedClick);
+  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
 async function showCard(e) {
@@ -69,7 +75,12 @@ async function showCard(e) {
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
-  modal.innerHTML = `
+
+  createModalCard(modal);
+
+  function createModalCard(cardForModal) {
+
+    cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
           <img class="modal__poster" src="${apiService.API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
         </div>
@@ -112,15 +123,49 @@ async function showCard(e) {
   `;
 
 
+    // ПЕРЕВІРКА - чи в списку бібліотеки
 
-  //Кнопки
-  const watchedBtn = document.querySelector('#watched');
-  const queueBtn = document.querySelector('#queue');
+    onWatchedCheck()
+    onQueueCheck()
+
+    function onWatchedCheck() {
+      const watchedBtn = document.querySelector(`#watched`);
+      //якщо фільм вже в списку
+      if (watched.includes(movieId)) {
+        watchedBtn.textContent = 'remove from queue'; //змінити текст кнопки
+        return;
+      }
+        watchedBtn.textContent = 'add to queue'; //змінити текст кнопки
+    }
   
-  //слухачі подій на кнопки
-  watchedBtn.addEventListener('click', onWatchedClick);
-  queueBtn.addEventListener('click', onQueueClick);
-  window.addEventListener('click', onWindowClick);
+    function onQueueCheck() {
+          const queueBtn = document.querySelector('#queue');
+      if (queue.includes(movieId)) {
+
+        queueBtn.textContent = 'remove from queue';
+        return;
+      }
+
+      queueBtn.textContent = 'add to queue';
+    }
+
+    chackClick ()
+
+  };
+
+
+//   function chackClick () {
+
+//     const watchedBtn = document.querySelector(`#watched`);
+//     const queueBtn = document.querySelector('#queue');
+//     const queueBtn = document.querySelector('.modal__button-trailer');
+
+
+//     watchedBtn.addEventListener('click', onWatchedClick);
+//     queueBtn.addEventListener('click', onQueueClick);
+//     window.addEventListener('click', onWindowClick);
+//  }
+
 
 
   function onWatchedClick() {
