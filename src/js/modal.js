@@ -73,6 +73,7 @@ async function showCard(e) {
 
   // Отримуємо youtube трейлер 
   const youtubeTrailer = await apiService.getYoutubeTrailerByMovieId(movieId);
+  console.log(youtubeTrailer);
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -192,7 +193,7 @@ async function showCard(e) {
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
   }
-  console.log(movie);
+  
 
 
 

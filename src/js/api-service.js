@@ -80,7 +80,7 @@ export async function getYoutubeTrailerByMovieId(movieId) {
   const responseData = await response.json();
   console.log(responseData);
 
-  if (responseData.results.lenght > 0){
+  if (responseData.results.length > 0){
     return responseData["results"][0]["key"];
   }
 
