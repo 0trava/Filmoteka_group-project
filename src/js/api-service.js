@@ -8,6 +8,7 @@ export const API_URL=`https://api.themoviedb.org/3/`;
 export const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 
 const moviesAll = document.querySelector(".gallery");
+const inputError = document.querySelector('.error-notification__text')
 
 // ТОП фільмів - вивести 1 сторінка
 getMovies(1);
@@ -97,6 +98,11 @@ export async function getSearchMovies(query, page) {
     const respSearch = await fetch( `${API_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`);
 
     const respDataSearch = await respSearch.json();
+
+  if (respDataSearch.results.length === 0) {
+    inputError.textContent = "Search result not successful. Enter the correct movie name and try again.";
+    return
+  }
 
     // Виключити loader
     spinner.classList.add('is-hidden');
