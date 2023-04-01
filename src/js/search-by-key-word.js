@@ -4,9 +4,11 @@ import * as pagination from './pagination';
 
 const moviesAll = document.querySelector(".gallery");
 
+
 //ПОШУК ПО КЛЮЧОВОМУ СЛОВУ
 const input = document.querySelector('.search-form__input')
 const form = document.querySelector('#search-box');
+const inputError = document.querySelector('.error-notification__text')
 
 let page = 1; 
 
@@ -23,14 +25,16 @@ function onSearchByKeyWords(e) {
     const search_word = input.value.trim(); //значення, яке ввели в інпут
     console.log(search_word);
     
-    if (search_word !== '') {
+    if (search_word !== "") {
         apiService.getSearchMovies(search_word, 1);
-        pagination.initPagination(1000, apiService.getSearchMovies, search_word); 
+        pagination.initPagination(1000, apiService.getSearchMovies, search_word);
+        inputError.textContent = "";
 
-    } else {
+    } else if (!search_word) {
+        inputError.textContent = "Please enter something to search ";
         console.log(error)
+        return;
     }
-
 }
 
 // async function getMoviesByValue(value, page) {
