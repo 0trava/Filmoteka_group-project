@@ -2,7 +2,7 @@
   background-color: #d8dbe0;
   color: var(--light-invers);
   .modal {
-    background-color: #ffffff;
+    background-color: #d8dbe;
   }
 }
 
@@ -27,15 +27,18 @@
   .home-footer__icon {
     color: var(--mainAccentColor);
   }
-
-  .body {
+  .body,
+  .modal {
     background-color: #28292c;
   }
   .modal__title {
     color: var(--mainAccentColor);
   }
   .modal__info-entry,
-  .modal__info-value {
+  .modal__info-value,
+  .modal__about,
+  .modal__about-text,
+  .movie-card__name {
     color: var(--secondaryColor);
   }
   button {
@@ -43,8 +46,9 @@
     box-shadow: 0 0 15px var(--headerHoverColor);
     border: var(--lightThemebackgroundColor);
   }
-  .movie-card__name {
-    color: var(--secondaryColor);
+  .modal__button-close {
+    background-color: #28292c;
+    fill: #e5e5e5;
   }
 }
 
