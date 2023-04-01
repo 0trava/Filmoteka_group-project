@@ -38,19 +38,21 @@ async function getMovies(page) {
         let genre = getGenre(genre_ids);
         let year = release_date?.substring(0, 4);
         //   if (genre && year) genre += ' | ';
-          if (!title) title = 'no information';
+          if (title) {
+                    return  `
+                    <li class="movie-card"  ID=${id}>
+                        <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
+                        onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
+                        alt="${title}" 
+                        width="300" ID=${id}>
+                        <h2 class="movie-card__name" ID=${id}>${title}</h2>
+                        <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
+        
+                    </li>
+                `;
+          };
 
-        return `
-            <li class="movie-card"  ID=${id}>
-                <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
-                onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
-                alt="${title}" 
-                width="300" ID=${id}>
-                <h2 class="movie-card__name" ID=${id}>${title}</h2>
-                <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
 
-            </li>
-        `;
       })
       .join('');
   
@@ -75,41 +77,57 @@ export async function getYoutubeTrailerByMovieId(movieId) {
   );
 
   const responseData = await response.json();
+  console.log(responseData);
 
-  return responseData["results"][0]["key"];
+  if (responseData.results.lenght > 0){
+    return responseData["results"][0]["key"];
+  }
+
+
 }
 
 // Функція виводу фільмів за пошуковим словом
 export async function getSearchMovies(query, page) {
+   console.log("start");
     // Включити loader
     const spinner = document.querySelector('.dot-spinner');
     spinner.classList.remove('is-hidden');
 
     // Отримати дані з сервера
-    const resp = await fetch( `${API_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`);
+    const respSearch = await fetch( `${API_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`);
 
-    const respData = await resp.json();
+    const respDataSearch = await respSearch.json();
 
     // Виключити loader
     spinner.classList.add('is-hidden');
 
-    console.log(respData);
+    console.log(respDataSearch);
+    console.log("list");
 
-    // Сформувати карточки фільмів
-    const data = respData["results"].map(item => {
-        return `
-            <li class="movie-card"  ID=${item.id}>
-                <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
-                onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
-                alt="${item.original_title}" 
-                width="300"
-                ID=${item.id}>
-                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title || item.name}</h2>
-                <p class="movie-card__text"   ID=${item.id}>${item.genre_ids} | ${item.release_date}</p>
-            </li>
-        `;
-    }).join('');
-  
+    // Сформувати карточки фільмів з ПОШУКУ
+    const dataSearch = respDataSearch['results']
+      .map(function ({ id, poster_path, title, genre_ids, release_date, backdrop_path }) {
+        let genre = getGenre(genre_ids);
+        let year = release_date?.substring(0, 4);
+        //   if (genre && year) genre += ' | ';
+        console.log("id");
+        if (backdrop_path) {
+          console.log(id);
+          return `
+                    <li class="movie-card"  ID=${id}>
+                        <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
+                        onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
+                        alt="${title}" 
+                        width="300" ID=${id}>
+                        <h2 class="movie-card__name" ID=${id}>${title}</h2>
+                        <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
+        
+                    </li>
+                `;
+        };
+      })
+      .join('');
+      // console.log(dataSearch);
     // Додати фільми у галерею
-    moviesAll.innerHTML = data;
+    moviesAll.innerHTML = dataSearch;
 }

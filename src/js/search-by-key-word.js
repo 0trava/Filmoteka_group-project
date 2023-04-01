@@ -26,26 +26,32 @@ function onSearchByKeyWords(e) {
     if (search_word !== '') {
         apiService.getSearchMovies(search_word, 1);
         pagination.initPagination(1000, apiService.getSearchMovies, search_word); 
+
     } else {
         console.log(error)
     }
 
 }
 
-async function getMoviesByValue(value, page) {
-    const API_URL = `https://api.themoviedb.org/3/`;
-    const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
+// async function getMoviesByValue(value, page) {
+//     const API_URL = `https://api.themoviedb.org/3/`;
+//     const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
-    try {
-        const response = await axios.get(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&include_adult=${value}`);
-        // createMarkup(response.data.results) 
+//     try {
+//         const response = await axios.get(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&include_adult=${value}`);
+//         // createMarkup(response.data.results) 
 
-        return console.log(response)
+//         return console.log(response)
 
-    } catch (error) {
-        console.log(error)
-    } 
-}
+//     } catch (error) {
+//         console.log(error)
+//     } 
+// }
+
+
+
+
+
 
 //Ф-ція для рендеру розмітки за ключовим словом
 // function createMarkup(array) {
