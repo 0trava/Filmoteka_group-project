@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Filmoteka | Library</title>
-    <link rel="stylesheet" href="./sass/index.scss" />
-    
-    <!-- Підключення шрифтів -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Raleway:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
 
-    <!-- Підключення js -->
-    <!-- <script type="module" src="./index.js"></script> -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filmoteka | Library</title>
+  <link rel="stylesheet" href="./sass/index.scss" />
+
+  <!-- Підключення шрифтів -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Raleway:wght@700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Підключення js -->
+  <!-- <script type="module" src="./index.js"></script> -->
+</head>
 
 <!-- Тіло сторінки -->
-  <body>
 
-    <header class="home-header">
-          <include src="./partials/Library/library-header.html"></include>
-    </header>
+<body>
+  <header class="home-header">
+    <include src="./partials/Library/library-header.html"></include>
+  </header>
 
-    <main class="home-main">
-          <include src="./partials/Library/library-body.html"></include>
-          <include src="./partials/Components/page-scroll.html"></include>
-    </main>
+  <main class="home-main">
+    <include src="./partials/Library/library-body.html"></include>
+    <include src="./partials/Components/page-scroll.html"></include>
+  </main>
 
-    <footer class="home-footer">
-          <include src="./partials/Home/home-footer.html"></include>
-    </footer>
+  <footer class="home-footer">
+    <include src="./partials/Home/home-footer.html"></include>
+  </footer>
 
-          <include src="./partials/Components/modal-students.html"></include>
-          <include src="./partials/Components/modal-window.html"></include>
-          <include src="./partials/Components/dot-spinner.html"></include>
+  <include src="./partials/Components/modal-students.html"></include>
+  <include src="./partials/Components/modal-window.html"></include>
+  <include src="./partials/Components/dot-spinner.html"></include>
 
-    <!-- Підключення скриптів -->
-    <!-- <script type="module" src="./index.js"></script> -->
-    <script type="module" src="./library.js"></script>
-  </body>
+  <!-- Підключення скриптів -->
+  <!-- <script type="module" src="./index.js"></script> -->
+  <script type="module" src="./library.js"></script>
+</body>
+
 </html>
