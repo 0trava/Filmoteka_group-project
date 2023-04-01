@@ -13,11 +13,24 @@ export const backdropModal = document.querySelector('.backdrop');
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
   closeButton: document.querySelector('.modal__button-close'),
+
 };
 
 window.addEventListener('keydown', closeModalHandler);
+// window.addEventListener('click', onCloseButton);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
+
+
+// зачинення по кліку поза модалкою
+
+const modal = document.querySelector('.modal');
+
+
+// добавляем обработчик клика на весь документ
+
+// ->>>>>>
+
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
@@ -88,10 +101,11 @@ async function showCard(e) {
                 <button id="watched" type="button" class="modal__button modal__button-watched">add to watched</button>
                 <button id="queue" type="button" class="modal__button modal__button-queue">add to queue</button>
             </div>
+
             <div class="modal__button-trailer-wrap">
                 <button type="button" class="modal__button modal__button-trailer">Trailer</button>
 
-                <iframe width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -99,13 +113,15 @@ async function showCard(e) {
 
 
 
-
   //Кнопки
   const watchedBtn = document.querySelector('#watched');
   const queueBtn = document.querySelector('#queue');
+  
   //слухачі подій на кнопки
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
+  window.addEventListener('click', onWindowClick);
+
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -134,4 +150,29 @@ async function showCard(e) {
     queueBtn.textContent = 'remove from queue';
   }
   console.log(movie);
+
+
+
+    
+  function onWindowClick(e) {
+    if (!modal.contains(event.target)) {
+   
+      backdropModal.classList.add('is-hidden');
+      watchedBtn.removeEventListener('click', onWatchedClick);
+      queueBtn.removeEventListener('click', onQueueClick);
+      window.removeEventListener('click', onWindowClick);
+    }
+  }
+  const modalIframe = document.querySelector('iframe');
+
+  const trailerBtn = document.querySelector('.modal__button-trailer');
+  
+  trailerBtn.addEventListener('click', onTrailerClick);
+
+  function onTrailerClick() {
+    modalIframe.classList.remove('is-hidden');
+    console.log('кнопка работает');
+  }
+
+
 };

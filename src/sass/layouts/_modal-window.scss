@@ -29,7 +29,7 @@
   top: 50%;
   left: 50%;
   margin-top: 20px;
-  // max-height: 98%;
+  max-height: 98%;
   overflow: auto;
 
   z-index: 100;
@@ -80,6 +80,17 @@
   fill: currentColor;
 }
 
+// cекція з додаванням через js
+
+.modul-card-to-add {
+  @include mq(tablet) {
+    display: flex;
+  }
+}
+
+.modal__poster-thumb {
+  display: flex;
+}
 .modal__poster {
   margin-bottom: 20px;
 
@@ -181,6 +192,7 @@
 }
 
 .modal__about {
+  color: #000;
   margin-bottom: 8px;
 
   font-size: 12px;
@@ -188,6 +200,7 @@
 }
 
 .modal__about-text {
+  color: #000;
   margin-bottom: 20px;
 
   font-size: 12px;
@@ -269,4 +282,13 @@
   @include mq(desktop) {
     padding-left: 5px;
   }
+}
+
+.modal__iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
 }
