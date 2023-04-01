@@ -10,14 +10,25 @@ const API_URL_IMG = `https://image.tmdb.org/t/p/original`;
 const libWatchedBtn = document.querySelector('.library-btn__watched');
 const libQueueBtn = document.querySelector('.library-btn__queue');
 const libContainer = document.querySelector('.library-gallery-wrap');
+const libBoxinfo = document.querySelector('.library-bg-image');
+const BoxCard = document.querySelector('.library-gallery-box');
 const spinner = document.querySelector('.dot-spinner');
 
 libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
 libQueueBtn.addEventListener('click', onlibQueueBtnClick);
 window.addEventListener('load', onlibWatchedBtnClick);
 
+
+// НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
-  if (watched.length === 0) return;
+  if (watched.length === 0) {
+    console.log("start");
+    libBoxinfo.classList.remove('is-hidden');
+    BoxCard.innerHTML = ``;
+    return 
+
+
+  };
 
   spinner.classList.remove('is-hidden');
 
@@ -29,8 +40,17 @@ async function onlibWatchedBtnClick() {
   renderList(watchedList);
 }
 
+
+// НАТИСК на кнопку - Queue
 async function onlibQueueBtnClick() {
-  if (queue.length === 0) return;
+  if (queue.length === 0)  {
+    console.log("start");
+    libBoxinfo.classList.remove('is-hidden');
+    BoxCard.innerHTML = ``;
+    return 
+
+
+  };
 
   spinner.classList.remove('is-hidden');
 
@@ -59,8 +79,8 @@ async function getMoviesList(array) {
 }
 
 function renderList(data) {
-  libContainer.innerHTML = '';
-  libContainer.insertAdjacentHTML('beforeend', data);
+  libBoxinfo.classList.add('is-hidden');
+  BoxCard.insertAdjacentHTML('beforeend', data);
 }
 
 function createList(array) {
