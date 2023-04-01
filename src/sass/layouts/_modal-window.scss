@@ -83,12 +83,14 @@
 // cекція з додаванням через js
 
 .modul-card-to-add {
-  display: flex;
+  @include mq(tablet) {
+    display: flex;
+  }
 }
 
-// .modal__poster-thumb {
-//   display: flex;
-// }
+.modal__poster-thumb {
+  display: flex;
+}
 .modal__poster {
   margin-bottom: 20px;
 
