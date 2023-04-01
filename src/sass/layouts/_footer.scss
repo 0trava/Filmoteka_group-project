@@ -16,9 +16,24 @@
     padding: 29px 0;
   }
 }
-.home-footer-icon {
-  margin: 0 10px;
+
+.home-footer__icon {
+  animation: logoPulse 2500ms linear 500ms infinite;
 }
+
+// анімація логотипу за допомогою keyframes
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .home-footer-reference {
   text-decoration: underline;
 }
@@ -31,4 +46,3 @@ span,
     line-height: 0.9;
   }
 }
-
