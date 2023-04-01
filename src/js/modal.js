@@ -120,6 +120,7 @@ async function showCard(e) {
   //слухачі подій на кнопки
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
+  window.addEventListener('click', onWindowClick);
 
 
   function onWatchedClick() {
@@ -151,29 +152,27 @@ async function showCard(e) {
   console.log(movie);
 
 
-  window.addEventListener('click', onWindowClick);
+
     
   function onWindowClick(e) {
     if (!modal.contains(event.target)) {
-      // если да, то закрываем модальное окно
+   
       backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
     }
   }
+  const modalIframe = document.querySelector('iframe');
 
+  const trailerBtn = document.querySelector('.modal__button-trailer');
+  
+  trailerBtn.addEventListener('click', onTrailerClick);
+
+  function onTrailerClick() {
+    modalIframe.classList.remove('is-hidden');
+    console.log('кнопка работает');
+  }
 
 
 };
-// && !backdropModal.contains(event.target)
-  // const modalIframe = document.querySelector('.modal__iframe');
-
-  // const trailerBtn = document.querySelector('.modal__button-trailer');
-  
-  // trailerBtn.addEventListener('click', onTrailerClick);
-
-  // function onTrailerClick() {
-  //   modalIframe.classList.remove('is-hidden')
-  //   console.log('кнопка работает')
-  // }
