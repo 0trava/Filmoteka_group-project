@@ -23,3 +23,7 @@ export const movieGenresIds = {
 export function getGenre(genre_ids) {
   return genre_ids.map(id => movieGenresIds[id]).join(', ');
 }
+
+export function getGenrelibrary(genre_ids) {
+  return genre_ids.map(({ name }) => name).join(', ');
+}

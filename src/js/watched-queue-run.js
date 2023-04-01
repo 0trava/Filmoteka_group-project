@@ -1,4 +1,5 @@
 import { watched, queue } from './local-storage';
+import {getGenrelibrary} from './generes';
 
 // import { getMovieInfoById } from './api-service';
 
@@ -47,7 +48,7 @@ async function getMovieInfoById(movieID) {
   );
 
   const respData = await resp.json();
-  console.log(respData);
+
   return respData;
 }
 
@@ -69,6 +70,11 @@ function createList(array) {
 }
 
 function createMarkup(item) {
+  console.log(item);
+
+        let test = getGenrelibrary(item.genres);
+
+        // let item.year = release_date?.substring(0, 4);
   return `
             <li class="movie-card"  ID=${item.id}>
                 <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
@@ -77,7 +83,7 @@ function createMarkup(item) {
                 width="300"
                 ID=${item.id}>
                 <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
-                <p class="movie-card__text"   ID=${item.id}>${item.genre_ids} | ${item.release_date}</p>
+                <p class="movie-card__text"   ID=${item.id}>${test} | ${item.release_date?.substring(0, 4)}</p>
             </li>
         `;
 }
