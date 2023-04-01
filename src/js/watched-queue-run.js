@@ -8,7 +8,7 @@ const API_URL_IMG = `https://image.tmdb.org/t/p/original`;
 
 const libWatchedBtn = document.querySelector('.library-btn__watched');
 const libQueueBtn = document.querySelector('.library-btn__queue');
-const libContainer = document.querySelector('.library-container');
+const libContainer = document.querySelector('.library-gallery-wrap');
 const spinner = document.querySelector('.dot-spinner');
 
 libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
