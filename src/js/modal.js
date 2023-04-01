@@ -17,8 +17,20 @@ const refs = {
 };
 
 window.addEventListener('keydown', closeModalHandler);
+// window.addEventListener('click', onCloseButton);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
+
+
+// зачинення по кліку поза модалкою
+
+const modal = document.querySelector('.modal');
+
+
+// добавляем обработчик клика на весь документ
+
+// ->>>>>>
+
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
@@ -139,10 +151,22 @@ async function showCard(e) {
   console.log(movie);
 
 
+  window.addEventListener('click', onWindowClick);
+    
+  function onWindowClick(e) {
+    if (!modal.contains(event.target)) {
+      // если да, то закрываем модальное окно
+      backdropModal.classList.add('is-hidden');
+      watchedBtn.removeEventListener('click', onWatchedClick);
+      queueBtn.removeEventListener('click', onQueueClick);
+      window.removeEventListener('click', onWindowClick);
+    }
+  }
+
 
 
 };
-
+// && !backdropModal.contains(event.target)
   // const modalIframe = document.querySelector('.modal__iframe');
 
   // const trailerBtn = document.querySelector('.modal__button-trailer');
