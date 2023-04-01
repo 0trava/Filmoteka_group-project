@@ -8,3 +8,4 @@ import './js/card-click';
 import './js/modal';
 import './js/search-by-key-word';
 import './js/scroll-up-btn';
+import './js/team-modal';
