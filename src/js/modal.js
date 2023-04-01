@@ -57,8 +57,9 @@ function onCloseButton() {
 
 async function showCard(e) {
   e.preventDefault();
-
-  if (e.target.nodeName === 'DIV') {
+  console.log(e.target.nodeName);
+  
+  if (e.target.nodeName === 'UL') {
     return;
   }
 
