@@ -25,13 +25,19 @@ const refs = {
 
 
 window.addEventListener('keydown', closeModalHandler);
-// window.addEventListener('click', onCloseButton);
+window.addEventListener('click', clickBackdropCloseModal);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
+const modal = document.querySelector('.modal');
+
 // зачинення по кліку поза модалкою
 
-const modal = document.querySelector('.modal');
+function clickBackdropCloseModal(e) {
+  if (e.target === backdropModal) {
+    backdropModal.classList.add('is-hidden');
+  }
+}
 
 
 // добавляем обработчик клика на весь документ
