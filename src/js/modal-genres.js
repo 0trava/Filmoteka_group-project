@@ -80,3 +80,6 @@ export const genres = [
 export function getGenre(genres) {
   return genres.map(genre => genre.name).join(', ');
 }
+export function getGenrelibrary(genre_ids) {
+  return genre_ids.map(({ name }) => name).join(', ');
+}
