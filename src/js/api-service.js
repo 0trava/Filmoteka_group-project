@@ -1,5 +1,5 @@
 
-import {getGenre} from './generes'
+import { getGenre } from './genres';
 import * as pagination from './pagination';
 
 
