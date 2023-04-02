@@ -8,6 +8,7 @@ import {
   setWatched,
 } from './local-storage';
 import { renderList } from './watched-queue-run';
+import { getGenrelibrary } from './modal-genres';
 
 const backdropModal = document.querySelector('.backdrop');
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
@@ -77,6 +78,7 @@ async function showCard(e) {
 
   // Отримуємо дані фільму
   const movie = await getMovieInfoById(movieId); 
+  let genres = getGenrelibrary(movie.genres);
 
   async function getMovieInfoById(movieID) { 
     const resp = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`); 
@@ -134,7 +136,7 @@ async function showCard(e) {
         </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Genre</td>
-                <td class="modal__info-value">${movie.genres.id}</td>
+                <td class="modal__info-value">${genres}</td>
             </tr>
         </table>
 
