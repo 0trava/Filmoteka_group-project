@@ -8,10 +8,9 @@ const body = document.querySelector('body');
 const footer = document.querySelector('footer');
 const modal = document.querySelector('#modal');
 
-const paginator = document.querySelector('#pagination');
-
 const setElementsColor = color => {
   const elements = document.querySelectorAll('.movie-card__name');
+  const paginator = document.querySelector('.tui-page-btn');
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.color = color;
   }

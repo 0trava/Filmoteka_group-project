@@ -13,6 +13,11 @@
   .movie-card__name {
     color: #ffffff;
   }
+  .tui-pagination.goit-pagination .tui-page-btn,
+  .tui-ico-ellip {
+    color: #ffffff;
+  }
+
   .modal {
     background-color: #28292c;
   }
@@ -21,6 +26,11 @@
 .grey-background-theme {
   background-color: #28292c;
   box-shadow: 0 0 15px #444444;
+
+  .home-footer {
+    background-color: #28292c;
+    box-shadow: 0 0 15px #444444;
+  }
 
   .home-footer__text,
   .home-footer-reference {
@@ -46,13 +56,17 @@
   }
   button {
     background-color: var(--lightThemebackgroundColor);
-    box-shadow: 0 0 15px var(--headerHoverColor);
+    // box-shadow: 0 0 15px var(--headerHoverColor);
     border: var(--lightThemebackgroundColor);
   }
   .modal__button-close {
     background-color: #28292c;
     fill: #e5e5e5;
   }
+}
+.home-footer.grey-background-theme {
+  background-color: #28292c;
+  box-shadow: 0 0 15px #444444;
 }
 
 .toggle-switch {
