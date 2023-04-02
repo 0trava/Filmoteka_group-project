@@ -1,5 +1,5 @@
 import { watched, queue } from './local-storage';
-import {getGenrelibrary} from './generes';
+import { getGenrelibrary } from './modal-genres';
 
 // import { getMovieInfoById } from './api-service';
 
