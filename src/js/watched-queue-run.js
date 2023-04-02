@@ -33,6 +33,7 @@ async function onlibWatchedBtnClick() {
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
 
+  renderList(watched);
 }
 
 
