@@ -2,9 +2,16 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
 export function initPagination(totalItems, funcOutputData, args) {
+    const itemsPerPage = 20; // Кількість елементів на одній сторінці
+
+    // Якщо всі елементи вміщюються на одну сторінку, то пагінація не потрібна
+    if (totalItems <= itemsPerPage) {
+        return;
+    }
+
     const options = {
         totalItems, // Загальна кількість елементів
-        itemsPerPage: 20, // Кількість елементів на одній сторінці
+        itemsPerPage, // Кількість елементів на одній сторінці
         visiblePages: 5, // Кількість видимих сторінок
         page: 1, // З якої сторінки починається вивід
         centerAlign: true,
@@ -33,7 +40,12 @@ export function initPagination(totalItems, funcOutputData, args) {
         pagination.on('beforeMove', evt => {
             const { page } = evt;
             window.scrollTo(0, 0); 
-            funcOutputData(page, args);
+
+            if (args) {
+                funcOutputData(args, page);
+            } else {
+                funcOutputData(page);
+            }
         });
 }
 

@@ -3,6 +3,7 @@ import * as apiService from './api-service';
 import * as pagination from './pagination';
 
 const moviesAll = document.querySelector(".gallery");
+const paginationEl = document.querySelector("#pagination");
 
 
 //ПОШУК ПО КЛЮЧОВОМУ СЛОВУ
@@ -10,30 +11,30 @@ const input = document.querySelector('.search-form__input')
 const form = document.querySelector('#search-box');
 const inputError = document.querySelector('.error-notification__text')
 
-let page = 1; 
 
 form.addEventListener('submit', onSearchByKeyWords)
 
-function onSearchByKeyWords(e) {
+async function onSearchByKeyWords(e) {
 
 
     e.preventDefault(); //не перезапускає сторінку
 
-    page = 1;
-    moviesAll.innerHTML = ''; //видаляє розмітку, яка вже є 
+    // Видаляє розмітку, яка вже є 
+    moviesAll.innerHTML = '';
+    paginationEl.innerHTML = ''
 
     const search_word = input.value.trim(); //значення, яке ввели в інпут
-    console.log(search_word);
     
-    if (search_word !== "") {
-        apiService.getSearchMovies(search_word, 1);
-        pagination.initPagination(1000, apiService.getSearchMovies, search_word);
-        inputError.textContent = "";
-
-    } else if (!search_word) {
+    if (!search_word) {
         inputError.textContent = "Please enter something to search ";
-        console.log(error)
         return;
+    }
+
+    const totalResults = await apiService.getSearchMovies(search_word, 1);
+
+    if (totalResults) { 
+        pagination.initPagination(totalResults, apiService.getSearchMovies, search_word);
+        inputError.textContent = "";
     }
 }
 

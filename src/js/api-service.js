@@ -1,6 +1,5 @@
 
 import {getGenre} from './generes'
-import * as pagination from './pagination';
 
 
 export const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
@@ -10,28 +9,20 @@ export const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 const moviesAll = document.querySelector(".gallery");
 const inputError = document.querySelector('.error-notification__text')
 
-// ТОП фільмів - вивести 1 сторінка
-getMovies(1);
-
-// ТОП фільмів - активувати пагінацію
-pagination.initPagination(1000, getMovies); 
-
 
 // Функція виводу ТОП фільмів
-async function getMovies(page) {
+export async function getTOPMovies(page) {
     // Включити loader
     const spinner = document.querySelector('.dot-spinner');
     spinner.classList.remove('is-hidden');
 
     // Отримати дані з сервера
-    const resp = await fetch( `${API_URL}/trending/all/day?api_key=${API_KEY}&page=${page}`);
+    const resp = await fetch( `${API_URL}trending/all/day?api_key=${API_KEY}&page=${page}`);
 
     const respData = await resp.json();
 
     // Виключити loader
     spinner.classList.add('is-hidden');
-
-    console.log(respData);
 
     // Сформувати карточки фільмів
     const data = respData['results']
@@ -57,14 +48,16 @@ async function getMovies(page) {
       })
       .join('');
   
-    // Додати фільми у галерею
-    moviesAll.innerHTML = data;
+  // Додати фільми у галерею
+  moviesAll.innerHTML = data;
+  
+  return respData.total_results;
 }
 
 
 // Функція отримання даних про фільм по ID
 export async function getMovieInfoById(movieID) { 
-    const resp = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`); 
+    const resp = await fetch(`${API_URL}movie/${movieID}?api_key=${API_KEY}&language=en-US`); 
  
     const respData = await resp.json(); 
 
@@ -78,7 +71,6 @@ export async function getYoutubeTrailerByMovieId(movieId) {
   );
 
   const responseData = await response.json();
-  console.log(responseData);
 
   if (responseData.results.length > 0){
     return responseData["results"][0]["key"];
@@ -89,26 +81,26 @@ export async function getYoutubeTrailerByMovieId(movieId) {
 
 // Функція виводу фільмів за пошуковим словом
 export async function getSearchMovies(query, page) {
-   console.log("start");
     // Включити loader
     const spinner = document.querySelector('.dot-spinner');
     spinner.classList.remove('is-hidden');
 
     // Отримати дані з сервера
-    const respSearch = await fetch( `${API_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`);
+    const respSearch = await fetch( `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`);
 
     const respDataSearch = await respSearch.json();
 
-  if (respDataSearch.results.length === 0) {
+  if (!respDataSearch.total_results) {
     inputError.textContent = "Search result not successful. Enter the correct movie name and try again.";
-    return
+
+    // Виключити loader
+    spinner.classList.add('is-hidden');
+    return;
   }
 
     // Виключити loader
     spinner.classList.add('is-hidden');
 
-    console.log(respDataSearch);
-    console.log("list");
 
     // Сформувати карточки фільмів з ПОШУКУ
     const dataSearch = respDataSearch['results']
@@ -116,9 +108,7 @@ export async function getSearchMovies(query, page) {
         let genre = getGenre(genre_ids);
         let year = release_date?.substring(0, 4);
         //   if (genre && year) genre += ' | ';
-        console.log("id");
         if (backdrop_path) {
-          console.log(id);
           return `
                     <li class="movie-card"  ID=${id}>
                         <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
@@ -133,7 +123,9 @@ export async function getSearchMovies(query, page) {
         };
       })
       .join('');
-      // console.log(dataSearch);
+
     // Додати фільми у галерею
-    moviesAll.innerHTML = dataSearch;
+  moviesAll.innerHTML = dataSearch;
+  
+  return respDataSearch.total_results;
 }
