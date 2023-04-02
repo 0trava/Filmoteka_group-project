@@ -20,6 +20,7 @@ export const movieGenresIds = {
   37: 'Western',
 };
 
+
 export function getGenre(genre_ids) {
   return genre_ids.map(id => movieGenresIds[id]).join(', ');
 }
@@ -31,13 +32,19 @@ export function getGenrelibrary(genre_ids) {
 // Функція створення посилань на жанри
 export function getGenreLinks() {
   const keys = Object.keys(movieGenresIds);
-
-  let str = "<ul>";
+  let generes = []
   for (const key of keys) {
-    console.log(movieGenresIds[key]);
-    str += `<li class="navigation__item"><a class="navigation__link" href="" id="${key}">${movieGenresIds[key]}</a></li>`;
+    generes.push({
+      'id': key,
+      'name': movieGenresIds[key],
+    });
   }
-  str += "</ul>";
+  
+  const generesLi = generes.sort((a, b) => a.name.localeCompare(b.name)).map(({ id, name }) => {
+    return `
+      <li class="navigation__item"><a class="navigation__link" href="" id="${id}">${name}</a></li>
+    `;
+  }).join('');
 
-  return str;
+  return `<ul>${generesLi}</ul>`;
 }
