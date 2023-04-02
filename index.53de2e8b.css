@@ -1,0 +1,2 @@
+.toggle-switch{width:100px;height:50px;margin:12px 0 0 auto;position:relative}.switch-label{width:90px;height:35px;cursor:pointer;border-radius:25px;position:absolute;right:.5px}.checkbox{display:none;position:absolute}.slider{width:100%;height:100%;border-radius:25px;transition:all .3s;position:absolute}.slider:before{content:"";width:25px;height:25px;border-radius:50%;transition:all .3s;position:absolute;top:4px;left:7px}.checkbox:checked~.slider:before{-webkit-box-shadow:none;box-shadow:none;transform:translate(50px)}
+/*# sourceMappingURL=index.53de2e8b.css.map */
