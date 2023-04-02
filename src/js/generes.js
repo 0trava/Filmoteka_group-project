@@ -59,6 +59,7 @@ async function onGenereClick(e) {
   e.preventDefault();
 
   // id жанра
+
   const genreId = e.target.id;
   
   // Фільми за жанром - вивести 1 сторінка
