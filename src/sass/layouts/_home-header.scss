@@ -36,6 +36,7 @@
 }
 
 .home-header__container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -219,6 +220,7 @@
   display: flex;
   justify-content: center;
   text-align: start;
+  height: 30px;
 
   &__text {
     font-family: 'Roboto';
@@ -227,5 +229,9 @@
     font-size: 14px;
     line-height: calc(16 / 14);
     color: var(--secondaryAccentColor);  
+  }
+
+  @include mq(desktop) {
+      height: 50px;
   }
 }
