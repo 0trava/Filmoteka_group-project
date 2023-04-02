@@ -18,17 +18,14 @@ libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
 libQueueBtn.addEventListener('click', onlibQueueBtnClick);
 window.addEventListener('load', onlibWatchedBtnClick);
 
-
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
-    console.log("start");
+    console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = ``;
-    return 
-
-
-  };
+    BoxCard.innerHTML = `../images/Library/movie.png`;
+    return;
+  }
 
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
@@ -36,17 +33,14 @@ async function onlibWatchedBtnClick() {
   renderList(watched);
 }
 
-
 // НАТИСК на кнопку - Queue
 async function onlibQueueBtnClick() {
-  if (queue.length === 0)  {
-    console.log("start");
+  if (queue.length === 0) {
+    console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = ``;
-    return 
-
-
-  };
+    BoxCard.innerHTML = `../images/Library/movie.png`;
+    return;
+  }
 
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
@@ -89,7 +83,7 @@ function createMarkup(item) {
 
   let genres = getGenrelibrary(item.genres);
 
-        // let item.year = release_date?.substring(0, 4);
+  // let item.year = release_date?.substring(0, 4);
   return `
             <li class="movie-card"  ID=${item.id}>
                 <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
