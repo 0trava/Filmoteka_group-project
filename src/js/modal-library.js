@@ -16,12 +16,7 @@ const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 const refs = {
   gallerySelector: document.querySelector('.library-gallery-wrap'),
   closeButton: document.querySelector('.modal__button-close'),
-
 };
-
- 
-
-
 
 
 window.addEventListener('keydown', closeModalHandler);
@@ -29,16 +24,12 @@ window.addEventListener('keydown', closeModalHandler);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
-
 // зачинення по кліку поза модалкою
 
 const modal = document.querySelector('.modal');
 
 
 // добавляем обработчик клика на весь документ
-
-// ->>>>>>
-
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
@@ -53,7 +44,6 @@ function closeModalHandler(evt) {
 function onCloseButton() {
   backdropModal.classList.add('is-hidden');
   //зняття слухачів
-
 
   // watchedBtn.removeEventListener('click', onWatchedClick);
   // queueBtn.removeEventListener('click', onQueueClick);
@@ -71,8 +61,6 @@ async function showCard(e) {
   backdropModal.classList.remove('is-hidden');
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
-
-
 
   // Отримуємо дані фільму
   const movie = await getMovieInfoById(movieId); 
@@ -100,9 +88,7 @@ async function showCard(e) {
     if (responseData.results.length > 0){
       return responseData["results"][0]["key"];
     }
-  
-  
-  }
+  };
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -125,7 +111,7 @@ async function showCard(e) {
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Popularity</td>
-                <td class="modal__info-value">${movie.popularity}</td>
+                <td class="modal__info-value">${movie.popularity.toFixed([1])}</td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Original Title</td>
@@ -183,7 +169,6 @@ async function showCard(e) {
   };
 
 
-
     const watchedBtn = document.querySelector(`#watched`);
     const queueBtn = document.querySelector(`#queue`);
     // const trailerBtn = document.querySelector(`#trailer`);
@@ -192,8 +177,6 @@ async function showCard(e) {
     watchedBtn.addEventListener('click', onWatchedClick);
     queueBtn.addEventListener('click', onQueueClick);
     window.addEventListener('click', onWindowClick);
- 
-
 
 
   function onWatchedClick() {
@@ -221,11 +204,7 @@ async function showCard(e) {
     queue.push(movieId);
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
-  }
-  
-
-
-
+  };
     
   function onWindowClick(e) {
     if (!modal.contains(event.target)) {
@@ -237,8 +216,8 @@ async function showCard(e) {
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
     }
+  };
 
-  }
   const modalIframe = document.querySelector('iframe');
 
   const trailerBtn = document.querySelector(`#trailer`);
@@ -250,6 +229,4 @@ async function showCard(e) {
     modalIframe.classList.remove('is-hidden');
     console.log('кнопка работает');
   }
-
-
 };
