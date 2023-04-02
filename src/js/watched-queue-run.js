@@ -87,7 +87,7 @@ function createList(array) {
 function createMarkup(item) {
   // console.log(item);
 
-        let test = getGenrelibrary(item.genres);
+  let genres = getGenrelibrary(item.genres);
 
         // let item.year = release_date?.substring(0, 4);
   return `
@@ -97,8 +97,12 @@ function createMarkup(item) {
                 alt="${item.original_title}" 
                 width="300"
                 ID=${item.id}>
-                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
-                <p class="movie-card__text"   ID=${item.id}>${test} | ${item.release_date?.substring(0, 4)}</p>
+                <h2 class="movie-card__name"   ID=${item.id}>${
+    item.original_title
+  }</h2>
+                <p class="movie-card__text"   ID=${
+                  item.id
+                }>${genres} | ${item.release_date?.substring(0, 4)}</p>
             </li>
         `;
 }
