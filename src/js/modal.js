@@ -201,7 +201,7 @@ async function showCard(e) {
   function onQueueClick() {
     if (queue.includes(movieId)) {
       queue.splice(queue.indexOf(movieId), 1);
-      setWatched(queue);
+      setQueue(queue);
       queueBtn.textContent = 'add to queue';
       return;
     }
