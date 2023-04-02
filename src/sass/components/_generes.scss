@@ -3,7 +3,12 @@
     @include mq(tablet) {
         display: flex;
         gap: 10px;
-        justify-content: center;
+        justify-content: space-between;
         flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    @include mq(desktop) {
+        margin-bottom: 30px;
     }
 }
