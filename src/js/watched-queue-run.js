@@ -23,7 +23,7 @@ async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
     console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = `../images/Library/movie.png`;
+    BoxCard.innerHTML = ` `;
     return;
   }
 
@@ -38,7 +38,7 @@ async function onlibQueueBtnClick() {
   if (queue.length === 0) {
     console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = `../images/Library/movie.png`;
+    BoxCard.innerHTML = ` `;
     return;
   }
 
