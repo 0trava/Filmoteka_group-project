@@ -10,8 +10,12 @@
   --secondaryAccentColor: #ff001b;
   --btnAccentColor: #ff6b01;
 
-  --lightThemebackgroundColor:#E5E5E5 ;
-  --darkThemebackgroundColor:#121213f7 ;
+  --lightThemebackgroundColor: #e5e5e5;
+  --darkThemebackgroundColor: #121213f7;
+  --timing-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --box-shadow-scroll-up-btn: 13px 13px 21px -1px rgba(0,0,0,0.58);
+  -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
+  -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
 }
 
 $headerGradient: linear-gradient(

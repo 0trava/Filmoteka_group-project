@@ -1,47 +1,62 @@
 import axios from "axios";
+import * as apiService from './api-service';
+import * as pagination from './pagination';
+
 const moviesAll = document.querySelector(".gallery");
+const paginationEl = document.querySelector("#pagination");
+
 
 //ПОШУК ПО КЛЮЧОВОМУ СЛОВУ
 const input = document.querySelector('.search-form__input')
 const form = document.querySelector('#search-box');
+const inputError = document.querySelector('.error-notification__text')
 
-let page = 1; 
 
 form.addEventListener('submit', onSearchByKeyWords)
 
-function onSearchByKeyWords(e) {
+async function onSearchByKeyWords(e) {
 
 
     e.preventDefault(); //не перезапускає сторінку
 
-    page = 1;
-    moviesAll.innerHTML = ''; //видаляє розмітку, яка вже є 
+    // Видаляє розмітку, яка вже є 
+    moviesAll.innerHTML = '';
+    paginationEl.innerHTML = ''
 
-    const value = input.value.trim(); //значення, яке ввели в інпут
-    console.log(value);
+    const search_word = input.value.trim(); //значення, яке ввели в інпут
     
-    if (value !== '') {
-    getMoviesByValue(value, page) //виклик ф-ції, для зв'язку з бек-ендом
-    } else {
-        console.log(error)
+    if (!search_word) {
+        inputError.textContent = "Please enter something to search ";
+        return;
     }
 
+    const totalResults = await apiService.getSearchMovies(search_word, 1);
+
+    if (totalResults) { 
+        pagination.initPagination(totalResults, apiService.getSearchMovies, search_word);
+        inputError.textContent = "";
+    }
 }
 
-async function getMoviesByValue(value, page) {
-    const API_URL = `https://api.themoviedb.org/3/`;
-    const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
+// async function getMoviesByValue(value, page) {
+//     const API_URL = `https://api.themoviedb.org/3/`;
+//     const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 
-    try {
-        const response = await axios.get(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&include_adult=${value}`);
-        // createMarkup(response.data.results) 
+//     try {
+//         const response = await axios.get(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&include_adult=${value}`);
+//         // createMarkup(response.data.results) 
 
-        return console.log(response)
+//         return console.log(response)
 
-    } catch (error) {
-        console.log(error)
-    } 
-}
+//     } catch (error) {
+//         console.log(error)
+//     } 
+// }
+
+
+
+
+
 
 //Ф-ція для рендеру розмітки за ключовим словом
 // function createMarkup(array) {

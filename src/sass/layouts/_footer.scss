@@ -1,31 +1,48 @@
 .home-footer {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    background-color: #F7F7F7;
-}
-.home-footer__container {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 0.8;
+  line-height: 100%;
+  text-align: center;
+  background-color: transparent;
+
+  @media screen and (max-width: 320px) {
+    padding: 28.71px 0;
+  }
+  @media screen and (max-width: 768px) {
     padding: 30px 0;
-    @include mq(tablet) {
-        padding: 29px 0;
-    }
-    @media screen and (max-width: 320px) {
-        padding: 28.71px 0;
-    }
+  }
+  @media screen and (min-width: 768px) {
+    padding: 29px 0;
+  }
 }
+
 .home-footer__icon {
-    margin: 0 10px;
+  animation: logoPulse 2500ms linear 500ms infinite;
 }
+
+// анімація логотипу за допомогою keyframes
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .home-footer-reference {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-.home-footer__text, .home-footer-reference {
-    color: #545454;
-}
-.home-footer__text {
+span,
+.home-footer-reference {
+  color: #545454;
+
+  @media screen and (max-width: 320px) {
     font-size: 14px;
-    line-height: 1.9;
-    @include mq(tablet) {
-        font-size: 16px;
-        line-height: 0.8;         
-    }
+    line-height: 0.9;
+  }
 }

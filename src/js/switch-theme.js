@@ -1,69 +1,54 @@
-const switcher = document.getElementById('switcher');
-const link = document.getElementById('theme-link');
-const switchTheme = document.querySelector('.checkbox');
-const savedTheme = localStorage.getItem('currTheme');
+const Theme = {
+  LIGHT: 'light-theme',
+  DARK: 'dark-theme',
+  GREY: 'grey-background-theme',
+};
 
-const load = currTheme => {
-  try {
-    let theme = window.localStorage.getItem(currTheme);
-    if (theme === null) {
-      theme = 'light';
-      window.localStorage.setItem(currTheme, theme);
-    }
-    return theme;
-  } catch (error) {
-    console.error('Get state error: ', error.message);
+const body = document.querySelector('body');
+const footer = document.querySelector('footer');
+const modal = document.querySelector('#modal');
+
+const paginator = document.querySelector('#pagination');
+
+const setElementsColor = color => {
+  const elements = document.querySelectorAll('.movie-card__name');
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.color = color;
   }
 };
-//  стан чекбокса та тема при завантаженні сторінки
-document.addEventListener('DOMContentLoaded', () => {
-  const currTheme = load('currTheme');
-  if (currTheme === 'dark') {
-    switcher.checked = true;
-    link.setAttribute('href', '/src/sass/components/_switch-dark-btn.scss');
-    document.body.style.backgroundColor = '#28292c';
-  } else if (currTheme === 'light') {
-    switcher.checked = false;
-    link.setAttribute('href', '/src/sass/components/_switch-light-btn.scss');
-    document.body.style.backgroundColor = '#d8dbe0';
-  }
-});
 
-switcher.addEventListener('click', () => {
-  ChangeTheme();
-});
+const delClassElem = () => {
+  body.classList.remove(Theme.LIGHT, Theme.DARK);
+  footer.classList.remove(Theme.LIGHT, Theme.GREY);
+  modal.classList.remove(Theme.LIGHT, Theme.GREY);
+};
 
-function ChangeTheme() {
-  const lightTheme = '/src/sass/components/_switch-light-btn.scss';
-  const darkTheme = '/src/sass/components/_switch-dark-btn.scss';
-  let theme = 'light';
-  let currTheme = link.getAttribute('href');
+const setTheme = theme => {
+  if (theme === 'darkTheme') {
+    body.classList.add(Theme.DARK);
+    footer.classList.add(Theme.GREY);
+    modal.classList.add(Theme.GREY);
 
-  if (currTheme == lightTheme) {
-    currTheme = darkTheme;
-    theme = 'dark';
-    window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = 'var(--darkThemebackgroundColor)';
+    setElementsColor('#ffffff');
   } else {
-    currTheme = lightTheme;
-    theme = 'light';
-    window.localStorage.setItem('currTheme', theme);
-    document.body.style.backgroundColor = 'var(--lightThemebackgroundColor)';
-  }
+    body.classList.add(Theme.LIGHT);
+    modal.classList.add(Theme.LIGHT);
 
-  link.setAttribute('href', currTheme);
+    setElementsColor('#121213f7');
+  }
+};
+
+const themeSwitcher = document.querySelector('#switcher');
+
+themeSwitcher.addEventListener('change', () => {
+  const theme = themeSwitcher.checked ? 'darkTheme' : 'lightTheme';
+  localStorage.setItem('Theme', theme);
+  delClassElem();
+  setTheme(theme);
+});
+
+const savedTheme = localStorage.getItem('Theme');
+if (savedTheme !== null) {
+  themeSwitcher.checked = savedTheme === 'darkTheme';
+  setTheme(savedTheme);
 }
-
-const save = (currTheme, theme) => {
-  try {
-    const serializedState = JSON.stringify(theme);
-    localStorage.setItem(currTheme, serializedState);
-  } catch (error) {
-    console.error('Set state error: ', error.message);
-  }
-};
-
-export default {
-  save,
-  load,
-};

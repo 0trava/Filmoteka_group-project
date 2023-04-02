@@ -1,4 +1,4 @@
-import * as apiService from './api-service';
+// import * as apiService from './api-service';
 import {
   watched,
   queue,
@@ -7,17 +7,20 @@ import {
   setQueue,
   setWatched,
 } from './local-storage';
-import { getGenre } from './modal-genres';
 
-export const backdropModal = document.querySelector('.backdrop');
+const backdropModal = document.querySelector('.backdrop');
+const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
+const API_URL=`https://api.themoviedb.org/3/`;
+const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 
 const refs = {
-  gallerySelector: document.querySelector('.gallery'),
+  gallerySelector: document.querySelector('.library-gallery-wrap'),
   closeButton: document.querySelector('.modal__button-close'),
 
 };
 
  
+
 
 
 
@@ -39,9 +42,7 @@ const modal = document.querySelector('.modal');
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-
     backdropModal.classList.add('is-hidden');
-
   }
   //зняття слухачів
 
@@ -59,7 +60,9 @@ function onCloseButton() {
 }
 
 async function showCard(e) {
+
   e.preventDefault();
+  console.log(e.target.nodeName);
 
   if (e.target.nodeName === 'UL') {
     return;
@@ -69,23 +72,37 @@ async function showCard(e) {
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
 
+
+
   // Отримуємо дані фільму
-  const movie = await apiService.getMovieInfoById(movieId); 
-  const {
-    poster_path,
-    title,
-    vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    genres,
-    overview,
-  } = movie;
-  let genre = getGenre(genres);
+  const movie = await getMovieInfoById(movieId); 
+
+  async function getMovieInfoById(movieID) { 
+    const resp = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`); 
+ 
+    const respData = await resp.json(); 
+
+    return respData;
+}
 
   // Отримуємо youtube трейлер 
-  const youtubeTrailer = await apiService.getYoutubeTrailerByMovieId(movieId);
+  const youtubeTrailer = await getYoutubeTrailerByMovieId(movieId);
   console.log(youtubeTrailer);
+
+  async function getYoutubeTrailerByMovieId(movieId) {
+    const response = await fetch(
+      `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`
+    );
+  
+    const responseData = await response.json();
+    console.log(responseData);
+  
+    if (responseData.results.length > 0){
+      return responseData["results"][0]["key"];
+    }
+  
+  
+  }
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -96,34 +113,32 @@ async function showCard(e) {
 
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${
-            apiService.API_URL_IMG
-          }${poster_path}" alt="${original_title} poster">
+          <img class="modal__poster" src="${API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
         </div>
    
         <div class="modal__info-thumb">
-            <h2 class="modal__title">${title}</h2>
+            <h2 class="modal__title">${movie.original_title}</h2>
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
-            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${vote_average}</span> / <span class="modal__info-value-vote">${vote_count}</span></td>
+            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${movie.vote_average}</span> / <span class="modal__info-value-vote">${movie.vote_count}</span></td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Popularity</td>
-                <td class="modal__info-value">${popularity.toFixed([1])}</td>
+                <td class="modal__info-value">${movie.popularity}</td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Original Title</td>
-                <td class="modal__info-value modal__info-value-title">${original_title}</td>
+                <td class="modal__info-value modal__info-value-title">${movie.original_title}</td>
         </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Genre</td>
-                <td class="modal__info-value">${genre}</td>
+                <td class="modal__info-value">${movie.genres.id}</td>
             </tr>
         </table>
 
         <h3 class="modal__about">About</h3>
-        <p class="modal__about-text">${overview}</p>
+        <p class="modal__about-text">${movie.overview}</p>
             <div class="modal__button-container">
                 <button id="watched" type="button" class="modal__button modal__button-watched">add to watched</button>
                 <button id="queue" type="button" class="modal__button modal__button-queue">add to queue</button>
@@ -132,10 +147,7 @@ async function showCard(e) {
             <div class="modal__button-trailer-wrap">
                 <button id="trailer" type="button" class="modal__button modal__button-trailer">Trailer</button>
 
-                <iframe id="video" class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
-                title="Mia and me - Mia and me Day 2014" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen></iframe>
+                <iframe class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -219,7 +231,7 @@ async function showCard(e) {
     if (!modal.contains(event.target)) {
       console.log('Трейлер на паузі');
       document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-
+   
       backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
@@ -236,7 +248,7 @@ async function showCard(e) {
 
   function onTrailerClick() {
     modalIframe.classList.remove('is-hidden');
-
+    console.log('кнопка работает');
   }
 
 
