@@ -1,14 +1,15 @@
-.movie-genres {
+.movie-genres ul {
     display: none;
     @include mq(tablet) {
         display: flex;
         gap: 10px;
-        justify-content: space-between;
+        justify-content: center;
         flex-wrap: wrap;
         margin-bottom: 10px;
     }
 
     @include mq(desktop) {
+        justify-content: space-between;
         margin-bottom: 30px;
     }
 }

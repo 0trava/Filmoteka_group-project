@@ -1,10 +1,3 @@
-import * as apiService from './api-service';
-import * as pagination from './pagination';
-
-const refs = {
-  genere: document.querySelector('.movie-genres'),
-}
-
 export const movieGenresIds = {
   28: 'Action',
   12: 'Adventure',
@@ -39,34 +32,12 @@ export function getGenrelibrary(genre_ids) {
 export function getGenreLinks() {
   const keys = Object.keys(movieGenresIds);
 
-  let str = "";
+  let str = "<ul>";
   for (const key of keys) {
+    console.log(movieGenresIds[key]);
     str += `<li class="navigation__item"><a class="navigation__link" href="" id="${key}">${movieGenresIds[key]}</a></li>`;
   }
+  str += "</ul>";
 
   return str;
-}
-
-// Посилання на жанри
-const genereLinks = getGenreLinks();
-refs.genere.innerHTML = genereLinks;
-
-// Додавання прослуховувача для жанрів
-refs.genere.addEventListener('click', onGenereClick);
-
-// Функція обробки кліку по жанру
-async function onGenereClick(e) {
-  e.preventDefault();
-
-  // id жанра
-
-  const genreId = e.target.id;
-  
-  // Фільми за жанром - вивести 1 сторінка
-  const total_results = await apiService.getMoviesByGenereId(genreId, 1);
-
-  if (total_results) {
-    // Фільми за жанром - активувати пагінацію
-    pagination.initPagination(total_results, apiService.getMoviesByGenereId, genreId);
-  }
 }
