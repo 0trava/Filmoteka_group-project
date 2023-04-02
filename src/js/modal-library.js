@@ -8,7 +8,10 @@ import {
   setWatched,
 } from './local-storage';
 import { renderList } from './watched-queue-run';
+
 import { getGenrelibrary } from './modal-genres';
+
+
 
 const backdropModal = document.querySelector('.backdrop');
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
