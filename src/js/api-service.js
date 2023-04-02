@@ -1,5 +1,7 @@
 
+import * as pagination from './pagination';
 import {getGenre} from './generes'
+
 
 
 export const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';

@@ -7,6 +7,7 @@ import {
   setQueue,
   setWatched,
 } from './local-storage';
+import { getGenre } from './modal-genres';
 
 export const backdropModal = document.querySelector('.backdrop');
 
@@ -68,10 +69,19 @@ async function showCard(e) {
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
 
-
-
   // Отримуємо дані фільму
   const movie = await apiService.getMovieInfoById(movieId); 
+  const {
+    poster_path,
+    title,
+    vote_average,
+    vote_count,
+    popularity,
+    original_title,
+    genres,
+    overview,
+  } = movie;
+  let genre = getGenre(genres);
 
   // Отримуємо youtube трейлер 
   const youtubeTrailer = await apiService.getYoutubeTrailerByMovieId(movieId);
@@ -86,32 +96,34 @@ async function showCard(e) {
 
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${apiService.API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
+          <img class="modal__poster" src="${
+            apiService.API_URL_IMG
+          }${poster_path}" alt="${original_title} poster">
         </div>
    
         <div class="modal__info-thumb">
-            <h2 class="modal__title">${movie.original_title}</h2>
+            <h2 class="modal__title">${title}</h2>
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
-            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${movie.vote_average}</span> / <span class="modal__info-value-vote">${movie.vote_count}</span></td>
+            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${vote_average}</span> / <span class="modal__info-value-vote">${vote_count}</span></td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Popularity</td>
-                <td class="modal__info-value">${movie.popularity}</td>
+                <td class="modal__info-value">${popularity.toFixed([1])}</td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Original Title</td>
-                <td class="modal__info-value modal__info-value-title">${movie.original_title}</td>
+                <td class="modal__info-value modal__info-value-title">${original_title}</td>
         </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Genre</td>
-                <td class="modal__info-value">${movie.genres.id}</td>
+                <td class="modal__info-value">${genre}</td>
             </tr>
         </table>
 
         <h3 class="modal__about">About</h3>
-        <p class="modal__about-text">${movie.overview}</p>
+        <p class="modal__about-text">${overview}</p>
             <div class="modal__button-container">
                 <button id="watched" type="button" class="modal__button modal__button-watched">add to watched</button>
                 <button id="queue" type="button" class="modal__button modal__button-queue">add to queue</button>
