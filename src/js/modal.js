@@ -142,7 +142,7 @@ async function showCard(e) {
         watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
         return;
       }
-        watchedBtn.textContent = 'add to queue'; //змінити текст кнопки
+        watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
     }
   
     function onQueueCheck() {
