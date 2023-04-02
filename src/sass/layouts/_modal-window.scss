@@ -10,8 +10,8 @@
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
 
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity var(--timing-function),
+  visibility var(--timing-function);
 }
 
 .backdrop.is-hidden {
@@ -24,22 +24,17 @@
   transform: translate(-50%, -50%) scale(0.2);
 }
 
-
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
   display: flex;
-
-
-  // margin-top: 20px;
+  width: 280px;
+  padding: 48px 20px 40px 20px;
   max-height: 98%;
   overflow: auto;
 
   z-index: 100;
-
-  width: 280px;
-  padding: 48px 20px 40px 20px;
 
   background-color: var(--secondaryColor);
 
@@ -47,7 +42,7 @@
     0px 2px 1px rgba(0, 0, 0, 0.2);
 
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--timing-function);
 
   @include mq(tablet) {
     width: 704px;
@@ -59,7 +54,6 @@
     padding-left: 10px;
   }
 }
-
 
 .modal__button-close {
   position: absolute;
@@ -74,13 +68,12 @@
   border-radius: 50%;
   // fill: #b70404;
   // transform: scale(1);
-
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--timing-function);
 }
 
 .modal__button-close:hover,
 .modal__button-close:focus {
-  transform: scale(1.15);
+  // transform: scale(1.15);
 }
 
 .modal__icon-close {
@@ -89,8 +82,6 @@
   margin: 0;
   padding: 0;
   z-index: 1;
-
-  // transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal__icon-close use {
@@ -104,8 +95,6 @@
 // cекція з додаванням через js
 
 .modul-card-to-add {
-
-
   @include mq(tablet) {
     display: flex;
   }
@@ -116,7 +105,6 @@
 }
 .modal__poster {
   margin-bottom: 20px;
-
   border-radius: 5px;
 
   @include mq(tablet) {
@@ -146,14 +134,11 @@
 
 .modal__title {
   margin-bottom: 20px;
-
   font-family: 'Roboto';
-
   font-weight: 500;
   font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
+  line-height: 1.15;
+  color: var(--primary-text-color);
 
   text-transform: uppercase;
 
@@ -164,7 +149,6 @@
 
 .modal__info {
   font-family: 'Roboto';
-
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
@@ -172,7 +156,7 @@
   min-width: 215px;
   margin-bottom: 20px;
 
-  color: #8c8c8c;
+  color: var(--modalInfoText);
 
   @include mq(desktop) {
     min-width: 259px;
@@ -188,7 +172,7 @@
 }
 
 .modal__info-value {
-  color: #000000;
+  color: var(--primary-text-color);
 }
 
 .modal__info-value-vote {
@@ -196,17 +180,17 @@
   width: 36px;
   height: 16px;
 
-  background-color: #ff6b01;
-  color: #000000;
-  background-color: #f7f7f7;
+  background-color: var(--btnAccentColor);
+  color: var(--primary-text-color);
+  background-color: var(--lighThemElementColor);
   border-radius: 5px;
   padding: 1px 0;
   text-align: center;
 }
 
 .modal__info-value-vote--accent {
-  color: #ffffff;
-  background-color: #ff6b08;
+  color: var(--secondaryColor);
+  background-color: var(--btnAccentColor);
   padding: 1px 0;
 }
 
@@ -215,7 +199,7 @@
 }
 
 .modal__about {
-  color: #000;
+  color: var(--primary-text-color);
   margin-bottom: 8px;
 
   font-size: 12px;
@@ -223,7 +207,7 @@
 }
 
 .modal__about-text {
-  color: #000;
+  color: var(--primary-text-color);
   margin-bottom: 20px;
 
   font-size: 12px;
@@ -242,31 +226,24 @@
 .modal__button {
   width: 110px;
   height: 44px;
-
-  text-transform: uppercase;
-
   border-radius: 5px;
 
-  background-color: #ffffff;
-  border: 1px solid #000000;
+  background-color: var(--secondaryColor);
+  border: 1px solid var(--primary-text-color);
 
-  transform: scale(1);
-  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  // transform: scale(1);
+  transition: var(--timing-function);
 
   font-family: 'Roboto';
-
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
-  /* or 133% */
+  line-height: 1.33;
+  text-transform: uppercase;
 
   // display: flex;
   // align-items: center;
   // text-align: center;
   // text-transform: uppercase;
-
-  // // color: #ffffff;
 
   @include mq(tablet) {
     width: 125px;
@@ -279,12 +256,10 @@
 
 .modal__button:hover,
 .modal__button:focus {
-  color: #ffffff;
-  background-color: #ff6b08;
-  border: 1px solid #ff6b08;
-
-  transform: scale(1.05);
-  // box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
+  color: var(--secondaryColor);
+  background-color: var(--btnAccentColor);
+  border: 1px solid var(--btnAccentColor);
+  // transform: scale(1.05);
 }
 
 .modal__button-watched {
