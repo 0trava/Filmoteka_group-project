@@ -59,7 +59,7 @@ async function onGenereClick(e) {
   e.preventDefault();
 
   // id жанра
-  genreId = e.target.id;
+  const genreId = e.target.id;
   
   // Фільми за жанром - вивести 1 сторінка
   const total_results = await apiService.getMoviesByGenereId(genreId, 1);
