@@ -7,6 +7,7 @@ import {
   setQueue,
   setWatched,
 } from './local-storage';
+import { renderList } from './watched-queue-run';
 
 const backdropModal = document.querySelector('.backdrop');
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
@@ -202,6 +203,7 @@ async function showCard(e) {
       watched.splice(watched.indexOf(movieId), 1); //видаляємо з масиву айді
       setWatched(watched); //перезаписуємо сховище
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
+      renderList(watched);
       return;
     }
 
@@ -215,6 +217,7 @@ async function showCard(e) {
       queue.splice(queue.indexOf(movieId), 1);
       setWatched(queue);
       queueBtn.textContent = 'add to queue';
+      renderList(queue);
       return;
     }
 

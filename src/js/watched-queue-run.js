@@ -31,13 +31,9 @@ async function onlibWatchedBtnClick() {
   };
 
   spinner.classList.remove('is-hidden');
-
-  const moviesList = await getMoviesList(watched);
-  const watchedList = createList(moviesList);
-
   spinner.classList.add('is-hidden');
 
-  renderList(watchedList);
+  renderList(watched);
 }
 
 
@@ -53,13 +49,9 @@ async function onlibQueueBtnClick() {
   };
 
   spinner.classList.remove('is-hidden');
-
-  const moviesList = await getMoviesList(queue);
-  const watchedList = createList(moviesList);
-
   spinner.classList.add('is-hidden');
 
-  renderList(watchedList);
+  renderList(queue);
 }
 
 async function getMovieInfoById(movieID) {
@@ -78,9 +70,12 @@ async function getMoviesList(array) {
   return moviesList;
 }
 
-function renderList(data) {
+export async function renderList(array) {
+  const moviesList = await getMoviesList(array);
+  const watchedList = createList(moviesList);
   libBoxinfo.classList.add('is-hidden');
-  BoxCard.insertAdjacentHTML('beforeend', data);
+  BoxCard.innerHTML = '';
+  BoxCard.insertAdjacentHTML('beforeend', watchedList);
 }
 
 function createList(array) {
