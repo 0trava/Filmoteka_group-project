@@ -2,15 +2,12 @@
 import * as pagination from './pagination';
 import {getGenre} from './generes'
 
-
-
 export const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 export const API_URL=`https://api.themoviedb.org/3/`;
 export const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 
 const moviesAll = document.querySelector(".gallery");
 const inputError = document.querySelector('.error-notification__text')
-
 
 // Функція виводу ТОП фільмів
 export async function getTOPMovies(page) {
@@ -28,26 +25,29 @@ export async function getTOPMovies(page) {
 
     // Сформувати карточки фільмів
     const data = respData['results']
-      .map(({ id, poster_path, title, genre_ids, release_date }) => {
-        let genre = getGenre(genre_ids);
-        let year = release_date?.substring(0, 4);
-        //   if (genre && year) genre += ' | ';
+      .map(
+        ({ id, poster_path, title, genre_ids, release_date, vote_average }) => {
+          let genre = getGenre(genre_ids);
+          let year = release_date?.substring(0, 4);
+          //   if (genre && year) genre += ' | ';
           if (title) {
-                    return  `
+            return `
                     <li class="movie-card"  ID=${id}>
                         <img class="movie-card__image" src="${API_URL_IMG}${poster_path}" 
                         onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
                         alt="${title}" 
                         width="300" ID=${id}>
                         <h2 class="movie-card__name" ID=${id}>${title}</h2>
-                        <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
-        
+                        <p class="movie-card__text" ID=${id}>${genre} | ${year}
+                          <span class="movie-card__box">
+                            <span class="movie-card__average">${vote_average.toFixed([1])}</span>
+                          </span>
+                        </p>
                     </li>
                 `;
-          };
-
-
-      })
+          }
+        }
+      )
       .join('');
   
   // Додати фільми у галерею
@@ -55,7 +55,6 @@ export async function getTOPMovies(page) {
   
   return respData.total_results;
 }
-
 
 // Функція отримання даних про фільм по ID
 export async function getMovieInfoById(movieID) { 
@@ -77,9 +76,7 @@ export async function getYoutubeTrailerByMovieId(movieId) {
   if (responseData.results.length > 0){
     return responseData["results"][0]["key"];
   }
-
-
-}
+};
 
 // Функція виводу фільмів за пошуковим словом
 export async function getSearchMovies(query, page) {
@@ -104,6 +101,8 @@ export async function getSearchMovies(query, page) {
     spinner.classList.add('is-hidden');
 
 
+  
+  
     // Сформувати карточки фільмів з ПОШУКУ
     const dataSearch = respDataSearch['results']
       .map(function ({ id, poster_path, title, genre_ids, release_date, backdrop_path }) {
@@ -119,7 +118,6 @@ export async function getSearchMovies(query, page) {
                         width="300" ID=${id}>
                         <h2 class="movie-card__name" ID=${id}>${title}</h2>
                         <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
-        
                     </li>
                 `;
         };
@@ -161,12 +159,9 @@ export async function getMoviesByGenereId(genere_id, page) {
                         width="300" ID=${id}>
                         <h2 class="movie-card__name" ID=${id}>${title}</h2>
                         <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
-        
                     </li>
                 `;
           };
-
-
       })
       .join('');
   

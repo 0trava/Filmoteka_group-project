@@ -1,6 +1,14 @@
 <!-- починай писати код тут -->
-<link rel="stylesheet" type="text/scss" href="/src/sass/components/_switch-btn.scss">
-<link rel="stylesheet" type="text/scss" href="/src/sass/components/_switch-theme.scss">
+<link
+  rel="stylesheet"
+  type="text/scss"
+  href="/src/sass/components/_switch-btn.scss"
+/>
+<link
+  rel="stylesheet"
+  type="text/scss"
+  href="/src/sass/components/_switch-theme.scss"
+/>
 <!-- хедер домашньої сторінки -->
 <header class="home-header__background">
   <div class="container home-header__container">
@@ -17,7 +25,9 @@
       <nav class="navigation">
         <ul class="navigation__list">
           <li class="navigation__item">
-            <a class="navigation__link nav__link--current" href="./index.html">Home</a>
+            <a class="navigation__link nav__link--current" href="./index.html"
+              >Home</a
+            >
           </li>
           <li class="navigation__item">
             <a class="navigation__link" href="./library.html">My library</a>
@@ -26,23 +36,26 @@
       </nav>
     </div>
 
-    <ul class="movie-genres"></ul>
-
     <!-- пошукова форма для фільмів -->
     <form action="" id="search-box" class="search-form">
-      <input class="search-form__input" type="text" autocomplete="off" placeholder="Movie search">
+      <input
+        class="search-form__input"
+        type="text"
+        autocomplete="off"
+        placeholder="Movie search"
+      />
       <button class="search-form__btn" type="submit">
         <svg class="search-form__icon" width="12" height="12">
           <use href="/src/images/symbol-defs.svg#search-icon"></use>
         </svg>
       </button>
     </form>
-<!-- текст при помилці вводу -->
-<div class="error-notification">
-  <p class="error-notification__text">
-    <!-- Search result not successful. Enter the correct movie name and try again. -->
-  </p>
-</div>
+    <!-- текст при помилці вводу -->
+    <div class="error-notification">
+      <p class="error-notification__text">
+        <!-- Search result not successful. Enter the correct movie name and try again. -->
+      </p>
+    </div>
 
     <!-- Кнопка зміни теми День-Ніч -->
     <div class="toggle-switch">
@@ -51,5 +64,6 @@
         <span class="slider"></span>
       </label>
     </div>
-
+    <div class="movie-genres"></div>
+  </div>
 </header>

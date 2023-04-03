@@ -14,33 +14,26 @@ export const backdropModal = document.querySelector('.backdrop');
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
   closeButton: document.querySelector('.modal__button-close'),
-  
 
 };
 
 const darkerBackdrop = document.querySelector('.darker');
-
-
 
 window.addEventListener('keydown', closeModalHandler);
 // window.addEventListener('click', onCloseButton);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
-
 // зачинення по кліку поза модалкою
 
 const modal = document.querySelector('.modal');
-
 
 // добавляем обработчик клика на весь документ
 
 // ->>>>>>
 
-
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-
     backdropModal.classList.add('is-hidden');
 
     // повертаємо скрол
@@ -55,6 +48,7 @@ function onCloseButton() {
    // повертаємо скрол
   document.body.style.overflow = '';
   darkerBackdrop.classList.add('is-hidden');
+
 
 }
 
@@ -87,9 +81,9 @@ async function showCard(e) {
   } = movie;
   let genre = getGenre(genres);
 
-  // Отримуємо youtube трейлер 
+  // Отримуємо youtube трейлер
   const youtubeTrailer = await apiService.getYoutubeTrailerByMovieId(movieId);
-  console.log(youtubeTrailer);
+  console.log('youtubeTrailer :>> ', youtubeTrailer);
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -97,7 +91,6 @@ async function showCard(e) {
   createModalCard(modal);
 
   function createModalCard(cardForModal) {
-
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
           <img class="modal__poster" src="${apiService.API_URL_IMG
@@ -140,7 +133,7 @@ async function showCard(e) {
                   ></span>
                Trailer</button>
 
-                <iframe id="video" class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
+                <iframe id="video" class="modal__iframe is-hidden" width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
                 title="Mia and me - Mia and me Day 2014" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen></iframe>
@@ -149,11 +142,10 @@ async function showCard(e) {
     </div>
   `;
 
-
     // ПЕРЕВІРКА - чи в списку бібліотеки
 
-    onWatchedCheck()
-    onQueueCheck()
+    onWatchedCheck();
+    onQueueCheck();
 
     function onWatchedCheck() {
       const watchedBtn = document.querySelector(`#watched`);
@@ -164,11 +156,12 @@ async function showCard(e) {
       }
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
     }
-  
+
+
+
     function onQueueCheck() {
       const queueBtn = document.querySelector('#queue');
       if (queue.includes(movieId)) {
-
         queueBtn.textContent = 'remove from queue';
         return;
       }
@@ -178,19 +171,13 @@ async function showCard(e) {
 
   };
 
-
-
   const watchedBtn = document.querySelector(`#watched`);
   const queueBtn = document.querySelector(`#queue`);
-  // const trailerBtn = document.querySelector(`#trailer`);
 
 
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
   window.addEventListener('click', onWindowClick);
- 
-
-
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -209,7 +196,7 @@ async function showCard(e) {
   function onQueueClick() {
     if (queue.includes(movieId)) {
       queue.splice(queue.indexOf(movieId), 1);
-      setWatched(queue);
+      setQueue(queue);
       queueBtn.textContent = 'add to queue';
       return;
     }
@@ -219,31 +206,33 @@ async function showCard(e) {
     queueBtn.textContent = 'remove from queue';
   }
 
+
   // маніпуляціі з трейлером
 
 
-  
   function onWindowClick(e) {
     if (!modal.contains(e.target)) {
       console.log('Трейлер на паузі');
-      document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      document
+        .querySelector('#video')
+        .contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          '*'
+        );
 
       backdropModal.classList.add('is-hidden');
 
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
-      // window.removeEventListener('keydown', closeModalHandler);
-      // darkerBackdrop.addEventListener('keydown', closeModalHandler);
     }
-
   }
 
   const modalIframe = document.querySelector('iframe');
   const trailerBtn = document.querySelector(`#trailer`);
   
   console.log(trailerBtn);
-  
+
   trailerBtn.addEventListener('click', onTrailerClick);
 
   function onTrailerClick() {
@@ -253,7 +242,6 @@ async function showCard(e) {
     watchedBtn.removeEventListener('click', onWatchedClick);
     queueBtn.removeEventListener('click', onQueueClick);
     window.removeEventListener('click', onWindowClick);
-
 
   }
 

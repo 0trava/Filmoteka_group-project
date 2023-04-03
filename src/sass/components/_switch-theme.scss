@@ -1,34 +1,34 @@
 .light-theme {
-  background-color: #d8dbe0;
+  background-color: var(--secondaryColor);
   color: var(--light-invers);
   .modal {
-    background-color: #d8dbe;
+    background-color: var(--secondaryColor);
   }
 }
 
 .dark-theme {
-  background-color: #28292c;
-  color: #ffffff;
+  background-color: var(--darkThemColor);
+  color: var(--secondaryColor);
   .library-text,
   .movie-card__name {
-    color: #ffffff;
+    color: var(--secondaryColor);
   }
   .tui-pagination.goit-pagination .tui-page-btn,
   .tui-ico-ellip {
-    color: #ffffff;
+    color: var(--secondaryColor);
   }
 
   .modal {
-    background-color: #28292c;
+    background-color: var(--darkThemColor);
   }
 }
 
 .grey-background-theme {
-  background-color: #28292c;
+  background-color: var(--darkThemColor);
   box-shadow: 0 0 15px #444444;
 
   .home-footer {
-    background-color: #28292c;
+    background-color: var(--darkThemColor);
     box-shadow: 0 0 15px #444444;
   }
 
@@ -42,7 +42,7 @@
   }
   .body,
   .modal {
-    background-color: #28292c;
+    background-color: var(--darkThemColor);
   }
   .modal__title {
     color: var(--mainAccentColor);
@@ -57,15 +57,16 @@
   button {
     background-color: var(--lightThemebackgroundColor);
     // box-shadow: 0 0 15px var(--headerHoverColor);
-    border: var(--lightThemebackgroundColor);
+    // border: var(--lightThemebackgroundColor);
   }
   .modal__button-close {
-    background-color: #28292c;
+    background-color: var(--darkThemColor);
     fill: #e5e5e5;
   }
 }
+
 .home-footer.grey-background-theme {
-  background-color: #28292c;
+  background-color: var(--darkThemColor);
   box-shadow: 0 0 15px #444444;
 }
 
@@ -77,10 +78,11 @@
 .switch-label {
   background-color: var(--light-invers);
   border: 1px solid #920e0e;
+  
 }
 
 .checkbox:checked ~ .slider {
-  background-color: var(--secondaryColor);
+  background-color: var(--lightThemebackgroundColor);
 }
 
 .slider::before {
@@ -95,7 +97,7 @@
 
 @media screen and (prefers-color-scheme: dark) {
   body {
-    background: #28292c;
+    background: var(--darkThemColor);
     color: var(--secondaryColor);
   }
 }

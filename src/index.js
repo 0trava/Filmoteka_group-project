@@ -1,6 +1,7 @@
 // Приклади
 import './js/team-modal';
 import './js/api-service';
+import './js/generes-header.js';
 import './js/switch-theme';
 import './js/trailer-api';
 // import './js/watched-queue-run'; //тут код тільки для бібліотеки

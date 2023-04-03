@@ -1,6 +1,7 @@
 .gallery-wrap {
   padding-top: 20px;
   padding-bottom: 40px;
+  min-height: 600px;
 
   @include mq(tablet) {
     padding-top: 60px;
@@ -18,6 +19,7 @@
 }
 
 .movie-card {
+  position: relative;
   margin-bottom: 20px;
   width: 280px;
   border-radius: 5px;
@@ -93,4 +95,32 @@
     font-size: 20px;
     line-height: 1.2;
   }
+}
+
+.movie-card__box {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  width: 36px;
+  height: 16px;
+  
+  background: #FF6B01;
+  border-radius: 5px;
+}
+
+.movie-card__average {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+
+  color: #FFFFFF;
 }
