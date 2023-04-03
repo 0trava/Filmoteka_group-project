@@ -23,7 +23,7 @@ async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
     console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = ` `;
+    BoxCard.innerHTML = ``;
     return;
   }
 
@@ -66,6 +66,21 @@ async function getMoviesList(array) {
 
 export async function renderList(array) {
   const moviesList = await getMoviesList(array);
+
+  if (document.querySelector('#video') || moviesList.length === 0) {
+    location.reload();
+    BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
+        <h2 class="library-text">Sorry, but your list is empty ...</h2>
+        <img
+          src="./images/Library/movie.png"
+          alt="cinema"
+          class="js-library-bg-image visually-hidden"
+          width="600"
+        />
+      
+  </div>`;
+    return;
+  }
   const watchedList = createList(moviesList);
   libBoxinfo.classList.add('is-hidden');
   BoxCard.innerHTML = '';
@@ -100,7 +115,9 @@ function createMarkup(item) {
                   item.id
                 }>${genres} | ${item.release_date?.substring(0, 4)}
                 <span class="movie-card__box">
-                <span class="movie-card__average">${item.vote_average.toFixed([1])}</span>
+                <span class="movie-card__average">${item.vote_average.toFixed([
+                  1,
+                ])}</span>
                 </span>
                 </p>
             </li>
