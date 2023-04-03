@@ -18,6 +18,18 @@ libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
 libQueueBtn.addEventListener('click', onlibQueueBtnClick);
 window.addEventListener('load', onlibWatchedBtnClick);
 
+libWatchedBtn.classList.add('active');
+
+libWatchedBtn.addEventListener('click', () => {
+  libWatchedBtn.classList.add('active');
+  libQueueBtn.classList.remove('active');
+});
+
+libQueueBtn.addEventListener('click', () => {
+  libQueueBtn.classList.add('active');
+  libWatchedBtn.classList.remove('active');
+});
+
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
@@ -123,3 +135,11 @@ function createMarkup(item) {
             </li>
         `;
 }
+
+window.addEventListener('load', () => {
+  if (libWatchedBtn) {
+    libWatchedBtn.checked = true;
+
+    libWatchedBtn.parentNode.classList.add('checked');
+  }
+});

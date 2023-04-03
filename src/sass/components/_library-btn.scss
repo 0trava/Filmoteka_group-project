@@ -39,3 +39,12 @@
       border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
+.library-btn.active {
+  background-color: var(--btnAccentColor);
+  border-color: var(--btnAccentColor);
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
