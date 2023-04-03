@@ -131,7 +131,7 @@ async function showCard(e) {
                 <button id="trailer" type="button" class="modal__button modal__button-trailer">
                   <span class="svg_span"
                     ><svg class="youtube__icon" width="24" height="24">
-                      <use href="../images/arrow-left.svg"></use></svg
+                      <use href="/src/images/symbol-defs.svg#icon-arrow-left"></use></svg
                   ></span>
                Trailer</button>
 
