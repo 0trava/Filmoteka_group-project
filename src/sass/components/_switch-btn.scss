@@ -1,9 +1,14 @@
 .toggle-switch {
   position: absolute;
-  top: 103px;
+  top: 110px;
   right: 32px;
   width: 100px;
   height: 50px;
+
+  @media screen and (max-width: 767px){
+    top: 185px;
+    right: 18px;
+  }
 }
 
 .switch-label {

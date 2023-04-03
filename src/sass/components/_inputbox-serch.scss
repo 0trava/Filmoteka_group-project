@@ -28,7 +28,7 @@
     outline: none;
     box-shadow: none;
     border: none;
-    color: #010102;
+    color: var(--primary-text-color);
     font-size: 1em;
     letter-spacing: 0.05em;
     transition: 0.5s;
@@ -40,7 +40,7 @@
     left: 0;
     padding: 20px 10px 10px;
     font-size: 1em;
-    color: #ffffff;
+    color: var(--secondaryColor);
     letter-spacing: 00.05em;
     transition: 0.5s;
     pointer-events: none;
