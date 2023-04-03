@@ -2,9 +2,7 @@
   padding-top: 20px;
   padding-bottom: 40px;
   min-height: 600px;
-
   @include mq(tablet) {
-    padding-top: 60px;
     padding-bottom: 60px;
   }
 }
@@ -12,8 +10,11 @@
 .gallery {
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 40px;
 
   @include mq(tablet) {
+    padding-top: 60px;
+    padding-bottom: 60px;
     gap: 16px;
   }
 }
@@ -24,7 +25,7 @@
   width: 280px;
   border-radius: 5px;
 
-  cursor: pointer; 
+  cursor: pointer;
   transition: var(--timing-function);
 
   &:hover {
@@ -106,8 +107,8 @@
   justify-content: center;
   width: 36px;
   height: 16px;
-  
-  background: #FF6B01;
+
+  background: #ff6b01;
   border-radius: 5px;
 }
 
@@ -122,5 +123,5 @@
   font-size: 12px;
   line-height: 1.67;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
