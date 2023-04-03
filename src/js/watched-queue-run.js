@@ -98,7 +98,11 @@ function createMarkup(item) {
   }</h2>
                 <p class="movie-card__text"   ID=${
                   item.id
-                }>${genres} | ${item.release_date?.substring(0, 4)}</p>
+                }>${genres} | ${item.release_date?.substring(0, 4)}
+                <span class="movie-card__box">
+                <span class="movie-card__average">${item.vote_average.toFixed([1])}</span>
+                </span>
+                </p>
             </li>
         `;
 }

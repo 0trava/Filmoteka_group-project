@@ -105,7 +105,7 @@ export async function getSearchMovies(query, page) {
   
     // Сформувати карточки фільмів з ПОШУКУ
     const dataSearch = respDataSearch['results']
-      .map(function ({ id, poster_path, title, genre_ids, release_date, backdrop_path }) {
+      .map(function ({ id, poster_path, title, genre_ids, release_date, backdrop_path, vote_average }) {
         let genre = getGenre(genre_ids);
         let year = release_date?.substring(0, 4);
         //   if (genre && year) genre += ' | ';
@@ -117,7 +117,11 @@ export async function getSearchMovies(query, page) {
                         alt="${title}" 
                         width="300" ID=${id}>
                         <h2 class="movie-card__name" ID=${id}>${title}</h2>
-                        <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
+                        <p class="movie-card__text" ID=${id}>${genre} | ${year}
+                        <span class="movie-card__box">
+                        <span class="movie-card__average">${vote_average.toFixed([1])}</span>
+                        </span>
+                        </p>
                     </li>
                 `;
         };
@@ -146,7 +150,7 @@ export async function getMoviesByGenereId(genere_id, page) {
 
     // Сформувати карточки фільмів
     const data = respData['results']
-      .map(({ id, poster_path, title, genre_ids, release_date }) => {
+      .map(({ id, poster_path, title, genre_ids, release_date, vote_average }) => {
         let genre = getGenre(genre_ids);
         let year = release_date?.substring(0, 4);
         //   if (genre && year) genre += ' | ';
@@ -158,7 +162,11 @@ export async function getMoviesByGenereId(genere_id, page) {
                         alt="${title}" 
                         width="300" ID=${id}>
                         <h2 class="movie-card__name" ID=${id}>${title}</h2>
-                        <p class="movie-card__text" ID=${id}>${genre} | ${year}</p>
+                        <p class="movie-card__text" ID=${id}>${genre} | ${year}
+                        <span class="movie-card__box">
+                        <span class="movie-card__average">${vote_average.toFixed([1])}</span>
+                        </span>
+                        </p>
                     </li>
                 `;
           };
