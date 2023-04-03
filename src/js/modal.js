@@ -14,7 +14,10 @@ export const backdropModal = document.querySelector('.backdrop');
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
   closeButton: document.querySelector('.modal__button-close'),
+
 };
+
+const darkerBackdrop = document.querySelector('.darker');
 
 window.addEventListener('keydown', closeModalHandler);
 // window.addEventListener('click', onCloseButton);
@@ -24,6 +27,7 @@ refs.gallerySelector.addEventListener('click', showCard);
 // зачинення по кліку поза модалкою
 
 const modal = document.querySelector('.modal');
+const modalIframe = document.querySelector('iframe');
 
 // добавляем обработчик клика на весь документ
 
@@ -32,29 +36,35 @@ const modal = document.querySelector('.modal');
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
     backdropModal.classList.add('is-hidden');
-  }
-  //зняття слухачів
 
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    darkerBackdrop.classList.add('is-hidden');
+
+  }
 }
 
 function onCloseButton() {
   backdropModal.classList.add('is-hidden');
-  //зняття слухачів
+   // повертаємо скрол
+  document.body.style.overflow = '';
+  darkerBackdrop.classList.add('is-hidden');
 
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
+
 }
 
 async function showCard(e) {
   e.preventDefault();
+  // знімаємо скрол
+  document.body.style.overflow = 'hidden';
+  const darkerBackdrop = document.querySelector('.darker');
 
   if (e.target.nodeName === 'UL') {
     return;
   }
 
   backdropModal.classList.remove('is-hidden');
+  darkerBackdrop.classList.add('is-hidden');
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
 
@@ -70,6 +80,7 @@ async function showCard(e) {
     genres,
     overview,
   } = movie;
+
   let genre = getGenre(genres);
 
   // Отримуємо youtube трейлер
@@ -84,9 +95,8 @@ async function showCard(e) {
   function createModalCard(cardForModal) {
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${
-            apiService.API_URL_IMG
-          }${poster_path}" alt="${original_title} poster">
+          <img class="modal__poster" src="${apiService.API_URL_IMG
+      }${poster_path}" alt="${original_title} poster">
         </div>
    
         <div class="modal__info-thumb">
@@ -118,7 +128,12 @@ async function showCard(e) {
             </div>
 
             <div class="modal__button-trailer-wrap">
-                <button id="trailer" type="button" class="modal__button modal__button-trailer">Trailer</button>
+                <button id="trailer" type="button" class="modal__button modal__button-trailer">
+                  <span class="svg_span"
+                    ><svg class="youtube__icon" width="24" height="24">
+                      <use href="../images/arrow-left.svg"></use></svg
+                  ></span>
+               Trailer</button>
 
                 <iframe id="video" class="modal__iframe is-hidden" width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
                 title="Mia and me - Mia and me Day 2014" frameborder="0" 
@@ -144,6 +159,8 @@ async function showCard(e) {
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
     }
 
+
+
     function onQueueCheck() {
       const queueBtn = document.querySelector('#queue');
       if (queue.includes(movieId)) {
@@ -152,16 +169,18 @@ async function showCard(e) {
       }
 
       queueBtn.textContent = 'add to queue';
-    }
-  }
+    };
+
+  };
 
   const watchedBtn = document.querySelector(`#watched`);
   const queueBtn = document.querySelector(`#queue`);
-  // const trailerBtn = document.querySelector(`#trailer`);
+
 
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
-  window.addEventListener('click', onWindowClick);
+  // window.addEventListener('click', onWindowClick);
+
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -190,8 +209,54 @@ async function showCard(e) {
     queueBtn.textContent = 'remove from queue';
   }
 
-  function onWindowClick(e) {
-    if (!modal.contains(event.target)) {
+
+  // маніпуляціі з трейлером
+
+
+  // function onWindowClick(e) {
+  //   if (!modal.contains(e.target)) {
+  //     console.log('Трейлер на паузі');
+  //     document
+  //       .querySelector('#video')
+  //       .contentWindow.postMessage(
+  //         '{"event":"command","func":"pauseVideo","args":""}',
+  //         '*'
+  //       );
+
+  //     backdropModal.classList.add('is-hidden');
+
+  //     watchedBtn.removeEventListener('click', onWatchedClick);
+  //     queueBtn.removeEventListener('click', onQueueClick);
+  //     window.removeEventListener('click', onWindowClick);
+  //   }
+  // }
+
+  const modalIframe = document.querySelector('iframe');
+  const trailerBtn = document.querySelector(`#trailer`);
+  
+  console.log(trailerBtn);
+
+  trailerBtn.addEventListener('click', onTrailerClick);
+
+  function onTrailerClick() {
+    modalIframe.classList.remove('is-hidden');
+    darkerBackdrop.classList.remove('is-hidden');
+
+    watchedBtn.removeEventListener('click', onWatchedClick);
+    queueBtn.removeEventListener('click', onQueueClick);
+    // window.removeEventListener('click', onWindowClick);
+
+  }
+
+  darkerBackdrop.addEventListener('click', onDarkerClick);
+
+  function onDarkerClick(e) {
+    if (e.target === modalIframe) {
+      return;
+    }
+
+
+    if (!modal.contains(e.target)) {
       console.log('Трейлер на паузі');
       document
         .querySelector('#video')
@@ -199,21 +264,17 @@ async function showCard(e) {
           '{"event":"command","func":"pauseVideo","args":""}',
           '*'
         );
+      // if (!modalIframe.paused) {
+      //   modalIframe.pause()
+      // }
 
-      backdropModal.classList.add('is-hidden');
-      watchedBtn.removeEventListener('click', onWatchedClick);
-      queueBtn.removeEventListener('click', onQueueClick);
-      window.removeEventListener('click', onWindowClick);
+      darkerBackdrop.classList.add('is-hidden');
+      modalIframe.classList.add('is-hidden');
+
+       watchedBtn.addEventListener('click', onWatchedClick);
+      queueBtn.addEventListener('click', onQueueClick);
     }
+
   }
-  const modalIframe = document.querySelector('iframe');
-
-  const trailerBtn = document.querySelector(`#trailer`);
-  console.log(trailerBtn);
-
-  trailerBtn.addEventListener('click', onTrailerClick);
-
-  function onTrailerClick() {
-    modalIframe.classList.remove('is-hidden');
-  }
+  
 }

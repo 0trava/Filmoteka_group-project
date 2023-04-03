@@ -10,8 +10,20 @@
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
 
-  transition: opacity var(--timing-function),
-  visibility var(--timing-function);
+  transition: opacity var(--timing-function), visibility var(--timing-function);
+}
+
+.darker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 15;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 15;
 }
 
 .backdrop.is-hidden {
@@ -197,7 +209,11 @@
 .modal__info-value-title {
   text-transform: uppercase;
 }
-
+.youtube__icon {
+  fill: rgb(0, 0, 0);
+  background-color: aqua;
+  // background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M8 8L22 22' stroke='black' stroke-width='2'/%3e%3cpath d='M8 22L22 8' stroke='black' stroke-width='2'/%3e%3c/svg%3e ");
+}
 .modal__about {
   color: var(--primary-text-color);
   margin-bottom: 8px;
@@ -283,6 +299,13 @@
   }
 }
 
+.modal__button-trailer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
 .modal__iframe {
   position: absolute;
   top: 0;
@@ -290,4 +313,8 @@
   width: 100%;
   height: 100%;
   z-index: 101;
+}
+
+.body.modal-open {
+  overflow: hidden;
 }
