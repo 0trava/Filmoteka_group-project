@@ -30,14 +30,14 @@
 
     background-color: var(--btnAccentColor);
     color: var(--secondaryColor);
-    box-shadow: var(--box-shadow-scroll-up-btn);
+    box-shadow: var(--boxShadowScrollUpBtn);
 
     &:hover {
         background-color: var(--secondaryColor); 
         .scroll-up-btn__text {
                 color: var(--mainAccentColor);
             }
-            box-shadow: var(--box-shadow-scroll-up-btn);
+            box-shadow: var(--boxShadowScrollUpBtn);
 
     }
 
@@ -55,17 +55,14 @@
         width: 50px;
         height: 50px;
         right: 45px;
-        bottom: 139px;
+        bottom: 80px;
     }
 
     @include mq(desktop) {
         width: 60px;
         height: 60px;
-        right: 45px;
-        bottom: 137px;
     }
 }
-
 
 .scroll-up-btn__text {
     font-weight: 500;
