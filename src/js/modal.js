@@ -14,10 +14,11 @@ export const backdropModal = document.querySelector('.backdrop');
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
   closeButton: document.querySelector('.modal__button-close'),
+  
 
 };
 
- 
+const darkerBackdrop = document.querySelector('.darker');
 
 
 
@@ -42,35 +43,38 @@ function closeModalHandler(evt) {
 
     backdropModal.classList.add('is-hidden');
 
-  }
-  //зняття слухачів
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    darkerBackdrop.classList.add('is-hidden');
 
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
+  }
 }
 
 function onCloseButton() {
   backdropModal.classList.add('is-hidden');
-  //зняття слухачів
+   // повертаємо скрол
+  document.body.style.overflow = '';
+  darkerBackdrop.classList.add('is-hidden');
 
-
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
 async function showCard(e) {
   e.preventDefault();
+  // знімаємо скрол
+  document.body.style.overflow = 'hidden';
+
 
   if (e.target.nodeName === 'UL') {
     return;
   }
 
   backdropModal.classList.remove('is-hidden');
+  darkerBackdrop.classList.add('is-hidden');
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
 
   // Отримуємо дані фільму
-  const movie = await apiService.getMovieInfoById(movieId); 
+  const movie = await apiService.getMovieInfoById(movieId);
   const {
     poster_path,
     title,
@@ -96,9 +100,8 @@ async function showCard(e) {
 
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${
-            apiService.API_URL_IMG
-          }${poster_path}" alt="${original_title} poster">
+          <img class="modal__poster" src="${apiService.API_URL_IMG
+      }${poster_path}" alt="${original_title} poster">
         </div>
    
         <div class="modal__info-thumb">
@@ -130,7 +133,12 @@ async function showCard(e) {
             </div>
 
             <div class="modal__button-trailer-wrap">
-                <button id="trailer" type="button" class="modal__button modal__button-trailer">Trailer</button>
+                <button id="trailer" type="button" class="modal__button modal__button-trailer">
+                  <span class="svg_span"
+                    ><svg class="youtube__icon" width="24" height="24">
+                      <use href="../images/arrow-left.svg"></use></svg
+                  ></span>
+               Trailer</button>
 
                 <iframe id="video" class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
                 title="Mia and me - Mia and me Day 2014" frameborder="0" 
@@ -154,11 +162,11 @@ async function showCard(e) {
         watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
         return;
       }
-        watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
+      watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
     }
   
     function onQueueCheck() {
-          const queueBtn = document.querySelector('#queue');
+      const queueBtn = document.querySelector('#queue');
       if (queue.includes(movieId)) {
 
         queueBtn.textContent = 'remove from queue';
@@ -172,14 +180,14 @@ async function showCard(e) {
 
 
 
-    const watchedBtn = document.querySelector(`#watched`);
-    const queueBtn = document.querySelector(`#queue`);
-    // const trailerBtn = document.querySelector(`#trailer`);
+  const watchedBtn = document.querySelector(`#watched`);
+  const queueBtn = document.querySelector(`#queue`);
+  // const trailerBtn = document.querySelector(`#trailer`);
 
 
-    watchedBtn.addEventListener('click', onWatchedClick);
-    queueBtn.addEventListener('click', onQueueClick);
-    window.addEventListener('click', onWindowClick);
+  watchedBtn.addEventListener('click', onWatchedClick);
+  queueBtn.addEventListener('click', onQueueClick);
+  window.addEventListener('click', onWindowClick);
  
 
 
@@ -210,34 +218,68 @@ async function showCard(e) {
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
   }
+
+  // маніпуляціі з трейлером
+
+
   
-
-
-
-    
   function onWindowClick(e) {
-    if (!modal.contains(event.target)) {
+    if (!modal.contains(e.target)) {
       console.log('Трейлер на паузі');
       document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
 
       backdropModal.classList.add('is-hidden');
+
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
+      // window.removeEventListener('keydown', closeModalHandler);
+      // darkerBackdrop.addEventListener('keydown', closeModalHandler);
     }
 
   }
-  const modalIframe = document.querySelector('iframe');
 
+  const modalIframe = document.querySelector('iframe');
   const trailerBtn = document.querySelector(`#trailer`);
+  
   console.log(trailerBtn);
   
   trailerBtn.addEventListener('click', onTrailerClick);
 
   function onTrailerClick() {
     modalIframe.classList.remove('is-hidden');
+    darkerBackdrop.classList.remove('is-hidden');
+
+    watchedBtn.removeEventListener('click', onWatchedClick);
+    queueBtn.removeEventListener('click', onQueueClick);
+    window.removeEventListener('click', onWindowClick);
+
 
   }
 
+  // darkerBackdrop.addEventListener('click', onCLickPause);
+
+  //     var iframe = document.querySelector('iframe');
+  //     var video = iframe.contentWindow.document.querySelector('video');
+
+  // function onCLickPause(event) {
+  //        if (event.target !== iframe && !iframe.contains(event.target)) {
+  //         // Если да, то ставим видео на паузу
+  //          video.pause();
+  //          darkerBackdrop.classList.add('is-hidden');
+  //          iframe.classList.add('is-hidden');
+           
+  //       }
+      
+  //     }
+
+  // function onDarkerCLick(e) {
+  //   if (!modalIframe.contains(e.target)) {
+  //     darkerBackdrop.classList.add('is-hidden');
+
+        
+  //   }
+
+  // }
 
 };
