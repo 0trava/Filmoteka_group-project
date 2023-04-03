@@ -27,6 +27,7 @@ refs.gallerySelector.addEventListener('click', showCard);
 // зачинення по кліку поза модалкою
 
 const modal = document.querySelector('.modal');
+const modalIframe = document.querySelector('iframe');
 
 // добавляем обработчик клика на весь документ
 
@@ -56,7 +57,7 @@ async function showCard(e) {
   e.preventDefault();
   // знімаємо скрол
   document.body.style.overflow = 'hidden';
-
+  const darkerBackdrop = document.querySelector('.darker');
 
   if (e.target.nodeName === 'UL') {
     return;
@@ -79,6 +80,7 @@ async function showCard(e) {
     genres,
     overview,
   } = movie;
+
   let genre = getGenre(genres);
 
   // Отримуємо youtube трейлер
@@ -177,7 +179,8 @@ async function showCard(e) {
 
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
-  window.addEventListener('click', onWindowClick);
+  // window.addEventListener('click', onWindowClick);
+
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -210,23 +213,23 @@ async function showCard(e) {
   // маніпуляціі з трейлером
 
 
-  function onWindowClick(e) {
-    if (!modal.contains(e.target)) {
-      console.log('Трейлер на паузі');
-      document
-        .querySelector('#video')
-        .contentWindow.postMessage(
-          '{"event":"command","func":"pauseVideo","args":""}',
-          '*'
-        );
+  // function onWindowClick(e) {
+  //   if (!modal.contains(e.target)) {
+  //     console.log('Трейлер на паузі');
+  //     document
+  //       .querySelector('#video')
+  //       .contentWindow.postMessage(
+  //         '{"event":"command","func":"pauseVideo","args":""}',
+  //         '*'
+  //       );
 
-      backdropModal.classList.add('is-hidden');
+  //     backdropModal.classList.add('is-hidden');
 
-      watchedBtn.removeEventListener('click', onWatchedClick);
-      queueBtn.removeEventListener('click', onQueueClick);
-      window.removeEventListener('click', onWindowClick);
-    }
-  }
+  //     watchedBtn.removeEventListener('click', onWatchedClick);
+  //     queueBtn.removeEventListener('click', onQueueClick);
+  //     window.removeEventListener('click', onWindowClick);
+  //   }
+  // }
 
   const modalIframe = document.querySelector('iframe');
   const trailerBtn = document.querySelector(`#trailer`);
@@ -241,33 +244,37 @@ async function showCard(e) {
 
     watchedBtn.removeEventListener('click', onWatchedClick);
     queueBtn.removeEventListener('click', onQueueClick);
-    window.removeEventListener('click', onWindowClick);
+    // window.removeEventListener('click', onWindowClick);
 
   }
 
-  // darkerBackdrop.addEventListener('click', onCLickPause);
+  darkerBackdrop.addEventListener('click', onDarkerClick);
 
-  //     var iframe = document.querySelector('iframe');
-  //     var video = iframe.contentWindow.document.querySelector('video');
+  function onDarkerClick(e) {
+    if (e.target === modalIframe) {
+      return;
+    }
 
-  // function onCLickPause(event) {
-  //        if (event.target !== iframe && !iframe.contains(event.target)) {
-  //         // Если да, то ставим видео на паузу
-  //          video.pause();
-  //          darkerBackdrop.classList.add('is-hidden');
-  //          iframe.classList.add('is-hidden');
-           
-  //       }
-      
-  //     }
 
-  // function onDarkerCLick(e) {
-  //   if (!modalIframe.contains(e.target)) {
-  //     darkerBackdrop.classList.add('is-hidden');
+    if (!modal.contains(e.target)) {
+      console.log('Трейлер на паузі');
+      document
+        .querySelector('#video')
+        .contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          '*'
+        );
+      // if (!modalIframe.paused) {
+      //   modalIframe.pause()
+      // }
 
-        
-  //   }
+      darkerBackdrop.classList.add('is-hidden');
+      modalIframe.classList.add('is-hidden');
 
-  // }
+       watchedBtn.addEventListener('click', onWatchedClick);
+      queueBtn.addEventListener('click', onQueueClick);
+    }
 
-};
+  }
+  
+}
