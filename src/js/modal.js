@@ -60,7 +60,6 @@ function onCloseButton(e) {
   // повертаємо скрол
   document.body.style.overflow = '';
   refs.darkerBackdrop.classList.add('is-hidden');
-
 }
 
 async function showCard(e) {
@@ -243,8 +242,6 @@ async function showCard(e) {
 
   const modalIframe = document.querySelector('iframe');
   const trailerBtn = document.querySelector(`#trailer`);
-  
-  console.log(trailerBtn);
 
   trailerBtn.addEventListener('click', onTrailerClick);
 
@@ -254,7 +251,6 @@ async function showCard(e) {
 
     watchedBtn.removeEventListener('click', onWatchedClick);
     queueBtn.removeEventListener('click', onQueueClick);
-    // window.removeEventListener('click', onWindowClick);
   }
 
   darkerBackdrop.addEventListener('click', onDarkerClick);

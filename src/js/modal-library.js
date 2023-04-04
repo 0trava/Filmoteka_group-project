@@ -34,7 +34,7 @@ refs.gallerySelector.addEventListener('click', showCard);
 
 function clickBackdropCloseModal(e) {
   if (e.target === refs.backdropModal) {
-    onCloseButton();
+    onCloseButton(e);
     // повертаємо скрол
     document.body.style.overflow = '';
     refs.darkerBackdrop.classList.add('is-hidden');
@@ -45,26 +45,26 @@ function clickBackdropCloseModal(e) {
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-    onCloseButton();
+    onCloseButton(evt);
     // повертаємо скрол
     document.body.style.overflow = '';
     refs.darkerBackdrop.classList.add('is-hidden');
   }
-  //зняття слухачів
 
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
-function onCloseButton() {
+function onCloseButton(e) {
+  if (e.target === backdropModal || e.code === 'Escape') {
+    backdropModal.classList.add('is-hidden');
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
+  }
+
   refs.backdropModal.classList.add('is-hidden');
   // повертаємо скрол
   document.body.style.overflow = '';
   refs.darkerBackdrop.classList.add('is-hidden');
-  //зняття слухачів
-
-  // watchedBtn.removeEventListener('click', onWatchedClick);
-  // queueBtn.removeEventListener('click', onQueueClick);
 }
 
 async function showCard(e) {
@@ -261,7 +261,7 @@ async function showCard(e) {
 
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
-  window.addEventListener('click', onWindowClick);
+  // window.addEventListener('click', onWindowClick);
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -318,16 +318,21 @@ async function showCard(e) {
     }
   }
 
-  const modalIframe = document.querySelector('iframe');
 
+  const modalIframe = document.querySelector('iframe');
   const trailerBtn = document.querySelector(`#trailer`);
-  //console.log(trailerBtn);
 
   trailerBtn.addEventListener('click', onTrailerClick);
 
   function onTrailerClick() {
     modalIframe.classList.remove('is-hidden');
-    //console.log('кнопка работает');
+    darkerBackdrop.classList.remove('is-hidden');
+
+    watchedBtn.removeEventListener('click', onWatchedClick);
+    queueBtn.removeEventListener('click', onQueueClick);
   }
 
 };
+
+
+
