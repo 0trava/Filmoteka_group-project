@@ -46,9 +46,9 @@
             color: var(--mainAccentColor);
             }
         transform: translateY(-1px);
-        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-            -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-            -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+        box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+            -webkit-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+            -moz-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
     }
 
     @include mq(tablet) {

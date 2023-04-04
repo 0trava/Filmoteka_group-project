@@ -23,6 +23,7 @@
   --inputBoxColor: #e9f1f8;
   --grayInputBoxColor: #d8d9ebb7;
   --boxShadowGrayColor: #444444;
+  --boxShadowRgbaColor: rgba(0, 0, 0, 0.79);
   --timing-function: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --boxShadowHeaderInput: inset 3px -11px 25px -13px #a7151a;
   --boxShadowHeaderAccent: inset 5px -15px 30px -10px #a7151a;
@@ -600,9 +601,9 @@ button {
 }
 .scroll-up-btn:active {
   transform: translateY(-1px);
-  box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-  -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-  -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+  box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+  -webkit-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+  -moz-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
 }
 .scroll-up-btn:active .scroll-up-btn__text {
   color: var(--mainAccentColor);
