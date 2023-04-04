@@ -3,7 +3,7 @@ import * as pagination from './pagination';
 import * as generes from './generes';
 
 const refs = {
-  genere: document.querySelector('.movie-genres'),
+  genere: document.querySelector('.modal-genres-mob'),
 };
 
 // Посилання на жанри

@@ -11,3 +11,5 @@ import './js/search-by-key-word';
 import './js/scroll-up-btn';
 import './js/team-modal';
 import './js/top-movies';
+import './js/genres-modal';
+import './js/generes-mob';
