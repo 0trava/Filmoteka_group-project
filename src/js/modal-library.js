@@ -133,9 +133,8 @@ async function showCard(e) {
   createModalCard(modal, starValue);
   
   function createModalCard(cardForModal, starValue) {
-    console.log(`Creat card open ${PAGE_OPEN}`);
     let str = `
-      <div class="rating">`;
+      <div id="stars" class="rating">`;
     for (let i = 5; i >= 1; i -= 1) {
       let checked = "";
       if (i === starValue) {
@@ -148,7 +147,6 @@ async function showCard(e) {
         </div>
       </div>`;
     const renderRating = str;
-    console.log("test-2");
 
     
     cardForModal.innerHTML = `
@@ -230,11 +228,12 @@ async function showCard(e) {
     }
 
     // Додаємо прослуховувач на рейтинг
-    ratingStars = document.querySelector('.rating');
-    ratingStars.addEventListener('click', onRatingClick);
+    // ratingStars = document.querySelector(`#stars`);
+    // ratingStars.addEventListener('click', onRatingClick);
     
      // Зберегти рейтинг
     function onRatingClick(e) {
+      console.log(`Stars`);
       const starValue = e.target.value;
       if (starValue && movieId) {
 
@@ -272,19 +271,18 @@ async function showCard(e) {
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
   // window.addEventListener('click', onWindowClick);
-  console.log("test");
+
 
   function onWatchedClick() {
-    console.log(`Start ${PAGE_OPEN}`);
+
 
     //якщо фільм вже в списку
     if (watched.includes(movieId)) {
       watched.splice(watched.indexOf(movieId), 1); //видаляємо з масиву айді
       setWatched(watched); //перезаписуємо сховище
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
-      console.log(`start W ${PAGE_OPEN}`);
+
       if (PAGE_OPEN === 1){
-        console.log(`Прошел рендеринг W ${PAGE_OPEN}`);
         renderList(watched); //оновлюємо сторінку
       };
 
@@ -295,7 +293,6 @@ async function showCard(e) {
     setWatched(watched); //записати в сховище
     watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
     if (PAGE_OPEN === 1){
-      console.log(`Прошел рендеринг W ${PAGE_OPEN}`);
       renderList(watched); //оновлюємо сторінку
     };
   }
@@ -305,10 +302,8 @@ async function showCard(e) {
       queue.splice(queue.indexOf(movieId), 1);
       setQueue(queue);//перезаписуємо сховище
       queueBtn.textContent = 'add to queue';//змінити текст кнопки
-      console.log(queue);
       // onlibQueueBtnClick(queue);
       if (PAGE_OPEN === 2){
-        console.log(`Прошел рендеринг Q ${PAGE_OPEN}`);
         renderList(queue); //оновлюємо сторінку
       }
 
@@ -319,7 +314,6 @@ async function showCard(e) {
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
     if (PAGE_OPEN === 2){
-      console.log(`Прошел рендеринг Q ${PAGE_OPEN}`);
       renderList(queue); //оновлюємо сторінку
     }
   }
@@ -330,7 +324,6 @@ async function showCard(e) {
     }
 
     if (!modal.contains(e.target)) {
-      //console.log('Трейлер на паузі');
       document
         .querySelector('#video')
         .contentWindow.postMessage(
