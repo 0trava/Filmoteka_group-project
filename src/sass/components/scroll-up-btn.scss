@@ -1,82 +1,82 @@
 .scroll-up-btn {
-    display: none;
-    position: fixed;
-    width: 35px;
-    height: 35px;
-    right: 18px;
-    bottom: 75px;
-    border-radius: 50%;
-    z-index: 1;
-    transition: var(--timing-function);
+  display: none;
+  position: fixed;
+  width: 35px;
+  height: 35px;
+  right: 18px;
+  bottom: 75px;
+  border-radius: 50%;
+  z-index: 1;
+  transition: var(--timing-function);
 
-    animation-name: up;
-        animation-duration: 900ms;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    
-        @keyframes up {
-            0% {
-                transform: translateY(0);
-            }
-        
-            50% {
-                transform: translateY(-10px);
-            }
-        
-            100% {
-                transform: translateY(0);
-            }
-        }
+  animation-name: up;
+  animation-duration: 900ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
-    background-color: var(--btnAccentColor);
-    color: var(--secondaryColor);
+  @keyframes up {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  background-color: var(--btnAccentColor);
+  color: var(--secondaryColor);
+  box-shadow: var(--boxShadowScrollUpBtn);
+
+  &:hover,
+  &:focus {
+    background-color: var(--secondaryColor);
+    .scroll-up-btn__text {
+      color: var(--mainAccentColor);
+    }
     box-shadow: var(--boxShadowScrollUpBtn);
+  }
 
-    &:hover {
-        background-color: var(--secondaryColor); 
-        .scroll-up-btn__text {
-                color: var(--mainAccentColor);
-            }
-            box-shadow: var(--boxShadowScrollUpBtn);
-
+  &:active {
+    .scroll-up-btn__text {
+      color: var(--mainAccentColor);
     }
+    transform: translateY(-1px);
+    box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+    -webkit-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+    -moz-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+  }
 
-    &:active {
-        .scroll-up-btn__text {
-            color: var(--mainAccentColor);
-            }
-        transform: translateY(-1px);
-        box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
-            -webkit-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
-            -moz-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
-    }
+  @include mq(tablet) {
+    width: 50px;
+    height: 50px;
+    right: 45px;
+    bottom: 80px;
+  }
 
-    @include mq(tablet) {
-        width: 50px;
-        height: 50px;
-        right: 45px;
-        bottom: 80px;
-    }
-
-    @include mq(desktop) {
-        width: 60px;
-        height: 60px;
-    }
+  @include mq(desktop) {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .scroll-up-btn__text {
-    font-weight: 500;
-    font-size: 16px;
+  font-weight: 500;
+  font-size: 16px;
 
-    @include mq(tablet) {
-        font-size: 18px;
-    }
+  @include mq(tablet) {
+    font-size: 18px;
+  }
 
-    @include mq(desktop) {
-        font-size: 22px;
-    }
+  @include mq(desktop) {
+    font-size: 22px;
+  }
 }
 
 .go-up-show {
-    display: block;
+  display: block;
 }

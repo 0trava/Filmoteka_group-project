@@ -1,3 +1,34 @@
+// КАРТОЧКА
+
+.library-stars{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    pointer-events: none;
+
+}
+
+// МОДАЛЬНЕ ВІКНО
+.modal-library_my-rating{
+    display: flex;
+    align-items: center
+
+}
+
+.modal-library__info-key{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 1px 65px 1px 2px;
+
+
+    @include mq(desktop) {
+        padding: 1px 70px 1px 2px;
+    }
+}
+
+
+
 .rating:not(:checked) > input {
     position: absolute;
     appearance: none;
@@ -6,8 +37,12 @@
   .rating:not(:checked) > label {
     float: right;
     cursor: pointer;
-    font-size: 50px;
+    font-size: 20px;
     color: #666;
+
+    @include mq(desktop) {
+        font-size: 30px;
+      }
   }
   
   .rating:not(:checked) > label:before {

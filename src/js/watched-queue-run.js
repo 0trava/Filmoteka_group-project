@@ -80,7 +80,9 @@ export async function renderList(array) {
   const moviesList = await getMoviesList(array);
 
   if (document.querySelector('#video') || moviesList.length === 0) {
-    location.reload();
+    console.log("empty");
+    // location.reload();
+    libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
         <h2 class="library-text">Sorry, but your list is empty ...</h2>
         <img
@@ -91,6 +93,7 @@ export async function renderList(array) {
         />
       
   </div>`;
+  console.log(BoxCard);
     return;
   }
   const watchedList = createList(moviesList);
@@ -105,11 +108,41 @@ function createList(array) {
   }, '');
 }
 
+// Отримати рейтинг фильма
+function getRatingByMovieId(movieId) {
+      const stars = JSON.parse(localStorage.getItem('star')) || [];
+      const id = stars.findIndex(item => parseInt(item.id) === parseInt(movieId));
+
+      if (id !== -1) {
+        return parseInt(stars[id].star);
+      } else {
+        return 0;
+      }
+}
+  
 function createMarkup(item) {
   // console.log(item);
 
   let genres = getGenrelibrary(item.genres);
 
+  const starValue = getRatingByMovieId(item.id);
+      let renderStars = `
+      <div class="rating">`;
+    for (let i = 5; i >= 1; i -= 1) {
+      let checked = "";
+      if (i === starValue) {
+        checked = "checked";
+      }
+      renderStars += ` <input type="radio" id="star${i}" name="rate" value="${i}" ${checked}>
+                  <label for="star${i}" title="text"></label>`;
+    }
+    renderStars += `
+        </div>
+      </div>`;
+  renderStars = "";
+      
+  
+  
   // let item.year = release_date?.substring(0, 4);
   return `
             <li class="movie-card"  ID=${item.id}>
@@ -120,6 +153,9 @@ function createMarkup(item) {
                 alt="${item.original_title}" 
                 width="300"
                 ID=${item.id}>
+                <div class="library-stars">
+                ${renderStars}
+                </div>
                 <h2 class="movie-card__name"   ID=${item.id}>${
     item.original_title
   }</h2>
@@ -132,6 +168,7 @@ function createMarkup(item) {
                 ])}</span>
                 </span>
                 </p>
+                
             </li>
         `;
 }

@@ -14,43 +14,47 @@ export const backdropModal = document.querySelector('.backdrop');
 const refs = {
   gallerySelector: document.querySelector('.gallery'),
   closeButton: document.querySelector('.modal__button-close'),
-
+  darkerBackdrop: document.querySelector('.darker'),
 };
 
-const darkerBackdrop = document.querySelector('.darker');
-
 window.addEventListener('keydown', closeModalHandler);
-// window.addEventListener('click', onCloseButton);
+window.addEventListener('click', clickBackdropCloseModal);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
 // зачинення по кліку поза модалкою
+
+function clickBackdropCloseModal(e) {
+  if (e.target === backdropModal) {
+    onCloseButton(e);
+
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
+  }
+}
 
 const modal = document.querySelector('.modal');
 const modalIframe = document.querySelector('iframe');
 
 // добавляем обработчик клика на весь документ
 
-// ->>>>>>
-
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-    backdropModal.classList.add('is-hidden');
+    onCloseButton(evt);
 
     // повертаємо скрол
     document.body.style.overflow = '';
-    darkerBackdrop.classList.add('is-hidden');
-
+    refs.darkerBackdrop.classList.add('is-hidden');
   }
 }
 
-function onCloseButton() {
-  backdropModal.classList.add('is-hidden');
-   // повертаємо скрол
-  document.body.style.overflow = '';
-  darkerBackdrop.classList.add('is-hidden');
-
-
+function onCloseButton(e) {
+  if (e.target === backdropModal || e.code === 'Escape') {
+    backdropModal.classList.add('is-hidden');
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
+  }
 }
 
 async function showCard(e) {
@@ -95,8 +99,9 @@ async function showCard(e) {
   function createModalCard(cardForModal) {
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${apiService.API_URL_IMG
-      }${poster_path}" alt="${original_title} poster">
+          <img class="modal__poster" src="${
+            apiService.API_URL_IMG
+          }${poster_path}" alt="${original_title} poster">
         </div>
    
         <div class="modal__info-thumb">
@@ -107,7 +112,7 @@ async function showCard(e) {
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
-            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${vote_average}</span> / <span class="modal__info-value-vote">${vote_count}</span></td>
+            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${vote_average.toFixed([1])}</span> / <span class="modal__info-value-vote">${vote_count}</span></td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Popularity</td>
@@ -171,7 +176,6 @@ async function showCard(e) {
 
       queueBtn.textContent = 'add to queue';
     };
-
   };
 
   const watchedBtn = document.querySelector(`#watched`);
@@ -213,7 +217,6 @@ async function showCard(e) {
 
   // маніпуляціі з трейлером
 
-
   // function onWindowClick(e) {
   //   if (!modal.contains(e.target)) {
   //     console.log('Трейлер на паузі');
@@ -246,7 +249,6 @@ async function showCard(e) {
     watchedBtn.removeEventListener('click', onWatchedClick);
     queueBtn.removeEventListener('click', onQueueClick);
     // window.removeEventListener('click', onWindowClick);
-
   }
 
   darkerBackdrop.addEventListener('click', onDarkerClick);
@@ -275,7 +277,5 @@ async function showCard(e) {
        watchedBtn.addEventListener('click', onWatchedClick);
       queueBtn.addEventListener('click', onQueueClick);
     }
-
   }
-  
 }

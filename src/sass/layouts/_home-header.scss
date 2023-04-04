@@ -50,7 +50,7 @@
   margin-bottom: 54px;
 
   @include mq(tablet) {
-    margin-bottom: /*40*/15px;
+    margin-bottom: /*40*/ 15px;
   }
 }
 
@@ -170,13 +170,21 @@
     font-size: 14px;
     line-height: calc(16 / 14);
     color: var(--secondaryColor);
+    transition: var(--timing-function);
   }
 
-  &:hover {
+
+  &:hover,
+  &:focus,
+  &:focus-within {
     box-shadow: var(--boxShadowHeaderInput);
     transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  // &:active {
+  //   box-shadow: var(--boxShadowHeaderInput);
+  // }
 }
 
 .search-form__input::placeholder {
@@ -218,10 +226,10 @@
     font-weight: 400;
     font-size: 14px;
     line-height: calc(16 / 14);
-    color: var(--secondaryAccentColor);  
+    color: var(--secondaryAccentColor);
   }
 
   @include mq(desktop) {
-      height: 50px;
+    height: 50px;
   }
 }
