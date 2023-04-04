@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
 
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(-backdropBackgroundRgbaColor);
   opacity: 1;
 
   transition: opacity var(--timing-function), visibility var(--timing-function);
@@ -22,7 +22,7 @@
 
   z-index: 15;
 
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--darkerBackgroundRgbaColor);
   z-index: 15;
 }
 
