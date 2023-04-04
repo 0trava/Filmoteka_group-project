@@ -31,7 +31,7 @@
   height: 100%;
   border-radius: 25px;
   -webkit-transition: 0.3s;
-  transition: 0.3s;
+  transition: var(--timing-function);
 }
 
 .slider::before {
@@ -44,7 +44,7 @@
   border-radius: 50%;
 
   -webkit-transition: 0.3s;
-  transition: 0.3s;
+  transition: var(--timing-function);
 }
 
 .checkbox:checked ~ .slider::before {
@@ -54,4 +54,5 @@
 
   -webkit-box-shadow: none;
   box-shadow: none;
+  transition: var(--timing-function);
 }

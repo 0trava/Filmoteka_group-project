@@ -17,8 +17,8 @@
 
   color: var(--secondaryColor);
 
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color var(--timing-function),
+    background var(--timing-function);
 
   @include mq(tablet) {
     width: 152px;
@@ -34,9 +34,6 @@
     background-color: var(--btnAccentColor);
     border-color: var(--btnAccentColor);
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -44,7 +41,7 @@
   background-color: var(--btnAccentColor);
   border-color: var(--btnAccentColor);
   box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color var(--timing-function),
+    box-shadow var(--timing-function),
+    border-color var(--timing-function);
 }
