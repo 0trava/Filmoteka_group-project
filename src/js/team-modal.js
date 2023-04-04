@@ -1,29 +1,31 @@
 (() => {
-    const refs = {
-      openModalBtn: document.querySelector("[team-modal-open]"),
-      closeModalBtn: document.querySelector("[team-modal-close]"),
-      modal: document.querySelector("[team-modal]"),
+  const refs = {
+    openModalBtn: document.querySelector('[team-modal-open]'),
+    closeModalBtn: document.querySelector('[team-modal-close]'),
+    modal: document.querySelector('[team-modal]'),
   };
-  
-  window.addEventListener("click", clickBackdropCloseModal);
+
+  window.addEventListener('click', clickBackdropCloseModal);
   window.addEventListener('keydown', closeModalByClickEscape);
-  refs.openModalBtn.addEventListener("click", toggleModal);
-  refs.closeModalBtn.addEventListener("click", toggleModal);
-  
+  refs.openModalBtn.addEventListener('click', toggleModal);
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+
   function clickBackdropCloseModal(e) {
     if (e.target === refs.modal) {
       refs.modal.classList.add('is-hidden');
+      document.body.classList.toggle('stop-scrolling');
     }
   }
 
   function closeModalByClickEscape(e) {
-  if (e.code === 'Escape') {
-    refs.modal.classList.add('is-hidden');
+    if (e.code === 'Escape') {
+      refs.modal.classList.add('is-hidden');
+      document.body.classList.toggle('stop-scrolling');
+    }
   }
-}
-      
+
   function toggleModal() {
-    refs.modal.classList.toggle("is-hidden");
+    refs.modal.classList.toggle('is-hidden');
     document.body.classList.toggle('stop-scrolling');
   }
 })();
