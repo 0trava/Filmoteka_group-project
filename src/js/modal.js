@@ -55,6 +55,12 @@ function onCloseButton(e) {
     document.body.style.overflow = '';
     refs.darkerBackdrop.classList.add('is-hidden');
   }
+
+  backdropModal.classList.add('is-hidden');
+  // повертаємо скрол
+  document.body.style.overflow = '';
+  refs.darkerBackdrop.classList.add('is-hidden');
+
 }
 
 async function showCard(e) {
