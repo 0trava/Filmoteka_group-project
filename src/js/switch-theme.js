@@ -51,3 +51,5 @@ if (savedTheme !== null) {
   themeSwitcher.checked = savedTheme === 'darkTheme';
   setTheme(savedTheme);
 }
+
+body.classList.add('animated');

@@ -33,7 +33,7 @@ libQueueBtn.addEventListener('click', () => {
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
-    console.log('start');
+    console.log('start 0');
     libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = ``;
     return;
@@ -41,7 +41,8 @@ async function onlibWatchedBtnClick() {
 
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
-
+  console.log('start watched');
+  console.log(watched);
   renderList(watched);
 }
 
@@ -79,20 +80,23 @@ async function getMoviesList(array) {
 export async function renderList(array) {
   const moviesList = await getMoviesList(array);
 
-  if (document.querySelector('#video') || moviesList.length === 0) {
-    location.reload();
-    BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
-        <h2 class="library-text">Sorry, but your list is empty ...</h2>
-        <img
-          src="./images/Library/movie.png"
-          alt="cinema"
-          class="js-library-bg-image visually-hidden"
-          width="600"
-        />
-      
-  </div>`;
-    return;
+  if (moviesList.length === 0) {
+        console.log("empty");
+        // location.reload();
+        libBoxinfo.classList.remove('is-hidden');
+        BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
+            <h2 class="library-text">Sorry, but your list is empty ...</h2>
+            <img
+              src="./images/Library/movie.png"
+              alt="cinema"
+              class="js-library-bg-image visually-hidden"
+              width="600"
+            />
+            </div>`;
+      console.log(BoxCard);
+      return;
   }
+  
   const watchedList = createList(moviesList);
   libBoxinfo.classList.add('is-hidden');
   BoxCard.innerHTML = '';
@@ -105,51 +109,62 @@ function createList(array) {
   }, '');
 }
 
+// Отримати рейтинг фильма
+function getRatingByMovieId(movieId) {
+      const stars = JSON.parse(localStorage.getItem('star')) || [];
+      const id = stars.findIndex(item => parseInt(item.id) === parseInt(movieId));
+
+      if (id !== -1) {
+        return parseInt(stars[id].star);
+      } else {
+        return 0;
+      }
+}
+  
 function createMarkup(item) {
   // console.log(item);
 
   let genres = getGenrelibrary(item.genres);
 
+  const starValue = getRatingByMovieId(item.id);
+      let renderStars = `
+      <div class="rating">`;
+    for (let i = 5; i >= 1; i -= 1) {
+      let checked = "";
+      if (i === starValue) {
+        checked = "checked";
+      }
+      renderStars += ` <input type="radio" id="star${i}" name="rate" value="${i}" ${checked}>
+                  <label for="star${i}" title="text"></label>`;
+    }
+    renderStars += `
+        </div>
+      </div>`;
+  renderStars = "<p>Ждем код</p>";
+      
+  
+  
   // let item.year = release_date?.substring(0, 4);
   return `
             <li class="movie-card"  ID=${item.id}>
-                <img class="movie-card__image" src="${API_URL_IMG}${
-    item.poster_path
-  }" 
+                <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
                 onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
                 alt="${item.original_title}" 
                 width="300"
                 ID=${item.id}>
                 <div class="library-stars">
-                <div class="rating">
-                <input type="radio" id="star5" name="rate" value="5">
-                <label for="star5" title="text"></label>
-                <input type="radio" id="star4" name="rate" value="4">
-                <label for="star4" title="text"></label>
-                <input checked="" type="radio" id="star3" name="rate" value="3">
-                <label for="star3" title="text"></label>
-                <input type="radio" id="star2" name="rate" value="2">
-                <label for="star2" title="text"></label>
-                <input type="radio" id="star1" name="rate" value="1">
-                <label for="star1" title="text"></label>
+                ${renderStars}
                 </div>
-                </div>
-                <h2 class="movie-card__name"   ID=${item.id}>${
-    item.original_title
-  }</h2>
-                <p class="movie-card__text"   ID=${
-                  item.id
-                }>${genres} | ${item.release_date?.substring(0, 4)}
+                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
+                <p class="movie-card__text"   ID=${item.id}>${genres} | ${item.release_date?.substring(0, 4)}
                 <span class="movie-card__box">
-                <span class="movie-card__average">${item.vote_average.toFixed([
-                  1,
-                ])}</span>
+                <span class="movie-card__average">${item.vote_average.toFixed([1,])}</span>
                 </span>
                 </p>
-                
-            </li>
-        `;
+            </li>`;
 }
+
+
 
 window.addEventListener('load', () => {
   if (libWatchedBtn) {
