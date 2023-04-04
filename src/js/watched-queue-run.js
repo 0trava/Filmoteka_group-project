@@ -33,7 +33,7 @@ libQueueBtn.addEventListener('click', () => {
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
-    console.log('start');
+    console.log('start 0');
     libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = ``;
     return;
@@ -41,7 +41,8 @@ async function onlibWatchedBtnClick() {
 
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
-
+  console.log('start watched');
+  console.log(watched);
   renderList(watched);
 }
 
@@ -79,23 +80,23 @@ async function getMoviesList(array) {
 export async function renderList(array) {
   const moviesList = await getMoviesList(array);
 
-  if (document.querySelector('#video') || moviesList.length === 0) {
-    console.log("empty");
-    // location.reload();
-    libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
-        <h2 class="library-text">Sorry, but your list is empty ...</h2>
-        <img
-          src="./images/Library/movie.png"
-          alt="cinema"
-          class="js-library-bg-image visually-hidden"
-          width="600"
-        />
-      
-  </div>`;
-  console.log(BoxCard);
-    return;
+  if (moviesList.length === 0) {
+        console.log("empty");
+        // location.reload();
+        libBoxinfo.classList.remove('is-hidden');
+        BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
+            <h2 class="library-text">Sorry, but your list is empty ...</h2>
+            <img
+              src="./images/Library/movie.png"
+              alt="cinema"
+              class="js-library-bg-image visually-hidden"
+              width="600"
+            />
+            </div>`;
+      console.log(BoxCard);
+      return;
   }
+  
   const watchedList = createList(moviesList);
   libBoxinfo.classList.add('is-hidden');
   BoxCard.innerHTML = '';

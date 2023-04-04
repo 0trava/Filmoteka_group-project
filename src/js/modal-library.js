@@ -270,13 +270,14 @@ async function showCard(e) {
       setWatched(watched); //перезаписуємо сховище
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
 
-      // renderList(watched); //оновлюємо сторінку
+      renderList(watched); //оновлюємо сторінку
       return;
     }
 
     watched.push(movieId); //додати в масив айді фільма
     setWatched(watched); //записати в сховище
     watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
+    renderList(watched); //оновлюємо сторінку
   }
 
   function onQueueClick() {
@@ -293,6 +294,7 @@ async function showCard(e) {
     queue.push(movieId);
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
+    renderList(queue); //оновлюємо сторінку
   }
 
   function onWindowClick(e) {
