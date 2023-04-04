@@ -133,6 +133,7 @@ async function showCard(e) {
   createModalCard(modal, starValue);
   
   function createModalCard(cardForModal, starValue) {
+    console.log(`Creat card open ${PAGE_OPEN}`);
     let str = `
       <div class="rating">`;
     for (let i = 5; i >= 1; i -= 1) {
@@ -147,6 +148,7 @@ async function showCard(e) {
         </div>
       </div>`;
     const renderRating = str;
+    console.log("test-2");
 
     
     cardForModal.innerHTML = `
@@ -158,7 +160,7 @@ async function showCard(e) {
         <div class="modal__info-thumb">
             <h2 class="modal__title">${movie.original_title}</h2>
             <div class="modal-library_my-rating">
-            <p class="modal-library__info-key">My rating</p>
+            <p class="modal-library__info-key">M3y rating</p>
            ${renderRating}
         <table class="modal__info">
             <tr class="modal__info-entry">
@@ -270,22 +272,32 @@ async function showCard(e) {
   watchedBtn.addEventListener('click', onWatchedClick);
   queueBtn.addEventListener('click', onQueueClick);
   // window.addEventListener('click', onWindowClick);
+  console.log("test");
 
   function onWatchedClick() {
+    console.log(`Start ${PAGE_OPEN}`);
+
     //якщо фільм вже в списку
     if (watched.includes(movieId)) {
       watched.splice(watched.indexOf(movieId), 1); //видаляємо з масиву айді
       setWatched(watched); //перезаписуємо сховище
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
+      console.log(`start W ${PAGE_OPEN}`);
+      if (PAGE_OPEN === 1){
+        console.log(`Прошел рендеринг W ${PAGE_OPEN}`);
+        renderList(watched); //оновлюємо сторінку
+      };
 
-      renderList(watched); //оновлюємо сторінку
       return;
     }
 
     watched.push(movieId); //додати в масив айді фільма
     setWatched(watched); //записати в сховище
     watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
-    renderList(watched); //оновлюємо сторінку
+    if (PAGE_OPEN === 1){
+      console.log(`Прошел рендеринг W ${PAGE_OPEN}`);
+      renderList(watched); //оновлюємо сторінку
+    };
   }
 
   function onQueueClick() {
@@ -295,14 +307,21 @@ async function showCard(e) {
       queueBtn.textContent = 'add to queue';//змінити текст кнопки
       console.log(queue);
       // onlibQueueBtnClick(queue);
-      renderList(queue); //оновлюємо сторінку
+      if (PAGE_OPEN === 2){
+        console.log(`Прошел рендеринг Q ${PAGE_OPEN}`);
+        renderList(queue); //оновлюємо сторінку
+      }
+
       return;
     }
 
     queue.push(movieId);
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
-    renderList(queue); //оновлюємо сторінку
+    if (PAGE_OPEN === 2){
+      console.log(`Прошел рендеринг Q ${PAGE_OPEN}`);
+      renderList(queue); //оновлюємо сторінку
+    }
   }
 
   function onWindowClick(e) {

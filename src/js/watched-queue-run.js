@@ -6,7 +6,7 @@ import { getGenrelibrary } from './modal-genres';
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 const API_URL = `https://api.themoviedb.org/3/`;
 const API_URL_IMG = `https://image.tmdb.org/t/p/original`;
-let PAGE_OPEN = 1;
+export let PAGE_OPEN = 1;
 
 const libWatchedBtn = document.querySelector('.library-btn__watched');
 const libQueueBtn = document.querySelector('.library-btn__queue');
