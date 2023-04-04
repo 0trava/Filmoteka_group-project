@@ -28,8 +28,7 @@
   cursor: pointer;
   transition: var(--timing-function);
 
-  &:hover,
-  &:focus {
+  &:hover {
     box-shadow: var(--box-shadow-scroll-up-btn);
   }
 
@@ -38,8 +37,7 @@
 
     transition: var(--timing-function);
 
-    &:hover,
-    &:focus {
+    &:hover {
       transform: scale(1.05);
     }
   }
