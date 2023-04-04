@@ -10,6 +10,7 @@ import {
 import { renderList } from './watched-queue-run';
 import { getGenrelibrary } from './modal-genres';
 
+export const backdropModal = document.querySelector('.backdrop');
 
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 const API_URL=`https://api.themoviedb.org/3/`;
@@ -330,6 +331,35 @@ async function showCard(e) {
 
     watchedBtn.removeEventListener('click', onWatchedClick);
     queueBtn.removeEventListener('click', onQueueClick);
+  }
+
+
+  darkerBackdrop.addEventListener('click', onDarkerClick);
+
+  function onDarkerClick(e) {
+    if (e.target === modalIframe) {
+      return;
+    }
+
+
+    if (!modal.contains(e.target)) {
+      console.log('Трейлер на паузі');
+      document
+        .querySelector('#video')
+        .contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          '*'
+        );
+      // if (!modalIframe.paused) {
+      //   modalIframe.pause()
+      // }
+
+      darkerBackdrop.classList.add('is-hidden');
+      modalIframe.classList.add('is-hidden');
+
+       watchedBtn.addEventListener('click', onWatchedClick);
+      queueBtn.addEventListener('click', onQueueClick);
+    }
   }
 
 };
