@@ -189,8 +189,11 @@ async function showCard(e) {
        Trailer</button>
 
 
-                <iframe id="video" class="modal__iframe is-hidden" width="1237" height="696" src="https://www.youtube.com/embed/${youtubeTrailer}" title="Mia and me - Mia and me Day 2014" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+              <iframe id="video" class="modal__iframe is-hidden" width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
+              title="Mia and me - Mia and me Day 2014" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen></iframe>
+                </div>
         </div>
     </div>
   `;
@@ -344,12 +347,8 @@ async function showCard(e) {
 
     if (!modal.contains(e.target)) {
       console.log('Трейлер на паузі');
-      document
-        .querySelector('#video')
-        .contentWindow.postMessage(
-          '{"event":"command","func":"pauseVideo","args":""}',
-          '*'
-        );
+      document.querySelector('#video').test.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
+
       // if (!modalIframe.paused) {
       //   modalIframe.pause()
       // }
