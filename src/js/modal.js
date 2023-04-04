@@ -26,7 +26,7 @@ refs.gallerySelector.addEventListener('click', showCard);
 
 function clickBackdropCloseModal(e) {
   if (e.target === backdropModal) {
-    onCloseButton();
+    onCloseButton(e);
 
     document.body.style.overflow = '';
     refs.darkerBackdrop.classList.add('is-hidden');
@@ -40,7 +40,7 @@ const modalIframe = document.querySelector('iframe');
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-    onCloseButton();
+    onCloseButton(evt);
 
     // повертаємо скрол
     document.body.style.overflow = '';
@@ -48,11 +48,13 @@ function closeModalHandler(evt) {
   }
 }
 
-function onCloseButton() {
-  backdropModal.classList.add('is-hidden');
-   // повертаємо скрол
-  document.body.style.overflow = '';
-  refs.darkerBackdrop.classList.add('is-hidden');
+function onCloseButton(e) {
+  if (e.target === backdropModal || e.code === 'Escape') {
+    backdropModal.classList.add('is-hidden');
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
+  }
 }
 
 async function showCard(e) {
