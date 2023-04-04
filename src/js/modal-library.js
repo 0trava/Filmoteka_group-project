@@ -270,7 +270,8 @@ async function showCard(e) {
       watched.splice(watched.indexOf(movieId), 1); //видаляємо з масиву айді
       setWatched(watched); //перезаписуємо сховище
       watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
-      renderList(watched);
+
+      // renderList(watched); //оновлюємо сторінку
       return;
     }
 
@@ -282,9 +283,11 @@ async function showCard(e) {
   function onQueueClick() {
     if (queue.includes(movieId)) {
       queue.splice(queue.indexOf(movieId), 1);
-      setQueue(queue);
-      queueBtn.textContent = 'add to queue';
-      renderList(queue);
+      setQueue(queue);//перезаписуємо сховище
+      queueBtn.textContent = 'add to queue';//змінити текст кнопки
+      console.log(queue);
+      // onlibQueueBtnClick(queue);
+      renderList(queue); //оновлюємо сторінку
       return;
     }
 

@@ -20,7 +20,8 @@
   color: var(--primary-text-color);
 }
 
-.tui-pagination.goit-pagination .tui-page-btn:hover {
+.tui-pagination.goit-pagination .tui-page-btn:hover,
+.tui-pagination.goit-pagination .tui-page-btn:focus {
   background: none;
 }
 
@@ -37,8 +38,10 @@
 
 .tui-pagination.goit-pagination .tui-prev,
 .tui-pagination.goit-pagination .tui-prev:hover,
+.tui-pagination.goit-pagination .tui-prev:focus,
 .tui-pagination.goit-pagination .tui-next,
-.tui-pagination.goit-pagination .tui-next:hover {
+.tui-pagination.goit-pagination .tui-next:hover,
+.tui-pagination.goit-pagination .tui-next:focus {
   width: 40px;
   height: 40px;
   padding: 13px 20px 13px 7px;
