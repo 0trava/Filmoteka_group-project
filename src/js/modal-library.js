@@ -23,6 +23,8 @@ const refs = {
   modal: document.querySelector('.modal'),
 };
 
+let movieId = 0;
+
 window.addEventListener('keydown', closeModalHandler);
 window.addEventListener('click', clickBackdropCloseModal);
 refs.closeButton.addEventListener('click', onCloseButton);
@@ -67,7 +69,8 @@ function onCloseButton() {
 
 async function showCard(e) {
   e.preventDefault();
-  console.log(e.target.nodeName);
+  
+  //console.log(e.target.nodeName);
   // знімаємо скрол
   document.body.style.overflow = 'hidden';
   const darkerBackdrop = document.querySelector('.darker');
@@ -76,9 +79,14 @@ async function showCard(e) {
     return;
   }
 
+
   refs.backdropModal.classList.remove('is-hidden');
 
-  const movieId = e.target.id; // Отримали ID картки на яку був клік
+  if (!e.target.parentNode.classList.contains('rating')) {
+    movieId = e.target.id; // Отримали ID картки на яку був клік
+  }
+  
+
 
   // Отримуємо дані фільму
   const movie = await getMovieInfoById(movieId);
@@ -96,7 +104,7 @@ async function showCard(e) {
 
   // Отримуємо youtube трейлер
   const youtubeTrailer = await getYoutubeTrailerByMovieId(movieId);
-  console.log(youtubeTrailer);
+  //console.log(youtubeTrailer);
 
   async function getYoutubeTrailerByMovieId(movieId) {
     const response = await fetch(
@@ -104,7 +112,7 @@ async function showCard(e) {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
+    //console.log(responseData);
 
     if (responseData.results.length > 0) {
       return responseData['results'][0]['key'];
@@ -114,9 +122,29 @@ async function showCard(e) {
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
 
-  createModalCard(modal);
+  // Рейтинг фільму
+  const starValue = getRatingByMovieId(movieId);
 
-  function createModalCard(cardForModal) {
+  createModalCard(modal, starValue);
+  
+  function createModalCard(cardForModal, starValue) {
+    let str = `
+    <p class="modal__info-key">My rating</p>
+      <div class="rating">`;
+    for (let i = 5; i >= 1; i -= 1) {
+      let checked = "";
+      if (i === starValue) {
+        checked = "checked";
+      }
+      str += ` <input type="radio" id="star${i}" name="rate" value="${i}" ${checked}>
+                  <label for="star${i}" title="text"></label>`;
+    }
+    str += `
+        </div>
+      </div>`;
+    const renderRating = str;
+
+    
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
       <img class="modal__poster" src="${API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
@@ -127,19 +155,7 @@ async function showCard(e) {
             <h2 class="modal__title">${movie.original_title}</h2>
             <div class="modal-library_my-rating">
             <p class="modal-library__info-key">My rating</p>
-            <div class="rating">
-                <input type="radio" id="star5" name="rate" value="5">
-                <label for="star5" title="text"></label>
-                <input type="radio" id="star4" name="rate" value="4">
-                <label for="star4" title="text"></label>
-                <input checked="" type="radio" id="star3" name="rate" value="3">
-                <label for="star3" title="text"></label>
-                <input type="radio" id="star2" name="rate" value="2">
-                <label for="star2" title="text"></label>
-                <input type="radio" id="star1" name="rate" value="1">
-                <label for="star1" title="text"></label>
-                </div>
-              </div>
+           ${renderRating}
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
@@ -203,7 +219,42 @@ async function showCard(e) {
 
       queueBtn.textContent = 'add to queue';
     }
+
+    // Додаємо прослуховувач на рейтинг
+    ratingStars = document.querySelector('.rating');
+    ratingStars.addEventListener('click', onRatingClick);
+    
+     // Зберегти рейтинг
+    function onRatingClick(e) {
+      const starValue = e.target.value;
+      if (starValue && movieId) {
+
+        const stars = JSON.parse(localStorage.getItem('star')) || [];
+        const id = stars.findIndex(item => item.id === movieId);
+        if (id !== -1) {
+          stars[id].star = starValue;
+        } else {
+          stars.push({'id': movieId, 'star': starValue});
+        }
+      
+        localStorage.setItem('star', JSON.stringify(stars));
+      }
+    }
   }
+
+  // Отримати рейтинг фильма
+  function getRatingByMovieId(movieId) {
+      const stars = JSON.parse(localStorage.getItem('star')) || [];
+      const id = stars.findIndex(item => item.id === movieId);
+      if (id !== -1) {
+        return parseInt(stars[id].star);
+      } else {
+        return 0;
+      }
+  }
+
+	
+	
 
   const watchedBtn = document.querySelector(`#watched`);
   const queueBtn = document.querySelector(`#queue`);
@@ -243,8 +294,12 @@ async function showCard(e) {
   }
 
   function onWindowClick(e) {
+    if (e.target.parentNode.classList.contains('rating')) {
+      return;
+    }
+
     if (!modal.contains(e.target)) {
-      console.log('Трейлер на паузі');
+      //console.log('Трейлер на паузі');
       document
         .querySelector('#video')
         .contentWindow.postMessage(
@@ -252,8 +307,7 @@ async function showCard(e) {
           '*'
         );
 
-
-      backdropModal.classList.add('is-hidden');
+      refs.backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
@@ -263,12 +317,13 @@ async function showCard(e) {
   const modalIframe = document.querySelector('iframe');
 
   const trailerBtn = document.querySelector(`#trailer`);
-  console.log(trailerBtn);
+  //console.log(trailerBtn);
 
   trailerBtn.addEventListener('click', onTrailerClick);
 
   function onTrailerClick() {
     modalIframe.classList.remove('is-hidden');
-    console.log('кнопка работает');
+    //console.log('кнопка работает');
   }
+
 };
