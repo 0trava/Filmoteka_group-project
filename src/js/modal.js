@@ -101,6 +101,9 @@ async function showCard(e) {
    
         <div class="modal__info-thumb">
             <h2 class="modal__title">${title}</h2>
+
+
+
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
