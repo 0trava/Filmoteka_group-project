@@ -21,6 +21,7 @@
     if (e.code === 'Escape') {
       refs.modal.classList.add('is-hidden');
       document.body.classList.toggle('stop-scrolling');
+
     }
   }
 

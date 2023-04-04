@@ -64,6 +64,26 @@
         <span class="slider"></span>
       </label>
     </div>
+
     <div class="movie-genres"></div>
+
+    <!----- МОДАЛКА З ЖАНРАМИ ДЛЯ МОБ ВЕРСІЇ ------>
+
+    <button type="button" class="btn-movie-genres-mob" genres-modal-open>
+      GENRES
+      <svg class="genres-icon" width="18" height="18">
+        <use href="/src/images/symbol-defs.svg#icon-arrow-down-icon"></use>
+      </svg>
+    </button>
+
+    <div class="genres-wrap is-hidden" genres-modal>
+      <div class="modal-genres-mob">
+        <button type="button" class="genres-mob-close" genres-modal-close>
+          <svg class="genres-icon-close" width="30" height="30">
+            <use href="/src/images/symbol-defs.svg#close"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </header>

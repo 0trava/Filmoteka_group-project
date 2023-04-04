@@ -1,13 +1,13 @@
 .toggle-switch {
   position: absolute;
-  top: 110px;
+  top: 115px;
   right: 32px;
   width: 100px;
   height: 50px;
 
-  @media screen and (max-width: 767px){
-    top: 185px;
-    right: 18px;
+  @media screen and (max-width: 767px) {
+    top: 190px;
+    right: 20px;
   }
 }
 
