@@ -12,12 +12,15 @@
   --secondaryAccentColor: #ff001b;
   --btnAccentColor: #ff6b01;
   --modalInfoText: #8c8c8c;
+  --modalStudentsSocLink: #afb1b8;
   --lightThemebackgroundColor: #e5e5e5;
   --footerTextColor: #545454;
   --footerColor: #F7F7F7;
   --lighThemElementColor: #e7e7e7;
   --darkThemebackgroundColor: #121213f7;
   --darkThemColor: #2b2c2f;
+  --inputBoxColor: #e9f1f8;
+  --grayInputBoxColor: #d8d9ebb7;
   --timing-function: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --boxShadowHeaderInput: inset 3px -11px 25px -13px #a7151a;
   --boxShadowHeaderAccent: inset 5px -15px 30px -10px #a7151a;
@@ -448,7 +451,7 @@ button {
 
 .inputbox input:valid ~ span,
 .inputbox input:focus ~ span {
-  color: #e9f1f8;
+  color: var(--inputBoxColor);
   transform: translateX(-10px) translateY(-34px);
   font-size: 0, 75em;
   margin-top: -10px;
@@ -460,7 +463,7 @@ button {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: rgba(216, 217, 235, 0.7176470588);
+  background: var(--grayInputBoxColor);
   border-radius: 4px;
   transition: 0.5s;
   pointer-events: none;
@@ -501,9 +504,9 @@ button {
   height: 40px;
   padding: 13px;
   color: var(--secondaryColor);
-  background: #ff6b08;
+  background: var(--mainAccentColor);
   border-radius: 5px;
-  border-color: #ff6b08;
+  border-color: var(--mainAccentColor);
 }
 
 .tui-pagination.goit-pagination .tui-prev,
@@ -513,7 +516,7 @@ button {
   width: 40px;
   height: 40px;
   padding: 13px 20px 13px 7px;
-  background: #f7f7f7;
+  background: var(--footerColor);
   border-radius: 5px;
 }
 @media screen and (min-width: 768px) {
@@ -986,7 +989,7 @@ button {
   justify-content: center;
   width: 36px;
   height: 16px;
-  background: #ff6b01;
+  background: var(--btnAccentColor);
   border-radius: 5px;
 }
 
@@ -999,7 +1002,7 @@ button {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
-  color: #ffffff;
+  color: var(--secondaryColor);
 }
 
 .home-footer {
@@ -1261,7 +1264,7 @@ button {
   justify-content: center;
   width: 36px;
   height: 16px;
-  background: #FF6B01;
+  background: var(--btnAccentColor);
   border-radius: 5px;
 }
 
@@ -1274,7 +1277,7 @@ button {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
-  color: #FFFFFF;
+  color: var(--secondaryColor);
 }
 
 .stop-scrolling {
@@ -1305,7 +1308,7 @@ button {
   position: relative;
   max-width: 1000px;
   padding: 35px;
-  background-color: #fff;
+  background-color: var(--secondaryColor);
   z-index: 1;
 }
 
@@ -1333,7 +1336,7 @@ button {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: #000000;
+  color: var(--primary-text-color);
   text-transform: uppercase;
   text-align: center;
   margin-top: 10px;
@@ -1383,7 +1386,7 @@ button {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #fff;
+  background: var(--secondaryColor);
   width: 100%;
   height: 55px;
   z-index: 2;
@@ -1424,8 +1427,8 @@ button {
   align-content: center;
   justify-content: center;
   align-items: center;
-  border: 1px solid #afb1b8;
-  fill: #afb1b8;
+  border: 1px solid var(--modalStudentsSocLink);
+  fill: var(--modalStudentsSocLink);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal-student-soc-link:hover {
