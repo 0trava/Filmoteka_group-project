@@ -80,7 +80,9 @@ export async function renderList(array) {
   const moviesList = await getMoviesList(array);
 
   if (document.querySelector('#video') || moviesList.length === 0) {
-    location.reload();
+    console.log("empty");
+    // location.reload();
+    libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
         <h2 class="library-text">Sorry, but your list is empty ...</h2>
         <img
@@ -91,6 +93,7 @@ export async function renderList(array) {
         />
       
   </div>`;
+  console.log(BoxCard);
     return;
   }
   const watchedList = createList(moviesList);
