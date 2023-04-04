@@ -129,7 +129,6 @@ async function showCard(e) {
   
   function createModalCard(cardForModal, starValue) {
     let str = `
-    <p class="modal__info-key">My rating</p>
       <div class="rating">`;
     for (let i = 5; i >= 1; i -= 1) {
       let checked = "";

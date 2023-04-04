@@ -139,16 +139,14 @@ function createMarkup(item) {
     renderStars += `
         </div>
       </div>`;
-  renderStars = "";
+  renderStars = "<p>Ждем код</p>";
       
   
   
   // let item.year = release_date?.substring(0, 4);
   return `
             <li class="movie-card"  ID=${item.id}>
-                <img class="movie-card__image" src="${API_URL_IMG}${
-    item.poster_path
-  }" 
+                <img class="movie-card__image" src="${API_URL_IMG}${item.poster_path}" 
                 onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/b/атрибуты-кино-вьюрок-фи-ьма-и-во-а-со-ы-в-бумажном-стаканчике-87336791.jpg'" 
                 alt="${item.original_title}" 
                 width="300"
@@ -156,22 +154,16 @@ function createMarkup(item) {
                 <div class="library-stars">
                 ${renderStars}
                 </div>
-                <h2 class="movie-card__name"   ID=${item.id}>${
-    item.original_title
-  }</h2>
-                <p class="movie-card__text"   ID=${
-                  item.id
-                }>${genres} | ${item.release_date?.substring(0, 4)}
+                <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
+                <p class="movie-card__text"   ID=${item.id}>${genres} | ${item.release_date?.substring(0, 4)}
                 <span class="movie-card__box">
-                <span class="movie-card__average">${item.vote_average.toFixed([
-                  1,
-                ])}</span>
+                <span class="movie-card__average">${item.vote_average.toFixed([1,])}</span>
                 </span>
                 </p>
-                
-            </li>
-        `;
+            </li>`;
 }
+
+
 
 window.addEventListener('load', () => {
   if (libWatchedBtn) {
