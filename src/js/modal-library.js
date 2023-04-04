@@ -8,43 +8,45 @@ import {
   setWatched,
 } from './local-storage';
 import { renderList } from './watched-queue-run';
-
 import { getGenrelibrary } from './modal-genres';
 
 
-
-const backdropModal = document.querySelector('.backdrop');
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 const API_URL=`https://api.themoviedb.org/3/`;
 const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
 
 const refs = {
+  backdropModal: document.querySelector('.backdrop'),
   gallerySelector: document.querySelector('.library-gallery-wrap'),
   closeButton: document.querySelector('.modal__button-close'),
+  darkerBackdrop: document.querySelector('.darker'),
+  modal: document.querySelector('.modal'),
 };
-
 
 window.addEventListener('keydown', closeModalHandler);
 window.addEventListener('click', clickBackdropCloseModal);
 refs.closeButton.addEventListener('click', onCloseButton);
 refs.gallerySelector.addEventListener('click', showCard);
 
-const modal = document.querySelector('.modal');
-
 // зачинення по кліку поза модалкою
 
 function clickBackdropCloseModal(e) {
-  if (e.target === backdropModal) {
-    backdropModal.classList.add('is-hidden');
+  if (e.target === refs.backdropModal) {
+    onCloseButton();
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
   }
 }
-
 
 // добавляем обработчик клика на весь документ
 
 function closeModalHandler(evt) {
   if (evt.code === 'Escape') {
-    backdropModal.classList.add('is-hidden');
+    onCloseButton();
+    // повертаємо скрол
+    document.body.style.overflow = '';
+    refs.darkerBackdrop.classList.add('is-hidden');
   }
   //зняття слухачів
 
@@ -53,7 +55,10 @@ function closeModalHandler(evt) {
 }
 
 function onCloseButton() {
-  backdropModal.classList.add('is-hidden');
+  refs.backdropModal.classList.add('is-hidden');
+  // повертаємо скрол
+  document.body.style.overflow = '';
+  refs.darkerBackdrop.classList.add('is-hidden');
   //зняття слухачів
 
   // watchedBtn.removeEventListener('click', onWatchedClick);
@@ -61,31 +66,35 @@ function onCloseButton() {
 }
 
 async function showCard(e) {
-
   e.preventDefault();
   console.log(e.target.nodeName);
+  // знімаємо скрол
+  document.body.style.overflow = 'hidden';
+  const darkerBackdrop = document.querySelector('.darker');
 
   if (e.target.nodeName === 'UL') {
     return;
   }
 
-  backdropModal.classList.remove('is-hidden');
+  refs.backdropModal.classList.remove('is-hidden');
 
   const movieId = e.target.id; // Отримали ID картки на яку був клік
 
   // Отримуємо дані фільму
-  const movie = await getMovieInfoById(movieId); 
+  const movie = await getMovieInfoById(movieId);
   let genres = getGenrelibrary(movie.genres);
 
-  async function getMovieInfoById(movieID) { 
-    const resp = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`); 
- 
-    const respData = await resp.json(); 
+  async function getMovieInfoById(movieID) {
+    const resp = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`
+    );
+
+    const respData = await resp.json();
 
     return respData;
-}
+  }
 
-  // Отримуємо youtube трейлер 
+  // Отримуємо youtube трейлер
   const youtubeTrailer = await getYoutubeTrailerByMovieId(movieId);
   console.log(youtubeTrailer);
 
@@ -93,14 +102,14 @@ async function showCard(e) {
     const response = await fetch(
       `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`
     );
-  
+
     const responseData = await response.json();
     console.log(responseData);
-  
-    if (responseData.results.length > 0){
-      return responseData["results"][0]["key"];
+
+    if (responseData.results.length > 0) {
+      return responseData['results'][0]['key'];
     }
-  };
+  }
 
   // Вивід картки фільму
   const modal = document.querySelector('.modul-card-to-add');
@@ -108,27 +117,27 @@ async function showCard(e) {
   createModalCard(modal);
 
   function createModalCard(cardForModal) {
-
     cardForModal.innerHTML = `
     <div class="modal__poster-thumb">
-          <img class="modal__poster" src="${API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
-        </div>
+      <img class="modal__poster" src="${API_URL_IMG}${movie.poster_path}" alt="${movie.original_title} poster">
+    </div>
    
-        <div class="modal__info-thumb">
-            <h2 class="modal__title">${movie.original_title}</h2>
+      <div class="modal__info-thumb">
+        <h2 class="modal__title">${movie.original_title}</h2>
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
-            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${movie.vote_average}</span> / <span class="modal__info-value-vote">${movie.vote_count}</span></td>
+            <td><span class="modal__info-value-vote modal__info-value-vote--accent">${movie.vote_average.toFixed([1])}</span> / 
+            <span class="modal__info-value-vote">${movie.vote_count}</span></td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Popularity</td>
-                <td class="modal__info-value">${movie.popularity.toFixed([1])}</td>
+                <td class="modal__info-value">${movie.popularity.toFixed([1,])}</td>
             </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Original Title</td>
                 <td class="modal__info-value modal__info-value-title">${movie.original_title}</td>
-        </tr>
+          </tr>
             <tr class="modal__info-entry">
                 <td class="modal__info-key">Genre</td>
                 <td class="modal__info-value">${genres}</td>
@@ -151,11 +160,10 @@ async function showCard(e) {
     </div>
   `;
 
-
     // ПЕРЕВІРКА - чи в списку бібліотеки
 
-    onWatchedCheck()
-    onQueueCheck()
+    onWatchedCheck();
+    onQueueCheck();
 
     function onWatchedCheck() {
       const watchedBtn = document.querySelector(`#watched`);
@@ -164,32 +172,27 @@ async function showCard(e) {
         watchedBtn.textContent = 'remove from watched'; //змінити текст кнопки
         return;
       }
-        watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
+      watchedBtn.textContent = 'add to watched'; //змінити текст кнопки
     }
-  
-    function onQueueCheck() {
-          const queueBtn = document.querySelector('#queue');
-      if (queue.includes(movieId)) {
 
+    function onQueueCheck() {
+      const queueBtn = document.querySelector('#queue');
+      if (queue.includes(movieId)) {
         queueBtn.textContent = 'remove from queue';
         return;
       }
 
       queueBtn.textContent = 'add to queue';
-    };
+    }
+  }
 
-  };
+  const watchedBtn = document.querySelector(`#watched`);
+  const queueBtn = document.querySelector(`#queue`);
+  // const trailerBtn = document.querySelector(`#trailer`);
 
-
-    const watchedBtn = document.querySelector(`#watched`);
-    const queueBtn = document.querySelector(`#queue`);
-    // const trailerBtn = document.querySelector(`#trailer`);
-
-
-    watchedBtn.addEventListener('click', onWatchedClick);
-    queueBtn.addEventListener('click', onQueueClick);
-    window.addEventListener('click', onWindowClick);
-
+  watchedBtn.addEventListener('click', onWatchedClick);
+  queueBtn.addEventListener('click', onQueueClick);
+  window.addEventListener('click', onWindowClick);
 
   function onWatchedClick() {
     //якщо фільм вже в списку
@@ -218,25 +221,30 @@ async function showCard(e) {
     queue.push(movieId);
     setQueue(queue);
     queueBtn.textContent = 'remove from queue';
-  };
-    
+  }
+
   function onWindowClick(e) {
     if (!modal.contains(event.target)) {
       console.log('Трейлер на паузі');
-      document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-   
+      document
+        .querySelector('#video')
+        .contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          '*'
+        );
+
       backdropModal.classList.add('is-hidden');
       watchedBtn.removeEventListener('click', onWatchedClick);
       queueBtn.removeEventListener('click', onQueueClick);
       window.removeEventListener('click', onWindowClick);
     }
-  };
+  }
 
   const modalIframe = document.querySelector('iframe');
 
   const trailerBtn = document.querySelector(`#trailer`);
   console.log(trailerBtn);
-  
+
   trailerBtn.addEventListener('click', onTrailerClick);
 
   function onTrailerClick() {
