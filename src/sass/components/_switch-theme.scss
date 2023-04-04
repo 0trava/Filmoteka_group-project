@@ -89,6 +89,7 @@
   -webkit-box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
   box-shadow: inset 12px -4px 0px 0px var(--dark-invers);
   background-color: var(--light-invers);
+  transition: var(--timing-function);
 }
 
 .checkbox:checked ~ .slider::before {
