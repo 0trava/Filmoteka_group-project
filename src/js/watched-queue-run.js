@@ -6,6 +6,7 @@ import { getGenrelibrary } from './modal-genres';
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 const API_URL = `https://api.themoviedb.org/3/`;
 const API_URL_IMG = `https://image.tmdb.org/t/p/original`;
+let PAGE_OPEN = 1;
 
 const libWatchedBtn = document.querySelector('.library-btn__watched');
 const libQueueBtn = document.querySelector('.library-btn__queue');
@@ -32,6 +33,8 @@ libQueueBtn.addEventListener('click', () => {
 
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
+  PAGE_OPEN = 1;
+  console.log(PAGE_OPEN);
   if (watched.length === 0) {
     console.log('start 0');
     libBoxinfo.classList.remove('is-hidden');
@@ -48,6 +51,8 @@ async function onlibWatchedBtnClick() {
 
 // НАТИСК на кнопку - Queue
 async function onlibQueueBtnClick() {
+  PAGE_OPEN = 2;
+  console.log(PAGE_OPEN);
   if (queue.length === 0) {
     console.log('start');
     libBoxinfo.classList.remove('is-hidden');

@@ -7,7 +7,7 @@ import {
   setQueue,
   setWatched,
 } from './local-storage';
-import { renderList } from './watched-queue-run';
+import { renderList, PAGE_OPEN } from './watched-queue-run';
 import { getGenrelibrary } from './modal-genres';
 
 export const backdropModal = document.querySelector('.backdrop');
@@ -15,6 +15,7 @@ export const backdropModal = document.querySelector('.backdrop');
 const API_KEY = '34e68a416eb051ec4adf34df5a0038fd';
 const API_URL=`https://api.themoviedb.org/3/`;
 const API_URL_IMG=`https://image.tmdb.org/t/p/original`;
+
 
 const refs = {
   backdropModal: document.querySelector('.backdrop'),
@@ -68,6 +69,8 @@ function onCloseButton(e) {
   refs.darkerBackdrop.classList.add('is-hidden');
 }
 
+
+// КЛІК - по картці
 async function showCard(e) {
   e.preventDefault();
   
@@ -92,6 +95,7 @@ async function showCard(e) {
   // Отримуємо дані фільму
   const movie = await getMovieInfoById(movieId);
   let genres = getGenrelibrary(movie.genres);
+  console.log(PAGE_OPEN);
 
   async function getMovieInfoById(movieID) {
     const resp = await fetch(
