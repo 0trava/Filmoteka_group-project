@@ -25,11 +25,11 @@
 
 .grey-background-theme {
   background-color: var(--darkThemColor);
-  box-shadow: 0 0 15px #444444;
+  box-shadow: 0 0 15px var(--boxShadowGrayColor);
 
   .home-footer {
     background-color: var(--darkThemColor);
-    box-shadow: 0 0 15px #444444;
+    box-shadow: 0 0 15px var(--boxShadowGrayColor);
   }
 
   .home-footer__text,
@@ -61,23 +61,23 @@
   }
   .modal__button-close {
     background-color: var(--darkThemColor);
-    fill: #e5e5e5;
+    fill: var(--lightThemebackgroundColor);
   }
 }
 
 .home-footer.grey-background-theme {
   background-color: var(--darkThemColor);
-  box-shadow: 0 0 15px #444444;
+  box-shadow: 0 0 15px var(--boxShadowGrayColor);
 }
 
 .toggle-switch {
-  --dark-invers: #e5e5e5;
-  --light-invers: #121213f7;
+  --dark-invers: var(--lightThemebackgroundColor);
+  --light-invers: var(--darkThemebackgroundColor);
 }
 
 .switch-label {
   background-color: var(--light-invers);
-  border: 1px solid #920e0e;
+  border: 1px solid var(--redThemColor);
   
 }
 
