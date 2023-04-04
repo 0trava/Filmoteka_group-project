@@ -19,8 +19,10 @@
   --lighThemElementColor: #e7e7e7;
   --darkThemebackgroundColor: #121213f7;
   --darkThemColor: #2b2c2f;
+  --redThemColor: #920e0e;
   --inputBoxColor: #e9f1f8;
   --grayInputBoxColor: #d8d9ebb7;
+  --boxShadowGrayColor: #444444;
   --timing-function: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --boxShadowHeaderInput: inset 3px -11px 25px -13px #a7151a;
   --boxShadowHeaderAccent: inset 5px -15px 30px -10px #a7151a;
@@ -335,11 +337,11 @@ button {
 
 .grey-background-theme {
   background-color: var(--darkThemColor);
-  box-shadow: 0 0 15px #444444;
+  box-shadow: 0 0 15px var(--boxShadowGrayColor);
 }
 .grey-background-theme .home-footer {
   background-color: var(--darkThemColor);
-  box-shadow: 0 0 15px #444444;
+  box-shadow: 0 0 15px var(--boxShadowGrayColor);
 }
 .grey-background-theme .home-footer__text,
 .grey-background-theme .home-footer-reference {
@@ -367,22 +369,22 @@ button {
 }
 .grey-background-theme .modal__button-close {
   background-color: var(--darkThemColor);
-  fill: #e5e5e5;
+  fill: var(--lightThemebackgroundColor);
 }
 
 .home-footer.grey-background-theme {
   background-color: var(--darkThemColor);
-  box-shadow: 0 0 15px #444444;
+  box-shadow: 0 0 15px var(--boxShadowGrayColor);
 }
 
 .toggle-switch {
-  --dark-invers: #e5e5e5;
-  --light-invers: #121213f7;
+  --dark-invers: var(--lightThemebackgroundColor);
+  --light-invers: var(--darkThemebackgroundColor);
 }
 
 .switch-label {
   background-color: var(--light-invers);
-  border: 1px solid #920e0e;
+  border: 1px solid var(--redThemColor);
 }
 
 .checkbox:checked ~ .slider {
