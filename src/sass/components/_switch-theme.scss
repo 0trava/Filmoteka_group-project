@@ -102,3 +102,8 @@
     color: var(--secondaryColor);
   }
 }
+
+.animated {
+  transition-property: background-color;
+  transition-duration: 1s;
+}
