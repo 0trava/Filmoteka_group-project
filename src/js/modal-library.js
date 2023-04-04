@@ -116,8 +116,8 @@ async function showCard(e) {
    
         <div class="modal__info-thumb">
             <h2 class="modal__title">${movie.original_title}</h2>
-            <div>
-            <p class="modal__info-key">My rating</p>
+            <div class="modal-library_my-rating">
+            <p class="modal-library__info-key">My rating</p>
             <div class="rating">
                 <input type="radio" id="star5" name="rate" value="5">
                 <label for="star5" title="text"></label>
