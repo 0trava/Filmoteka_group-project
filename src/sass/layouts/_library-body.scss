@@ -50,7 +50,8 @@
   cursor: pointer;
   transition: var(--timing-function);
 
-  &:hover {
+  &:hover,
+  &:focus {
     box-shadow: var(--box-shadow-scroll-up-btn);
   }
 
@@ -59,7 +60,8 @@
 
     transition: var(--timing-function);
 
-    &:hover {
+    &:hover,
+    &:focus {
       transform: scale(1.05);
     }
   }
@@ -120,7 +122,6 @@
   }
 }
 
-
 .movie-card__box {
   position: absolute;
   right: 10px;
@@ -130,7 +131,7 @@
   justify-content: center;
   width: 36px;
   height: 16px;
-  
+
   background: var(--btnAccentColor);
   border-radius: 5px;
 }
