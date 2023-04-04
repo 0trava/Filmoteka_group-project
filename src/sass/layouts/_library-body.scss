@@ -131,7 +131,7 @@
   width: 36px;
   height: 16px;
   
-  background: #FF6B01;
+  background: var(--btnAccentColor);
   border-radius: 5px;
 }
 
@@ -146,5 +146,5 @@
   font-size: 12px;
   line-height: 1.67;
 
-  color: #FFFFFF;
+  color: var(--secondaryColor);
 }

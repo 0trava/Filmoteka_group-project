@@ -10,14 +10,23 @@
   --secondaryAccentColor: #ff001b;
   --btnAccentColor: #ff6b01;
   --modalInfoText: #8c8c8c;
+  --modalStudentsSocLink: #afb1b8;
   --lightThemebackgroundColor: #e5e5e5;
   --footerTextColor: #545454;
   --footerColor: #F7F7F7;
   --lighThemElementColor: #e7e7e7;
   --darkThemebackgroundColor: #121213f7;
   --darkThemColor: #2b2c2f;
-  --timing-function: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --box-shadow-scroll-up-btn: 13px 13px 21px -1px rgba(0,0,0,0.58);
+  --redThemColor: #920e0e;
+  --inputBoxColor: #e9f1f8;
+  --grayInputBoxColor: #d8d9ebb7;
+  --boxShadowGrayColor: #444444;
+  --boxShadowRgbaColor: rgba(0, 0, 0, 0.79);
+  --timing-function: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --boxShadowHeaderInput: inset 3px -11px 25px -13px #a7151a;
+  --boxShadowHeaderAccent: inset 5px -15px 30px -10px #a7151a;
+  --boxShadowScrollUpBtn: 13px 13px 21px -1px rgba(0,0,0,0.58);
   -webkit-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
   -moz-box-shadow: 13px 13px 21px -1px rgba(0,0,0,0.58);
 }
@@ -27,3 +36,4 @@ $headerGradient: linear-gradient(
   rgba(0, 0, 0, 0.56),
   rgba(0, 0, 0, 0.56)
 );
+

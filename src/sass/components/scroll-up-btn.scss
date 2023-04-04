@@ -30,14 +30,14 @@
 
     background-color: var(--btnAccentColor);
     color: var(--secondaryColor);
-    box-shadow: var(--box-shadow-scroll-up-btn);
+    box-shadow: var(--boxShadowScrollUpBtn);
 
     &:hover {
         background-color: var(--secondaryColor); 
         .scroll-up-btn__text {
                 color: var(--mainAccentColor);
             }
-            box-shadow: var(--box-shadow-scroll-up-btn);
+            box-shadow: var(--boxShadowScrollUpBtn);
 
     }
 
@@ -46,26 +46,23 @@
             color: var(--mainAccentColor);
             }
         transform: translateY(-1px);
-        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-            -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
-            -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.79);
+        box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+            -webkit-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
+            -moz-box-shadow: 6px 9px 22px -1px var(--boxShadowRgbaColor);
     }
 
     @include mq(tablet) {
         width: 50px;
         height: 50px;
         right: 45px;
-        bottom: 139px;
+        bottom: 80px;
     }
 
     @include mq(desktop) {
         width: 60px;
         height: 60px;
-        right: 45px;
-        bottom: 137px;
     }
 }
-
 
 .scroll-up-btn__text {
     font-weight: 500;

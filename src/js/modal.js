@@ -104,6 +104,9 @@ async function showCard(e) {
    
         <div class="modal__info-thumb">
             <h2 class="modal__title">${title}</h2>
+
+
+
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
@@ -131,12 +134,10 @@ async function showCard(e) {
             </div>
 
             <div class="modal__button-trailer-wrap">
-                <button id="trailer" type="button" class="modal__button modal__button-trailer">
-                  <span class="svg_span"
-                    ><svg class="youtube__icon" width="24" height="24">
-                      <use href="/src/images/symbol-defs.svg#icon-arrow-left"></use></svg
-                  ></span>
-               Trailer</button>
+            <button id="trailer" type="button" class="modal__button modal__button-trailer"><span class="svg_span"
+                ><svg width="40px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 72 72" width="64px" height="64px"><path d="M61.115,18.856C63.666,21.503,64,25.709,64,36s-0.334,14.497-2.885,17.144C58.563,55.791,55.906,56,36,56  s-22.563-0.209-25.115-2.856C8.334,50.497,8,46.291,8,36s0.334-14.497,2.885-17.144S16.094,16,36,16S58.563,16.209,61.115,18.856z M31.464,44.476l13.603-8.044l-13.603-7.918V44.476z"/></svg></span>
+            Trailer</button>
+
 
                 <iframe id="video" class="modal__iframe is-hidden" width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeTrailer}?enablejsapi=1" 
                 title="Mia and me - Mia and me Day 2014" frameborder="0" 

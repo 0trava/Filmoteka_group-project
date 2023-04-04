@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   gap: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   align-items: center;
 }
 
@@ -28,9 +30,9 @@
   padding: 13px;
 
   color: var(--secondaryColor);
-  background: #ff6b08;
+  background: var(--mainAccentColor);
   border-radius: 5px;
-  border-color: #ff6b08;
+  border-color: var(--mainAccentColor);
 }
 
 .tui-pagination.goit-pagination .tui-prev,
@@ -41,7 +43,7 @@
   height: 40px;
   padding: 13px 20px 13px 7px;
 
-  background: #f7f7f7;
+  background: var(--footerColor);
   border-radius: 5px;
 
   @include mq(tablet) {

@@ -18,12 +18,24 @@ libWatchedBtn.addEventListener('click', onlibWatchedBtnClick);
 libQueueBtn.addEventListener('click', onlibQueueBtnClick);
 window.addEventListener('load', onlibWatchedBtnClick);
 
+libWatchedBtn.classList.add('active');
+
+libWatchedBtn.addEventListener('click', () => {
+  libWatchedBtn.classList.add('active');
+  libQueueBtn.classList.remove('active');
+});
+
+libQueueBtn.addEventListener('click', () => {
+  libQueueBtn.classList.add('active');
+  libWatchedBtn.classList.remove('active');
+});
+
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   if (watched.length === 0) {
     console.log('start');
     libBoxinfo.classList.remove('is-hidden');
-    BoxCard.innerHTML = ` `;
+    BoxCard.innerHTML = ``;
     return;
   }
 
@@ -66,6 +78,21 @@ async function getMoviesList(array) {
 
 export async function renderList(array) {
   const moviesList = await getMoviesList(array);
+
+  if (document.querySelector('#video') || moviesList.length === 0) {
+    location.reload();
+    BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
+        <h2 class="library-text">Sorry, but your list is empty ...</h2>
+        <img
+          src="./images/Library/movie.png"
+          alt="cinema"
+          class="js-library-bg-image visually-hidden"
+          width="600"
+        />
+      
+  </div>`;
+    return;
+  }
   const watchedList = createList(moviesList);
   libBoxinfo.classList.add('is-hidden');
   BoxCard.innerHTML = '';
@@ -93,6 +120,20 @@ function createMarkup(item) {
                 alt="${item.original_title}" 
                 width="300"
                 ID=${item.id}>
+                <div class="library-stars">
+                <div class="rating">
+                <input type="radio" id="star5" name="rate" value="5">
+                <label for="star5" title="text"></label>
+                <input type="radio" id="star4" name="rate" value="4">
+                <label for="star4" title="text"></label>
+                <input checked="" type="radio" id="star3" name="rate" value="3">
+                <label for="star3" title="text"></label>
+                <input type="radio" id="star2" name="rate" value="2">
+                <label for="star2" title="text"></label>
+                <input type="radio" id="star1" name="rate" value="1">
+                <label for="star1" title="text"></label>
+                </div>
+                </div>
                 <h2 class="movie-card__name"   ID=${item.id}>${
     item.original_title
   }</h2>
@@ -100,9 +141,20 @@ function createMarkup(item) {
                   item.id
                 }>${genres} | ${item.release_date?.substring(0, 4)}
                 <span class="movie-card__box">
-                <span class="movie-card__average">${item.vote_average.toFixed([1])}</span>
+                <span class="movie-card__average">${item.vote_average.toFixed([
+                  1,
+                ])}</span>
                 </span>
                 </p>
+                
             </li>
         `;
 }
+
+window.addEventListener('load', () => {
+  if (libWatchedBtn) {
+    libWatchedBtn.checked = true;
+
+    libWatchedBtn.parentNode.classList.add('checked');
+  }
+});
