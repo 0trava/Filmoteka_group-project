@@ -46,5 +46,5 @@ export function getGenreLinks() {
     `;
   }).join('');
 
-  return `<ul>${generesLi}</ul>`;
+  return `<ul generesUL>${generesLi}</ul>`;
 }
