@@ -4,6 +4,7 @@
   align-items: center;
   height: 100px;
   background-color: var(--footerColor);
+  flex: 0 0 auto;
 
   @include mq(tablet) {
     height: 79px;

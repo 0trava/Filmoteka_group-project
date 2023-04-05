@@ -1,7 +1,9 @@
+
+
 .gallery-wrap {
   padding-top: 20px;
   padding-bottom: 40px;
-  min-height: 600px;
+  min-height: calc(100vh - 300px);
   @include mq(tablet) {
     padding-bottom: 60px;
   }
