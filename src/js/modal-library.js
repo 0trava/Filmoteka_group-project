@@ -9,6 +9,7 @@ import {
 } from './local-storage';
 import { renderList, PAGE_OPEN } from './watched-queue-run';
 import { getGenrelibrary } from './modal-genres';
+import * as rating from './rating';
 
 export const backdropModal = document.querySelector('.backdrop');
 
@@ -87,6 +88,7 @@ async function showCard(e) {
   refs.backdropModal.classList.remove('is-hidden');
 
   if (!e.target.parentNode.classList.contains('rating')) {
+    //console.log('id===='+e.target.id)
     movieId = e.target.id; // Отримали ID картки на яку був клік
   }
   
@@ -95,7 +97,7 @@ async function showCard(e) {
   // Отримуємо дані фільму
   const movie = await getMovieInfoById(movieId);
   let genres = getGenrelibrary(movie.genres);
-  console.log(PAGE_OPEN);
+ // console.log(PAGE_OPEN);
 
   async function getMovieInfoById(movieID) {
     const resp = await fetch(
@@ -133,20 +135,7 @@ async function showCard(e) {
   createModalCard(modal, starValue);
   
   function createModalCard(cardForModal, starValue) {
-    let str = `
-      <div id="stars" class="rating">`;
-    for (let i = 5; i >= 1; i -= 1) {
-      let checked = "";
-      if (i === starValue) {
-        checked = "checked";
-      }
-      str += ` <input type="radio" id="star${i}" name="rate" value="${i}" ${checked}>
-                  <label for="star${i}" title="text"></label>`;
-    }
-    str += `
-        </div>
-      </div>`;
-    const renderRating = str;
+    const renderRating = rating.renderRatingForMovie(starValue, movieId, 'modal');
 
     
     cardForModal.innerHTML = `
@@ -158,8 +147,11 @@ async function showCard(e) {
         <div class="modal__info-thumb">
             <h2 class="modal__title">${movie.original_title}</h2>
             <div class="modal-library_my-rating">
-            <p class="modal-library__info-key">M3y rating</p>
+            <p class="modal-library__info-key">My rating</p>
+            <div id="stars" class="rating">
            ${renderRating}
+           </div>
+           </div>
         <table class="modal__info">
             <tr class="modal__info-entry">
             <td class="modal__info-key">Vote / Votes</td>
@@ -228,12 +220,12 @@ async function showCard(e) {
     }
 
     // Додаємо прослуховувач на рейтинг
-    // ratingStars = document.querySelector(`#stars`);
-    // ratingStars.addEventListener('click', onRatingClick);
+     ratingStars = document.querySelector('#stars');
+     ratingStars.addEventListener('click', onRatingClick);
     
      // Зберегти рейтинг
     function onRatingClick(e) {
-      console.log(`Stars`);
+    //  console.log(`Stars=`);
       const starValue = e.target.value;
       if (starValue && movieId) {
 
@@ -246,6 +238,14 @@ async function showCard(e) {
         }
       
         localStorage.setItem('star', JSON.stringify(stars));
+
+        if (PAGE_OPEN === 1){
+          renderList(watched); //оновлюємо сторінку
+        }
+        
+         if (PAGE_OPEN === 2){
+          renderList(queue); //оновлюємо сторінку
+       }
       }
     }
   }
@@ -362,7 +362,7 @@ async function showCard(e) {
 
 
     if (!modal.contains(e.target)) {
-      console.log('Трейлер на паузі');
+     // console.log('Трейлер на паузі');
       document.querySelector('#video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
       darkerBackdrop.classList.add('is-hidden');
       modalIframe.classList.add('is-hidden');
