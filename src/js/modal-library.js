@@ -220,7 +220,7 @@ async function showCard(e) {
     }
 
     // Додаємо прослуховувач на рейтинг
-     ratingStars = document.querySelector('#stars');
+     const ratingStars = document.querySelector('#stars');
      ratingStars.addEventListener('click', onRatingClick);
     
      // Зберегти рейтинг
