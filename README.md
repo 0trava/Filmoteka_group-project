@@ -1,6 +1,6 @@
 Hi! :hugs:
 
-We are students of group # 8  named **"Code Masters"** of GоIT academy :fire: :rocket:
+We are students of Group №8 of GоIT academy :fire: :rocket:. We named **"Code Masters"**
 
 We graduated **JavaScript** course and for consolidate in practice :pushpin: knowledges received on
 this course, we together :handshake: **developed** graduation project :computer:
