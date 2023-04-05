@@ -1,5 +1,6 @@
 import { watched, queue } from './local-storage';
 import { getGenrelibrary } from './modal-genres';
+import * as rating from './rating';
 
 // import { getMovieInfoById } from './api-service';
 
@@ -34,9 +35,9 @@ libQueueBtn.addEventListener('click', () => {
 // НАТИСК на кнопку - Watched
 async function onlibWatchedBtnClick() {
   PAGE_OPEN = 1;
-  console.log(PAGE_OPEN);
+  //console.log(PAGE_OPEN);
   if (watched.length === 0) {
-    console.log('start 0');
+   // console.log('start 0');
     libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = ``;
     return;
@@ -44,17 +45,17 @@ async function onlibWatchedBtnClick() {
 
   spinner.classList.remove('is-hidden');
   spinner.classList.add('is-hidden');
-  console.log('start watched');
-  console.log(watched);
+  //console.log('start watched');
+  //console.log(watched);
   renderList(watched);
 }
 
 // НАТИСК на кнопку - Queue
 async function onlibQueueBtnClick() {
   PAGE_OPEN = 2;
-  console.log(PAGE_OPEN);
+  //console.log(PAGE_OPEN);
   if (queue.length === 0) {
-    console.log('start');
+   // console.log('start');
     libBoxinfo.classList.remove('is-hidden');
     BoxCard.innerHTML = ` `;
     return;
@@ -86,7 +87,7 @@ export async function renderList(array) {
   const moviesList = await getMoviesList(array);
 
   if (moviesList.length === 0) {
-        console.log("empty");
+     //   console.log("empty");
         // location.reload();
         libBoxinfo.classList.remove('is-hidden');
         BoxCard.innerHTML = `<div class="library-bg-image is-hidden">
@@ -98,7 +99,7 @@ export async function renderList(array) {
               width="600"
             />
             </div>`;
-      console.log(BoxCard);
+    //  console.log(BoxCard);
       return;
   }
   
@@ -132,20 +133,8 @@ function createMarkup(item) {
   let genres = getGenrelibrary(item.genres);
 
   const starValue = getRatingByMovieId(item.id);
-      let renderStars = `
-      <div class="rating">`;
-    for (let i = 5; i >= 1; i -= 1) {
-      let checked = "";
-      if (i === starValue) {
-        checked = "checked";
-      }
-      renderStars += ` <input type="radio" id="star${i}" name="rate" value="${i}" ${checked}>
-                  <label for="star${i}" title="text"></label>`;
-    }
-    renderStars += `
-        </div>
-      </div>`;
-  renderStars = "<p>Ждем код</p>";
+
+  const renderStars = rating.renderRatingForMovie(starValue, item.id, 'list');
       
   
   
@@ -158,7 +147,9 @@ function createMarkup(item) {
                 width="300"
                 ID=${item.id}>
                 <div class="library-stars">
+                <div class="rating">
                 ${renderStars}
+                </div>
                 </div>
                 <h2 class="movie-card__name"   ID=${item.id}>${item.original_title}</h2>
                 <p class="movie-card__text"   ID=${item.id}>${genres} | ${item.release_date?.substring(0, 4)}
