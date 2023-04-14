@@ -19,6 +19,7 @@ THIS PROJECT WAS CREATED BY:
 - :man_student:[**Front-end developer**: alionash](https://github.com/alionash)
 - :man_student:[**Front-end developer**: Yelyzaveta Riabokon](https://github.com/lisa-riabokon)
 - :man_student:[**Front-end developer**: Alexander Zabara](https://github.com/Zabaraaa)
+- :man_student:[**Front-end developer**: Tuschenko Dmutro](https://github.com/T-Dmutro)
 
 Made by design  <a href="https://www.figma.com/file/ieXHCTVNre6afLNCW0cDFc/Filmoteka?node-id=1-80&t=lUjJWws2KcjusGey-0">LINK</a>
 
