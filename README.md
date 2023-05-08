@@ -1,9 +1,13 @@
+<h1>FILMOTEKA</h1>
+
 Hi! :hugs:
 
-We are students of Group №8 of GоIT academy :fire: :rocket:. We named **"Code Masters"**
+We are students of Group number 8 of GоIT academy :fire: :rocket:. We named **"Code Masters"
 
 We graduated **JavaScript** course and for consolidate in practice :pushpin: knowledges received on
 this course, we together :handshake: **developed** graduation project :computer:
+
+<h3><b style="color:yellow">If you like our work, don't forget to put a &#11088;</b></h3>
 
 THIS PROJECT WAS CREATED BY:
 
